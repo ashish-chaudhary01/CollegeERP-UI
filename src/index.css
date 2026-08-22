@@ -1,0 +1,24 @@
+@import "tailwindcss";
+
+:root {
+  --background-color: #faf9fe;
+  --primary-color: #15171a;
+  --secondary-color: #8e44fd;
+  --accent-color: #375ece;
+  --border-color: #1e4acb;
+  --card-bg: #ffffff;
+}
+
+@theme inline {
+  --color-primary: var(--primary-color);
+  --color-background: var(--background-color);
+  --color-secondary: var(--secondary-color);
+  --color-border: var(--border-color);
+  --bg-card: var(--card-bg);
+}
+
+html,
+body {
+  font-family: "Poppins", sans-serif;
+  @apply bg-background text-primary;
+}
