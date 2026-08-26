@@ -24,22 +24,26 @@ function MobileSidebar({ sidebarOpen, setSidebarOpen, role }) {
 
       {/* navlinks */}
       <nav className="overflow-y-auto p-4 space-y-6">
-        {/* menu */}
-        <div className="border-b border-gray-200">
-          <p className="text-xs font-bold text-gray-500 uppercase mb-4">menu</p>
-          {sidebarMenu.map((item, idx) => (
-            <NavLink to={item.href} key={idx}>
-              {({ isActive }) => (
-                <div
-                  className={`flex items-center gap-4 px-4 py-2 mb-2 text-sm rounded-lg ${isActive ? "bg-secondary text-white font-bold" : "font-semibold hover:bg-gray-200"}`}
-                >
-                  <span>{<item.icon />}</span>
-                  <span>{item.label}</span>
-                </div>
-              )}
-            </NavLink>
-          ))}
-        </div>
+        {sidebarMenu.map((g, gidx) => (
+          <div key={gidx}>
+            <p className="text-xs font-bold text-gray-400 uppercase mb-4">
+              {g.section}
+            </p>
+
+            {g.items.map((item, idx) => (
+              <NavLink to={item.href} key={idx}>
+                {({ isActive }) => (
+                  <div
+                    className={`flex items-center gap-3 px-4 py-2 mb-2 text-sm rounded-lg ${isActive ? "bg-secondary text-white font-bold" : "font-semibold hover:bg-gray-200"}`}
+                  >
+                    <span>{<item.icon />}</span>
+                    <span>{item.label}</span>
+                  </div>
+                )}
+              </NavLink>
+            ))}
+          </div>
+        ))}
 
         {/* bottom links */}
         <div>
