@@ -1,18 +1,14 @@
 import {
   BookOpen,
   Building2,
-  ClipboardMinus,
-  CodeXml,
-  FileSearchCorner,
-  FlaskConical,
-  FolderArchive,
+  CalendarCheck,
+  CalendarDays,
   GraduationCap,
   Info,
-  LayersArrowUp,
   LayoutDashboard,
-  MapPinPlusInside,
-  Settings,
-  Store,
+  ReceiptIndianRupee,
+  Search,
+  SquareText,
   User,
   Users,
 } from "lucide-react";
@@ -25,20 +21,46 @@ export const sidebarData = {
       icon: LayoutDashboard,
     },
     { href: "/student/subjects", label: "Subjects", icon: BookOpen },
-    { href: "/student/labs", label: "Labs", icon: FlaskConical },
-    { href: "/student/workshops", label: "Workshops", icon: Store },
+    { href: "/student/attendance", label: "Attendance", icon: CalendarCheck },
+    { href: "/student/timetable", label: "Time Table", icon: CalendarDays },
+    { href: "/student/result", label: "Result", icon: SquareText },
+    {
+      href: "/student/Fees",
+      label: "Fees",
+      icon: ReceiptIndianRupee,
+    },
+    // later on ---
+    // Leave Application
+    // Documents
+    // Notices
   ],
   teacher: [
+    {
+      href: "/teacher/search",
+      label: "Search",
+      icon: Search,
+    },
     {
       href: "/teacher/dashboard",
       label: "Dashboard",
       icon: LayoutDashboard,
     },
-    { href: "/teacher/subjects", label: "Subjects", icon: BookOpen },
-    { href: "/teacher/labs", label: "Labs", icon: FlaskConical },
-    { href: "/teacher/workshops", label: "Workshops", icon: Store },
+    { href: "/teacher/classes", label: "Classes", icon: BookOpen },
+    { href: "/teacher/attendance", label: "Attendance", icon: CalendarCheck },
+    { href: "/teacher/timetable", label: "Time Table", icon: CalendarDays },
+    { href: "/teacher/students", label: "Students", icon: Users },
+    {
+      href: "/teacher/Fees",
+      label: "Fees management",
+      icon: ReceiptIndianRupee,
+    },
   ],
   hod: [
+    {
+      href: "/hod/search",
+      label: "Search",
+      icon: Search,
+    },
     {
       href: "/hod/dashboard",
       label: "Dashboard",
@@ -51,7 +73,7 @@ export const sidebarData = {
     },
     {
       href: "/hod/teachers",
-      label: "Teachers",
+      label: "faculty",
       icon: GraduationCap,
     },
     {
@@ -59,51 +81,70 @@ export const sidebarData = {
       label: "Subjects",
       icon: BookOpen,
     },
+    { href: "/hod/attendance", label: "Attendance", icon: CalendarCheck },
+    { href: "/hod/timetable", label: "Time Table", icon: CalendarDays },
     {
-      href: "/hod/labs",
-      label: "Labs",
+      href: "/hod/Fees",
+      label: "Fees management",
+      icon: ReceiptIndianRupee,
+    },
+  ],
+  admin: [
+    {
+      href: "/admin/search",
+      label: "Search",
+      icon: Search,
+    },
+    {
+      href: "/admin/dashboard",
+      label: "Dashboard",
+      icon: LayoutDashboard,
+    },
+    {
+      href: "/admin/departments",
+      label: "Departments",
       icon: Building2,
     },
     {
-      href: "/hod/archives",
-      label: "Archives",
-      icon: FolderArchive,
+      href: "/admin/students",
+      label: "Students",
+      icon: Users,
     },
     {
-      href: "/hod/promotion",
-      label: "Promotion",
-      icon: LayersArrowUp,
+      href: "/admin/teachers",
+      label: "faculty",
+      icon: GraduationCap,
+    },
+    {
+      href: "/hod/subjects",
+      label: "Subjects",
+      icon: BookOpen,
+    },
+    { href: "/hod/attendance", label: "Attendance", icon: CalendarCheck },
+    { href: "/hod/timetable", label: "Time Table", icon: CalendarDays },
+    {
+      href: "/admin/Fees",
+      label: "Fees management",
+      icon: ReceiptIndianRupee,
     },
   ],
 };
 
-export const campusData = [
-  { href: "/campus/map", label: "Campus Map", icon: MapPinPlusInside },
-  {
-    href: "/campus/lostandfound",
-    label: "Lost & Found",
-    icon: FileSearchCorner,
-  },
-  { href: "/campus/report", label: "Report", icon: ClipboardMinus },
-];
-
 export const bottomlinksData = {
   student: [
     { href: "/student/profile", label: "Profile", icon: User },
-    { href: "/campx/settings", label: "Settings", icon: Settings },
-    { href: "/campx/developers", label: "Developers", icon: CodeXml },
     { href: "/campx/about", label: "About", icon: Info },
   ],
   teacher: [
     { href: "/teacher/profile", label: "Profile", icon: User },
-    { href: "/campx/developers", label: "Developers", icon: CodeXml },
-    { href: "/campx/settings", label: "Settings", icon: Settings },
     { href: "/campx/about", label: "About", icon: Info },
   ],
   hod: [
     { href: "/hod/profile", label: "Profile", icon: User },
-    { href: "/campx/developers", label: "Developers", icon: CodeXml },
-    { href: "/campx/settings", label: "Settings", icon: Settings },
+    { href: "/campx/about", label: "About", icon: Info },
+  ],
+  admin: [
+    { href: "/hod/profile", label: "Profile", icon: User },
     { href: "/campx/about", label: "About", icon: Info },
   ],
 };

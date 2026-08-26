@@ -1,26 +1,24 @@
 import { Navigate, Route, Routes } from "react-router";
 import DashboardLayout from "./layouts/DashboardLayout";
 import StudentDashboard from "./pages/student/StudentDashboard";
-import StudentLabs from "./pages/student/StudentLabs";
-import StudentNotes from "./pages/student/StudentNotes";
-import StudentWorkshop from "./pages/student/StudentWorkshop";
 import StudentSubject from "./pages/student/StudentSubject";
 import StudentProfile from "./pages/student/StudentProfile";
 import HodDashboard from "./pages/hod/HodDashboard";
 import Subject from "./pages/hod/Subjects";
-import Labs from "./pages/hod/Labs";
-import Workshop from "./pages/hod/Workshop";
 import HodProfile from "./pages/hod/HodProfile";
 import Teacher from "./pages/hod/Teacher";
 import Student from "./pages/hod/Student";
-import Archives from "./pages/hod/Archives";
-import Promotion from "./pages/hod/Promotion";
-import Mappage from "./pages/campus/Mappage";
-import Lostfoundpage from "./pages/campus/Lostfoundpage";
-import Reportpage from "./pages/campus/Reportpage";
-import Settingpage from "./pages/AppInfo/Settingpage";
 import About from "./pages/AppInfo/About";
-import Developers from "./pages/AppInfo/Developers";
+import StudentAttendance from "./pages/student/studentAttendance";
+import StundentTimeTable from "./pages/student/StundentTimeTable";
+import StudentResult from "./pages/student/StudentResult";
+import StudentFees from "./pages/student/StudentFees";
+import TeacherClasses from "./pages/teacher/TeacherClasses";
+import TeacherAttendance from "./pages/teacher/TeacherAttendance";
+import StudentList from "./pages/teacher/StudentList";
+import TeacherTimeTable from "./pages/teacher/TeacherTimeTable";
+import Fees from "./pages/teacher/Fees";
+import TeacherProfile from "./pages/teacher/TeacherProfile";
 
 function App() {
   return (
@@ -30,48 +28,55 @@ function App() {
       <Route path="student" element={<DashboardLayout />}>
         <Route path="dashboard" element={<StudentDashboard />} />
         <Route path="subjects" element={<StudentSubject />} />
-        <Route path="subjects/notes" element={<StudentNotes />} />
-        <Route path="labs" element={<StudentLabs />} />
-        <Route path="workshops" element={<StudentWorkshop />} />
+        <Route path="attendance" element={<StudentAttendance />} />
+        <Route path="timetable" element={<StundentTimeTable />} />
+        <Route path="result" element={<StudentResult />} />
+        <Route path="fees" element={<StudentFees />} />
         <Route path="profile" element={<StudentProfile />} />
       </Route>
 
       {/* teacher route */}
       <Route path="teacher" element={<DashboardLayout />}>
+        <Route path="search" element={<StudentDashboard />} />
         <Route path="dashboard" element={<StudentDashboard />} />
-        <Route path="subjects" element={<StudentSubject />} />
-        <Route path="subjects/notes" element={<StudentNotes />} />
-        <Route path="labs" element={<StudentLabs />} />
-        <Route path="workshops" element={<StudentWorkshop />} />
-        <Route path="profile" element={<StudentProfile />} />
+        <Route path="classes" element={<TeacherClasses />} />
+        <Route path="students" element={<StudentList />} />
+        <Route path="attendance" element={<TeacherAttendance />} />
+        <Route path="timetable" element={<TeacherTimeTable />} />
+        <Route path="fees" element={<Fees />} />
+        <Route path="profile" element={<TeacherProfile />} />
       </Route>
 
       {/* hod route */}
       <Route path="hod" element={<DashboardLayout />}>
+        <Route path="search" element={<StudentDashboard />} />
         <Route path="dashboard" element={<HodDashboard />} />
         <Route path="teachers" element={<Teacher />} />
         <Route path="students" element={<Student />} />
         <Route path="subjects" element={<Subject />} />
-        <Route path="subjects/notes" element={<StudentNotes />} />
-        <Route path="labs" element={<Labs />} />
-        <Route path="workshops" element={<Workshop />} />
-        <Route path="archives" element={<Archives />} />
-        <Route path="promotion" element={<Promotion />} />
+        <Route path="attendance" element={<StudentSubject />} />
+        <Route path="timetable" element={<StudentSubject />} />
+        <Route path="fees" element={<StudentSubject />} />
         <Route path="profile" element={<HodProfile />} />
       </Route>
 
-      {/* campus links*/}
-      <Route path="campus" element={<DashboardLayout />}>
-        <Route path="map" element={<Mappage />} />
-        <Route path="lostandfound" element={<Lostfoundpage />} />
-        <Route path="report" element={<Reportpage />} />
+      {/* admin route */}
+      <Route path="admin" element={<DashboardLayout />}>
+        <Route path="search" element={<StudentDashboard />} />
+        <Route path="dashboard" element={<HodDashboard />} />
+        <Route path="departments" element={<StudentDashboard />} />
+        <Route path="students" element={<Student />} />
+        <Route path="teachers" element={<Teacher />} />
+        <Route path="subjects" element={<Subject />} />
+        <Route path="attendance" element={<StudentSubject />} />
+        <Route path="timetable" element={<StudentSubject />} />
+        <Route path="fees" element={<StudentSubject />} />
+        <Route path="profile" element={<HodProfile />} />
       </Route>
 
       {/* bottom links */}
-      <Route path="campx" element={<DashboardLayout />}>
-        <Route path="settings" element={<Settingpage />} />
+      <Route path="campxErp" element={<DashboardLayout />}>
         <Route path="about" element={<About />} />
-        <Route path="developers" element={<Developers />} />
       </Route>
     </Routes>
   );

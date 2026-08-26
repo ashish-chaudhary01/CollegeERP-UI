@@ -9,7 +9,7 @@ const DashboardLayout = () => {
   // sidebar open or close state
   const [sidebarOpen, setSidebarOpen] = useState(false);
   // role based sidebar
-  const [role, setRole] = useState("student");
+  const [role, setRole] = useState("admin");
 
   return (
     <div className="min-h-screen">

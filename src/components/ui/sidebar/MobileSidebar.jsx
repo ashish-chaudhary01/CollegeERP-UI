@@ -1,12 +1,10 @@
 import { NavLink } from "react-router";
-import { bottomlinksData, campusData, sidebarData } from "./sidebarData";
+import { bottomlinksData, sidebarData } from "./sidebarData";
 import { X } from "lucide-react";
 
 function MobileSidebar({ sidebarOpen, setSidebarOpen, role }) {
   // sidebar menu based on role
   const sidebarMenu = sidebarData[role];
-  // campus links
-  const campusMenu = campusData;
   // bottom links based on role
   const bottomlinks = bottomlinksData[role];
   return (
@@ -30,25 +28,6 @@ function MobileSidebar({ sidebarOpen, setSidebarOpen, role }) {
         <div className="border-b border-gray-200">
           <p className="text-xs font-bold text-gray-500 uppercase mb-4">menu</p>
           {sidebarMenu.map((item, idx) => (
-            <NavLink to={item.href} key={idx}>
-              {({ isActive }) => (
-                <div
-                  className={`flex items-center gap-4 px-4 py-2 mb-2 text-sm rounded-lg ${isActive ? "bg-secondary text-white font-bold" : "font-semibold hover:bg-gray-200"}`}
-                >
-                  <span>{<item.icon />}</span>
-                  <span>{item.label}</span>
-                </div>
-              )}
-            </NavLink>
-          ))}
-        </div>
-
-        {/* campus */}
-        <div className="border-b border-gray-200">
-          <p className="text-xs font-bold text-gray-500 uppercase mb-4">
-            campus
-          </p>
-          {campusMenu.map((item, idx) => (
             <NavLink to={item.href} key={idx}>
               {({ isActive }) => (
                 <div
