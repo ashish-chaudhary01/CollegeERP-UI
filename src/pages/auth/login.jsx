@@ -1,14 +1,24 @@
 import { GraduationCap } from "lucide-react";
 import { useState } from "react";
-import { useNavigate } from "react-router";
+import { Navigate, useNavigate } from "react-router";
 import { useAuth } from "../../context/AuthContext";
 
 function LoginPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
-  const { login } = useAuth();
+  const { login, user } = useAuth();
   const navigate = useNavigate();
+
+  if (user) {
+    if (user.role === "admin")
+      return <Navigate to="/admin/dashboard" replace />;
+    if (user.role === "hod") return <Navigate to="/hod/dashboard" replace />;
+    if (user.role === "teacher")
+      return <Navigate to="/teacher/dashboard" replace />;
+    if (user.role === "student")
+      return <Navigate to="/student/dashboard" replace />;
+  }
 
   const handleClick = async (e) => {
     e.preventDefault();
@@ -79,7 +89,7 @@ function LoginPage() {
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               placeholder="johndoe@example.com"
-              className="w-full px-4 py-3 rounded-lg border-2 outline-0 border-black/30 focus:border-indigo-600 placeholder:text-sm text-sm duration-200"
+              className="w-full px-4 py-3 rounded-lg border-2 outline-0 border-black/30 focus:border-indigo-600 placeholder:text-sm text-sm duration-200 bg-gray-100"
             />
           </div>
 
@@ -93,7 +103,7 @@ function LoginPage() {
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               placeholder="Enter your password.."
-              className="w-full px-4 py-3 rounded-lg border-2 outline-0 border-black/30 focus:border-indigo-600 placeholder:text-sm text-sm duration-200"
+              className="w-full px-4 py-3 rounded-lg border-2 outline-0 border-black/30 focus:border-indigo-600 placeholder:text-sm text-sm duration-200 bg-gray-100"
             />
           </div>
         </div>

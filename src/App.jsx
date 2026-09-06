@@ -1,4 +1,4 @@
-import { Route, Routes, useNavigate } from "react-router";
+import { Route, Routes } from "react-router";
 import DashboardLayout from "./layouts/DashboardLayout";
 import StudentDashboard from "./pages/student/StudentDashboard";
 import StudentSubject from "./pages/student/StudentSubject";
@@ -20,8 +20,8 @@ import TeacherTimeTable from "./pages/teacher/TeacherTimeTable";
 import Fees from "./pages/teacher/Fees";
 import TeacherProfile from "./pages/teacher/TeacherProfile";
 import LoginPage from "./pages/auth/login";
-import { useAuth } from "./context/AuthContext";
-import { useEffect } from "react";
+// import { useAuth } from "./context/AuthContext";
+// import { useEffect } from "react";
 import AdminDashboard from "./pages/admin/AdminDashboard";
 import Departments from "./pages/admin/Departments";
 import Students from "./pages/admin/Students";
@@ -31,30 +31,8 @@ import Attendance from "./pages/admin/Attendance";
 import Timetable from "./pages/admin/Timetable";
 import AdminFeesPage from "./pages/admin/Fees";
 import AdminProfile from "./pages/admin/AdminProfile";
-// {<Navigate to="/student/dashboard" replace />}
-function App() {
-  const { user } = useAuth();
-  const navigate = useNavigate();
 
-  useEffect(() => {
-    if (user !== null) {
-      //   role based redirect
-      if (user.role === "admin") {
-        navigate("/admin/dashboard");
-      }
-      if (user.role === "hod") {
-        navigate("/hod/dashboard");
-      }
-      if (user.role === "teacher") {
-        navigate("/teacher/dashboard");
-      }
-      if (user.role === "student") {
-        navigate("/student/dashboard");
-      }
-    } else {
-      navigate("/");
-    }
-  }, []);
+function App() {
   return (
     <Routes>
       <Route path="/" element={<LoginPage />} />
