@@ -13,10 +13,10 @@ const DashboardLayout = () => {
   return (
     <div className="min-h-screen">
       {/* desktop siderbar */}
-      <Sidebar role={user.role} />
+      <Sidebar role={user?.role} />
       {/* mobile sidebar */}
       <MobileSidebar
-        role={user.role}
+        role={user?.role}
         sidebarOpen={sidebarOpen}
         setSidebarOpen={setSidebarOpen}
       />

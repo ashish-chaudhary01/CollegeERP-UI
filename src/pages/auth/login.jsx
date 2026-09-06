@@ -19,6 +19,7 @@ function LoginPage() {
         headers: {
           "Content-Type": "application/json",
         },
+        credentials: "include",
         body: JSON.stringify({ email, password }),
       });
 
@@ -54,7 +55,7 @@ function LoginPage() {
       {/* container */}
       <form
         onSubmit={handleClick}
-        className="px-4 py-8 rounded-xl shadow-lg bg-white flex flex-col gap-8 items-center"
+        className="px-4 py-8 rounded-xl shadow-lg bg-white flex flex-col gap-8 items-center min-w-[320px]"
       >
         {/* heading */}
         <div className="flex items-center gap-4">

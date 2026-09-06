@@ -28,7 +28,7 @@ function App() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (user) {
+    if (user !== null) {
       //   role based redirect
       if (user.role === "admin") {
         navigate("/admin/dashboard");
@@ -42,6 +42,8 @@ function App() {
       if (user.role === "student") {
         navigate("/student/dashboard");
       }
+    } else {
+      navigate("/");
     }
   }, []);
   return (
