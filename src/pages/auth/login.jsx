@@ -1,11 +1,13 @@
 import { GraduationCap } from "lucide-react";
 import { useState } from "react";
 import { useNavigate } from "react-router";
+import { useAuth } from "../../context/AuthContext";
 
 function LoginPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
+  const { login } = useAuth();
   const navigate = useNavigate();
 
   const handleClick = async (e) => {
@@ -22,21 +24,23 @@ function LoginPage() {
 
       const data = await res.json();
 
-      if (data) {
-        const { user } = data;
-        //   role based redirect
-        if (user.role === "admin") {
-          navigate("/admin/dashboard");
-        }
-        if (user.role === "hod") {
-          navigate("/hod/dashboard");
-        }
-        if (user.role === "teacher") {
-          navigate("/teacher/dashboard");
-        }
-        if (user.role === "student") {
-          navigate("/student/dashboard");
-        }
+      const { user } = data; //user
+
+      //  context + localStorage
+      login(user);
+
+      //   role based redirect
+      if (user.role === "admin") {
+        navigate("/admin/dashboard");
+      }
+      if (user.role === "hod") {
+        navigate("/hod/dashboard");
+      }
+      if (user.role === "teacher") {
+        navigate("/teacher/dashboard");
+      }
+      if (user.role === "student") {
+        navigate("/student/dashboard");
       }
     } catch (error) {
       console.log(error.message);
@@ -79,7 +83,7 @@ function LoginPage() {
           </div>
 
           <div>
-            <label htmlFor="email" className="font-semibold text-xs mb-1">
+            <label htmlFor="password" className="font-semibold text-xs mb-1">
               PASSWORD
             </label>
             <input

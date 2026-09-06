@@ -1,23 +1,22 @@
 import { Outlet } from "react-router";
-
 import Header from "../components/ui/Header";
 import { useState } from "react";
 import Sidebar from "../components/ui/sidebar/Sidebar";
 import MobileSidebar from "../components/ui/sidebar/MobileSidebar";
+import { useAuth } from "../context/AuthContext";
 
 const DashboardLayout = () => {
+  const { user } = useAuth();
   // sidebar open or close state
   const [sidebarOpen, setSidebarOpen] = useState(false);
-  // role based sidebar
-  const [role, setRole] = useState("student");
 
   return (
     <div className="min-h-screen">
       {/* desktop siderbar */}
-      <Sidebar role={role} />
+      <Sidebar role={user.role} />
       {/* mobile sidebar */}
       <MobileSidebar
-        role={role}
+        role={user.role}
         sidebarOpen={sidebarOpen}
         setSidebarOpen={setSidebarOpen}
       />
