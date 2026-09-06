@@ -20,8 +20,6 @@ import TeacherTimeTable from "./pages/teacher/TeacherTimeTable";
 import Fees from "./pages/teacher/Fees";
 import TeacherProfile from "./pages/teacher/TeacherProfile";
 import LoginPage from "./pages/auth/login";
-// import { useAuth } from "./context/AuthContext";
-// import { useEffect } from "react";
 import AdminDashboard from "./pages/admin/AdminDashboard";
 import Departments from "./pages/admin/Departments";
 import Students from "./pages/admin/Students";
