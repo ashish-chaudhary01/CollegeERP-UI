@@ -19,11 +19,12 @@ import StudentList from "./pages/teacher/StudentList";
 import TeacherTimeTable from "./pages/teacher/TeacherTimeTable";
 import Fees from "./pages/teacher/Fees";
 import TeacherProfile from "./pages/teacher/TeacherProfile";
-
+import LoginPage from "./pages/auth/login";
+// {<Navigate to="/student/dashboard" replace />}
 function App() {
   return (
     <Routes>
-      <Route path="/" element={<Navigate to="/student/dashboard" replace />} />
+      <Route path="/" element={<LoginPage />} />
       {/* student dashboard layout and route */}
       <Route path="student" element={<DashboardLayout />}>
         <Route path="dashboard" element={<StudentDashboard />} />
