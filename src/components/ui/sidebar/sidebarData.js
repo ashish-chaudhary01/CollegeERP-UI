@@ -201,7 +201,7 @@ export const bottomlinksData = {
     { href: "/campx/about", label: "About", icon: Info },
   ],
   admin: [
-    { href: "/hod/profile", label: "Profile", icon: User },
+    { href: "/admin/profile", label: "Profile", icon: User },
     { href: "/campx/about", label: "About", icon: Info },
   ],
 };

@@ -22,6 +22,15 @@ import TeacherProfile from "./pages/teacher/TeacherProfile";
 import LoginPage from "./pages/auth/login";
 import { useAuth } from "./context/AuthContext";
 import { useEffect } from "react";
+import AdminDashboard from "./pages/admin/AdminDashboard";
+import Departments from "./pages/admin/Departments";
+import Students from "./pages/admin/Students";
+import Teachers from "./pages/admin/Teachers";
+import Subjects from "./pages/admin/Subjects";
+import Attendance from "./pages/admin/Attendance";
+import Timetable from "./pages/admin/Timetable";
+import AdminFeesPage from "./pages/admin/Fees";
+import AdminProfile from "./pages/admin/AdminProfile";
 // {<Navigate to="/student/dashboard" replace />}
 function App() {
   const { user } = useAuth();
@@ -87,16 +96,16 @@ function App() {
 
       {/* admin route */}
       <Route path="admin" element={<DashboardLayout />}>
-        <Route path="search" element={<StudentDashboard />} />
-        <Route path="dashboard" element={<HodDashboard />} />
-        <Route path="departments" element={<StudentDashboard />} />
-        <Route path="students" element={<Student />} />
-        <Route path="teachers" element={<Teacher />} />
-        <Route path="subjects" element={<Subject />} />
-        <Route path="attendance" element={<StudentSubject />} />
-        <Route path="timetable" element={<StudentSubject />} />
-        <Route path="fees" element={<StudentSubject />} />
-        <Route path="profile" element={<HodProfile />} />
+        <Route path="search" element={<AdminDashboard />} />
+        <Route path="dashboard" element={<AdminDashboard />} />
+        <Route path="departments" element={<Departments />} />
+        <Route path="students" element={<Students />} />
+        <Route path="teachers" element={<Teachers />} />
+        <Route path="subjects" element={<Subjects />} />
+        <Route path="attendance" element={<Attendance />} />
+        <Route path="timetable" element={<Timetable />} />
+        <Route path="fees" element={<AdminFeesPage />} />
+        <Route path="profile" element={<AdminProfile />} />
       </Route>
 
       {/* bottom links */}
