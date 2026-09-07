@@ -168,7 +168,7 @@ function LoginPage() {
           <div className="flex gap-12 items-center mt-8 text-white">
             {/* feature 1 */}
             <div className="flex flex-col gap-1 items-center">
-              <span className="bg-white/10 border border-white/10 backdrop-blur-xl rounded-md flex items-center text-center p-2">
+              <span className="bg-white/10 hover:bg-white/20 duration-150 border border-white/10 backdrop-blur-xl rounded-md flex items-center text-center p-2">
                 <Users />
               </span>
               <span className="text-xs text-center">
@@ -178,7 +178,7 @@ function LoginPage() {
             </div>
             {/* feature 2 */}
             <div className="flex flex-col gap-1 items-center">
-              <span className="bg-white/10 border border-white/10 backdrop-blur-xl rounded-md flex items-center text-center p-2">
+              <span className="bg-white/10 border hover:bg-white/20 duration-150 border-white/10 backdrop-blur-xl rounded-md flex items-center text-center p-2">
                 <School />
               </span>
               <span className="text-xs text-center">
@@ -188,7 +188,7 @@ function LoginPage() {
             </div>
             {/* feature 3 */}
             <div className="flex flex-col gap-1 items-center">
-              <span className="bg-white/10 border border-white/10 backdrop-blur-xl rounded-md flex items-center text-center p-2">
+              <span className="bg-white/10 hover:bg-white/20 duration-150 border border-white/10 backdrop-blur-xl rounded-md flex items-center text-center p-2">
                 <GraduationCap />
               </span>
               <span className="text-xs text-center">
@@ -198,7 +198,7 @@ function LoginPage() {
             </div>
             {/* feature 4 */}
             <div className="flex flex-col gap-1 items-center">
-              <span className="bg-white/10 border border-white/10 backdrop-blur-xl rounded-md flex items-center text-center p-2">
+              <span className="bg-white/10 hover:bg-white/20 duration-150 border border-white/10 backdrop-blur-xl rounded-md flex items-center text-center p-2">
                 <IndianRupee />
               </span>
               <span className="text-xs text-center">
