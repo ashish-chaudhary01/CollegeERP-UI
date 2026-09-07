@@ -29,6 +29,7 @@ import Attendance from "./pages/admin/Attendance";
 import Timetable from "./pages/admin/Timetable";
 import AdminFeesPage from "./pages/admin/Fees";
 import AdminProfile from "./pages/admin/AdminProfile";
+import SearchPage from "./pages/shared/SearchPage";
 
 function App() {
   return (
@@ -72,7 +73,7 @@ function App() {
 
       {/* admin route */}
       <Route path="admin" element={<DashboardLayout />}>
-        <Route path="search" element={<AdminDashboard />} />
+        <Route path="search" element={<SearchPage />} />
         <Route path="dashboard" element={<AdminDashboard />} />
         <Route path="departments" element={<Departments />} />
         <Route path="students" element={<Students />} />

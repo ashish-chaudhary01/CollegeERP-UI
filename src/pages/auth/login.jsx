@@ -1,4 +1,4 @@
-import { GraduationCap } from "lucide-react";
+import { GraduationCap, Lock, Mail } from "lucide-react";
 import { useState } from "react";
 import { Navigate, useNavigate } from "react-router";
 import { useAuth } from "../../context/AuthContext";
@@ -61,15 +61,12 @@ function LoginPage() {
   };
 
   return (
-    <div className="min-h-screen flex justify-center items-center">
-      {/* container */}
-      <form
-        onSubmit={handleClick}
-        className="px-4 py-8 rounded-xl shadow-lg bg-white flex flex-col gap-8 items-center min-w-[320px]"
-      >
-        {/* heading */}
-        <div className="flex items-center gap-4">
-          <div className="bg-linear-to-br from-indigo-600 to-violet-500 rounded-xl p-2 text-white">
+    <div className="relative grid md:grid-cols-2 min-h-screen w-full p-2">
+      {/* left container */}
+      <div className="flex justify-center pt-44 w-full h-full">
+        {/* logo */}
+        <div className="absolute top-10 left-10 flex gap-3">
+          <div className="bg-linear-to-br from-indigo-600 to-violet-500 rounded-xl p-3 text-white">
             <GraduationCap size={27} />{" "}
           </div>
           <div className="font-bold text-2xl flex flex-col">
@@ -77,47 +74,74 @@ function LoginPage() {
             <span className="text-gray-500 text-xs">College ERP System</span>
           </div>
         </div>
-        {/* inputs */}
-        <div className="flex flex-col gap-4">
-          <div>
-            <label htmlFor="email" className="font-semibold text-xs mb-1">
-              EMAIL
-            </label>
-            <input
-              type="email"
-              name="email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              placeholder="johndoe@example.com"
-              className="w-full px-4 py-3 rounded-lg border-2 outline-0 border-black/30 focus:border-indigo-600 placeholder:text-sm text-sm duration-200 bg-gray-100"
-            />
+        <form onSubmit={handleClick} className="p-4 flex flex-col gap-8">
+          {/* heading */}
+          <div className="text-center">
+            <h2 className="font-bold text-4xl text-black">Welcome Back</h2>
+            <p className="text-sm text-gray-400 mt-2">
+              Enter your email and password to access your account
+            </p>
+          </div>
+          {/* inputs div container */}
+          <div className="flex flex-col gap-6">
+            <div>
+              <label
+                htmlFor="email"
+                className="text-[14px] font-semibold drop-shadow-xl mb-1 flex gap-1 items-center"
+              >
+                <Mail size={20} /> Email
+              </label>
+              <input
+                type="email"
+                name="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                placeholder="Enter your email"
+                className="w-full px-4 py-2 rounded border-2 border-black/40 outline-0 focus:border-blue-600 duration-200 text-sm bg-gray-100"
+              />
+            </div>
+
+            <div>
+              <label
+                htmlFor="password"
+                className="text-[14px] font-semibold drop-shadow-xl mb-1 flex gap-1 items-center"
+              >
+                <Lock size={20} />
+                Password
+              </label>
+              <input
+                type="password"
+                name="password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                placeholder="Enter your email"
+                className="w-full px-4 py-2 rounded border-2 border-black/40 outline-0 focus:border-blue-600 duration-200 text-sm bg-gray-100"
+              />
+            </div>
           </div>
 
-          <div>
-            <label htmlFor="password" className="font-semibold text-xs mb-1">
-              PASSWORD
-            </label>
-            <input
-              type="password"
-              name="password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              placeholder="Enter your password.."
-              className="w-full px-4 py-3 rounded-lg border-2 outline-0 border-black/30 focus:border-indigo-600 placeholder:text-sm text-sm duration-200 bg-gray-100"
-            />
+          {/* button */}
+          <div className="">
+            <button
+              disabled={loading}
+              className="w-full py-2 bg-blue-700 rounded text-white font-semibold text-md shadow hover:bg-blue-600 duration-200"
+            >
+              {loading ? "Signing In..." : "Sign In"}
+            </button>
+            <p className="text-center text-[#6766CF] text-sm mt-2">
+              Forgot your password?
+            </p>
           </div>
-        </div>
-        {/* links */}
-        <div className="flex flex-col gap-2 items-center justify-center">
-          {/* login button */}
-          <button
-            disabled={loading}
-            className="px-6 py-2 rounded shadow bg-blue-600 font-semibold tracking-wider hover:bg-blue-700 duration-200 text-white"
-          >
-            {loading ? "Logging in..." : "Login"}
-          </button>
-        </div>
-      </form>
+        </form>
+      </div>
+      {/* right container */}
+      <div className="hidden md:flex rounded-xl h-screen">
+        <img
+          src="/clg-img.jpg"
+          alt="image"
+          className="w-full h-full object-cover rounded-lg"
+        />
+      </div>
     </div>
   );
 }
