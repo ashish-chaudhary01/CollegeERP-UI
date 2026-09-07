@@ -10,6 +10,10 @@ const DashboardLayout = () => {
   // sidebar open or close state
   const [sidebarOpen, setSidebarOpen] = useState(false);
 
+  if (!user) {
+    return null;
+  }
+
   return (
     <div className="min-h-screen">
       {/* desktop siderbar */}
