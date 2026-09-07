@@ -1,4 +1,11 @@
-import { GraduationCap, Lock, Mail } from "lucide-react";
+import {
+  GraduationCap,
+  IndianRupee,
+  Lock,
+  Mail,
+  School,
+  Users,
+} from "lucide-react";
 import { useState } from "react";
 import { Navigate, useNavigate } from "react-router";
 import { useAuth } from "../../context/AuthContext";
@@ -61,7 +68,7 @@ function LoginPage() {
   };
 
   return (
-    <div className="relative grid md:grid-cols-2 min-h-screen w-full p-2">
+    <div className="relative grid lg:grid-cols-2 min-h-screen w-full">
       {/* left container */}
       <div className="flex justify-center pt-44 w-full h-full">
         {/* logo */}
@@ -135,12 +142,83 @@ function LoginPage() {
         </form>
       </div>
       {/* right container */}
-      <div className="hidden md:flex rounded-xl h-screen">
+      <div className="relative hidden min-h-screen overflow-hidden lg:block">
+        {/* background image */}
         <img
-          src="/clg-img.jpg"
+          src="/college_img.png"
           alt="image"
-          className="w-full h-full object-cover rounded-lg"
+          className="absolute inset-0 w-full h-full object-cover"
         />
+        {/* dark overlay */}
+        <div className="absolute inset-0 bg-slate-950/70" />
+        {/* content */}
+        <div className="relative z-10 flex flex-col h-full justify-center px-12 lg:px-16">
+          {/* heading */}
+          <h1 className="text-4xl max-w-xl xl:text-5xl leading-tight text-white font-bold">
+            Empowering Education Through{" "}
+            <span className="text-[#8666F8]">Technology</span>
+          </h1>
+          {/* description */}
+          <p className="max-w-lg text-sm text-gray-300 mt-1">
+            {" "}
+            A smarter, simpler and more connected way to manage college .
+          </p>
+
+          {/* features */}
+          <div className="flex gap-12 items-center mt-8 text-white">
+            {/* feature 1 */}
+            <div className="flex flex-col gap-1 items-center">
+              <span className="bg-white/10 border border-white/10 backdrop-blur-xl rounded-md flex items-center text-center p-2">
+                <Users />
+              </span>
+              <span className="text-xs text-center">
+                Manage <br />
+                Students
+              </span>
+            </div>
+            {/* feature 2 */}
+            <div className="flex flex-col gap-1 items-center">
+              <span className="bg-white/10 border border-white/10 backdrop-blur-xl rounded-md flex items-center text-center p-2">
+                <School />
+              </span>
+              <span className="text-xs text-center">
+                Manage <br />
+                Departments
+              </span>
+            </div>
+            {/* feature 3 */}
+            <div className="flex flex-col gap-1 items-center">
+              <span className="bg-white/10 border border-white/10 backdrop-blur-xl rounded-md flex items-center text-center p-2">
+                <GraduationCap />
+              </span>
+              <span className="text-xs text-center">
+                Manage <br />
+                Teacher
+              </span>
+            </div>
+            {/* feature 4 */}
+            <div className="flex flex-col gap-1 items-center">
+              <span className="bg-white/10 border border-white/10 backdrop-blur-xl rounded-md flex items-center text-center p-2">
+                <IndianRupee />
+              </span>
+              <span className="text-xs text-center">
+                Simplify <br />
+                Fees
+              </span>
+            </div>
+          </div>
+
+          {/* Bottom Text */}
+          <div className="mt-16">
+            <p className="text-xl italic text-white/80">Better Systems,</p>
+
+            <p className="text-xl italic text-white/80">
+              Stronger Institutions
+            </p>
+
+            <div className="mt-3 h-1 w-24 rounded-full bg-[#8666F8]" />
+          </div>
+        </div>
       </div>
     </div>
   );
