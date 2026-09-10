@@ -1,9 +1,9 @@
-import { Search } from "lucide-react";
 import { useEffect, useState } from "react";
 import Studentcard from "../../components/StudentCard";
 
 const Students = () => {
-  const [students, setStudents] = useState(null);
+  const [inputSearch, setInputSearch] = useState("");
+  const [students, setStudents] = useState([]);
   useEffect(() => {
     async function fetchStudents() {
       try {
@@ -21,6 +21,22 @@ const Students = () => {
 
     fetchStudents();
   }, []);
+
+  const filteredStudents =
+    inputSearch.trim().length > 0
+      ? students.filter((student) => {
+          const studentName = student?.userId?.name?.toLowerCase() ?? "";
+          const studentEmail = student?.userId?.email?.toLowerCase() ?? "";
+          const studentRollNumber = student?.rollNumber ?? "";
+          const searchTerm = inputSearch.trim().toLowerCase();
+          return (
+            studentName.includes(searchTerm) ||
+            studentRollNumber.includes(searchTerm) ||
+            studentEmail.includes(searchTerm)
+          );
+        })
+      : students;
+
   return (
     <div className="min-h-screen overflow-hidden">
       {/* heading */}
@@ -34,26 +50,22 @@ const Students = () => {
         <div className="flex items-center flex-1">
           <input
             type="text"
+            value={inputSearch}
+            onChange={(e) => setInputSearch(e.target.value)}
             placeholder="Search by name or student ID..."
-            className="outline-0 border-black/15 px-4 py-2 rounded-l-md bg-gray-200 placeholder:text-sm flex-1 text-md text-slate-700"
+            className="outline-0 border-black/15 px-4 py-2 rounded bg-gray-200 placeholder:text-sm flex-1 text-md text-slate-700"
           />
-          <button className="rounded-r-md bg-blue-600 text-white font-semibold flex items-center gap-2 py-2 px-4 cursor-pointer hover:bg-blue-700 duration-200">
-            <span className="h-full">
-              <Search />
-            </span>
-            <span className="hidden sm:block">Search</span>
-          </button>
         </div>
 
-        <div className="flex items-center gap-2 bg-primary text-white px-4 py-2 rounded-lg font-semibold shadow hover:bg-black/80 duration-200 cursor-pointer">
+        <div className="flex items-center gap-2 bg-blue-500 text-white px-4 py-2 rounded font-semibold shadow hover:bg-blue-700/80 duration-200 cursor-pointer">
           <span>+</span>
           <span className="hidden lg:block">Add Student</span>
         </div>
       </div>
 
       {/* student grid */}
-      <div className="grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-3 sm:gap-4 items-stretch md:p-4 py-4">
-        {students?.map((student, idx) => (
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 xl:grid-cols-5 gap-3 sm:gap-4 items-stretch md:p-4 py-4">
+        {filteredStudents?.map((student, idx) => (
           <Studentcard student={student} key={idx} />
         ))}
       </div>
