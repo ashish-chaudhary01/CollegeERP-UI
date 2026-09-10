@@ -1,5 +1,6 @@
 import { Search } from "lucide-react";
 import { useEffect, useState } from "react";
+import Studentcard from "../../components/StudentCard";
 
 const Students = () => {
   const [students, setStudents] = useState(null);
@@ -12,8 +13,7 @@ const Students = () => {
         );
 
         const data = await res.json();
-        setStudents(data);
-        console.log(data);
+        setStudents(data.students);
       } catch (error) {
         console.log(error.message);
       }
@@ -24,7 +24,7 @@ const Students = () => {
   return (
     <div className="min-h-screen overflow-hidden">
       {/* heading */}
-      <h1 className="text-2xl font-bold">Students</h1>
+      <h1 className="text-4xl font-bold">Students</h1>
       <p className="text-gray-400 text-[13px]">
         Search, view and manage student records
       </p>
@@ -52,7 +52,11 @@ const Students = () => {
       </div>
 
       {/* student grid */}
-      <div className="rounded-lg border-black/10 grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-3 sm:gap-4 items-stretch md:p-4 py-4"></div>
+      <div className="grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-3 sm:gap-4 items-stretch md:p-4 py-4">
+        {students?.map((student, idx) => (
+          <Studentcard student={student} key={idx} />
+        ))}
+      </div>
     </div>
   );
 };
