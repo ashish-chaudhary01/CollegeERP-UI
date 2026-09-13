@@ -86,10 +86,10 @@ const Students = () => {
       </div>
 
       {/* filter container */}
-      <div className="mt-6 px-4 py-2 bg-gray-200 rounded-xl flex gap-4 flex-wrap items-center">
+      <div className="mt-6 px-4 py-2 bg-gray-200 rounded-xl flex gap-4 flex-wrap items-center text-sm">
         {/* department filter */}
         <div className="flex gap-2 items-center">
-          <label htmlFor="departments" className="text-sm font-medium ">
+          <label htmlFor="departments" className="font-medium ">
             Departments :
           </label>
 
@@ -97,7 +97,7 @@ const Students = () => {
             name="department"
             value={selectedDepartment}
             onChange={(e) => setSelectedDepartment(e.target.value)}
-            className="border border-black/20 p-0.75 rounded-xl"
+            className="border border-gray-500 py-0.5 px-2 text-xs rounded-xl"
           >
             <option value="all">All</option>
             {departments.map((department) => (
@@ -117,7 +117,7 @@ const Students = () => {
             name="status"
             value={status}
             onChange={(e) => setStatus(e.target.value)}
-            className="border border-black/20 p-0.75 rounded-xl"
+            className="border border-gray-500 py-0.5 px-2 text-xs rounded-xl"
           >
             <option value="active">Active</option>
             <option value="inactive">Inactive</option>

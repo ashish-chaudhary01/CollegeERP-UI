@@ -7,7 +7,6 @@ import {
   Info,
   LayoutDashboard,
   ReceiptIndianRupee,
-  Search,
   SquareText,
   User,
   Users,
@@ -53,11 +52,11 @@ export const sidebarData = {
     {
       section: "MAIN",
       items: [
-        {
-          href: "/teacher/search",
-          label: "Search",
-          icon: Search,
-        },
+        // {
+        //   href: "/teacher/search",
+        //   label: "Search",
+        //   icon: Search,
+        // },
         {
           href: "/teacher/dashboard",
           label: "Dashboard",
@@ -88,11 +87,6 @@ export const sidebarData = {
     {
       section: "MAIN",
       items: [
-        {
-          href: "/hod/search",
-          label: "Search",
-          icon: Search,
-        },
         {
           href: "/hod/dashboard",
           label: "Dashboard",
@@ -136,11 +130,6 @@ export const sidebarData = {
     {
       section: "MAIN",
       items: [
-        {
-          href: "/admin/search",
-          label: "Search",
-          icon: Search,
-        },
         {
           href: "/admin/dashboard",
           label: "Dashboard",

@@ -29,7 +29,6 @@ import Attendance from "./pages/admin/Attendance";
 import Timetable from "./pages/admin/Timetable";
 import AdminFeesPage from "./pages/admin/Fees";
 import AdminProfile from "./pages/admin/AdminProfile";
-import SearchPage from "./pages/shared/SearchPage";
 
 function App() {
   return (
@@ -48,7 +47,6 @@ function App() {
 
       {/* teacher route */}
       <Route path="teacher" element={<DashboardLayout />}>
-        <Route path="search" element={<StudentDashboard />} />
         <Route path="dashboard" element={<StudentDashboard />} />
         <Route path="classes" element={<TeacherClasses />} />
         <Route path="students" element={<StudentList />} />
@@ -60,7 +58,6 @@ function App() {
 
       {/* hod route */}
       <Route path="hod" element={<DashboardLayout />}>
-        <Route path="search" element={<StudentDashboard />} />
         <Route path="dashboard" element={<HodDashboard />} />
         <Route path="teachers" element={<Teacher />} />
         <Route path="students" element={<Student />} />
@@ -73,7 +70,6 @@ function App() {
 
       {/* admin route */}
       <Route path="admin" element={<DashboardLayout />}>
-        <Route path="search" element={<SearchPage />} />
         <Route path="dashboard" element={<AdminDashboard />} />
         <Route path="departments" element={<Departments />} />
         <Route path="students" element={<Students />} />
