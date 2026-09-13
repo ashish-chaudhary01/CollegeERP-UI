@@ -167,13 +167,13 @@ export const sidebarData = {
           icon: GraduationCap,
         },
         {
-          href: "/hod/subjects",
+          href: "/admin/subjects",
           label: "Subjects",
           icon: BookOpen,
         },
-        { href: "/hod/attendance", label: "Attendance", icon: CalendarCheck },
+        { href: "/admin/attendance", label: "Attendance", icon: CalendarCheck },
         {
-          href: "/hod/timetable",
+          href: "/admin/timetable",
           label: "College Timetable",
           icon: CalendarDays,
         },

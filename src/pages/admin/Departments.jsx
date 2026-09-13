@@ -14,7 +14,6 @@ const Departments = () => {
         );
         if (!res.ok) throw new Error("Failed to Fetch Departments");
         const data = await res.json();
-        console.log(data.departments);
         setDepartments(data.departments);
       } catch (error) {
         console.log(error.message);
@@ -36,7 +35,7 @@ const Departments = () => {
       <h1 className="text-2xl font-bold">Departments</h1>
 
       {/* search bar */}
-      <div className="flex items-center mt-4 gap-2">
+      <div className="flex items-center mt-4 gap-2 max-w-3xl">
         <div className="flex items-center flex-1">
           <input
             type="text"

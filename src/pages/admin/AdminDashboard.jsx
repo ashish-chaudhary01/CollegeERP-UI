@@ -19,7 +19,6 @@ function AdminDashboard() {
         });
         const data = await res.json();
         setOverviewData(data);
-        console.log(data);
       } catch (error) {
         console.log(error.message);
       }

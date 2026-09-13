@@ -14,7 +14,6 @@ const Teachers = () => {
 
         const data = await res.json();
         setTeachers(data.teacher);
-        console.log(data.teacher);
       } catch (error) {
         console.log(error.message);
       }
@@ -45,7 +44,7 @@ const Teachers = () => {
       </p>
 
       {/* search bar */}
-      <div className="flex items-center mt-4 gap-2">
+      <div className="flex items-center mt-4 gap-2 max-w-3xl">
         <div className="flex items-center flex-1">
           <input
             type="text"
