@@ -86,7 +86,7 @@ const Students = () => {
       </div>
 
       {/* filter container */}
-      <div className="mt-6 px-4 py-2 bg-gray-200  rounded-xl flex gap-4 flex-wrap items-center">
+      <div className="mt-6 px-4 py-2 bg-gray-200 rounded-xl flex gap-4 flex-wrap items-center">
         {/* department filter */}
         <div className="flex gap-2 items-center">
           <label htmlFor="departments" className="text-sm font-medium ">
@@ -131,6 +131,38 @@ const Students = () => {
           <Studentcard student={student} key={idx} />
         ))}
       </div>
+
+      {/* Students Table
+      <div className="mt-6 overflow-x-auto rounded-xl border">
+        <table className="w-full text-left">
+          <thead>
+            <tr className="border-b">
+              <th className="p-4">Name</th>
+              <th className="p-4">Roll Number</th>
+              <th className="p-4">Email</th>
+              <th className="p-4">Branch</th>
+              <th className="p-4">Year</th>
+              <th className="p-4">Semester</th>
+            </tr>
+          </thead>
+
+          <tbody>
+            {students.map((student) => (
+              <tr key={student._id} className="border-b">
+                <td className="p-4">{student.userId?.name}</td>
+
+                <td className="p-4">{student.rollNumber}</td>
+                <td className="p-4">{student.userId?.email}</td>
+
+                <td className="p-4">{student.department?.departmentName}</td>
+
+                <td className="p-4">{student.year}</td>
+                <td className="p-4">{student.semester}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div> */}
     </div>
   );
 };
