@@ -3,8 +3,10 @@ function TeacherCard({ teacher }) {
   return (
     <div className="relative rounded-lg border border-black/20 shadow-md hover:shadow-lg w-full h-full hover:-translate-y-1.5 duration-300 ease-out flex flex-col justify-between overflow-hidden">
       {/* role */}
-      <p className="absolute right-2 top-2 text-[8px] rounded-full mb-2 px-2 py-1 uppercase tracking-[0.30em] bg-purple-500/30 text-purple-700 inline font-bold">
-        teacher
+      <p
+        className={`absolute right-2 top-2 text-[8px] rounded-full mb-2 px-2 py-1 uppercase tracking-[0.30em] ${teacher.userId.role === "hod" ? "bg-pink-500/20 text-pink-700" : "bg-purple-500/20 text-purple-700"} inline font-bold`}
+      >
+        {teacher.userId.role}
       </p>
       <div className="aspect-square">
         <img

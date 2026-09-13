@@ -1,9 +1,10 @@
 function Studentcard({ student }) {
+  const image_url = student.profilePictureUrl || "/no-image.jpg";
   return (
     <div className="rounded-lg border border-black/20 shadow-md hover:shadow-lg w-full h-full hover:-translate-y-1.5 duration-300 ease-out flex flex-col justify-between overflow-hidden">
       <div className="aspect-square">
         <img
-          src="/no-image.jpg"
+          src={image_url}
           alt="student-image"
           className="w-full h-full object-cover  rounded-t-lg"
         />

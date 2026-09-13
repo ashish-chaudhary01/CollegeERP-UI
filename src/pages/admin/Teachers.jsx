@@ -62,7 +62,7 @@ const Teachers = () => {
         </div>
       </div>
 
-      {/* student grid */}
+      {/* teacher grid */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 xl:grid-cols-5 gap-3 sm:gap-4 items-stretch md:p-4 py-4">
         {filteredTeachers?.map((teacher, idx) => (
           <TeacherCard teacher={teacher} key={idx} />
