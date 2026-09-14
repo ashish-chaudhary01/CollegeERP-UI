@@ -6,6 +6,13 @@ const Departments = () => {
   const [inputSearch, setInputSearch] = useState("");
   const [departments, setDepartments] = useState([]);
   const [showModal, setShowModal] = useState(false);
+  const [assignHodModal, setAssignHodModal] = useState(false);
+  const [teachers, setTeachers] = useState([]);
+  const [selectedDepartmentId, setSelectedDepartmentId] = useState("");
+  const [selectedTeacherId, setSelectedTeacherId] = useState("");
+  const [isAssigningHod, setIsAssigningHod] = useState(false);
+  const [assignHodError, setAssignHodError] = useState("");
+  const [departmentsRefreshKey, setDepartmentsRefreshKey] = useState(0);
 
   useEffect(() => {
     async function fetchDepartment() {
@@ -16,12 +23,29 @@ const Departments = () => {
         );
         if (!res.ok) throw new Error("Failed to Fetch Departments");
         const data = await res.json();
-        setDepartments(data.departments);
+        setDepartments((data.departments ?? []).filter(Boolean));
       } catch (error) {
         console.log(error.message);
       }
     }
     fetchDepartment();
+  }, [departmentsRefreshKey]);
+
+  useEffect(() => {
+    async function fetchTeacher() {
+      try {
+        const res = await fetch(
+          `${import.meta.env.VITE_API_URL}/admin/teachers`,
+          { method: "GET", credentials: "include" },
+        );
+        const data = await res.json();
+        setTeachers(data.teacher);
+        setSelectedTeacherId(data?.teacher?.[0]?._id ?? "");
+      } catch (error) {
+        console.log(error.message);
+      }
+    }
+    fetchTeacher();
   }, []);
 
   const filteredDepartments =
@@ -34,6 +58,45 @@ const Departments = () => {
 
   const handleDepartmentCreate = (newDepartment) => {
     setDepartments([...departments, newDepartment]);
+  };
+
+  const closeAssignHodModal = () => {
+    setAssignHodModal(false);
+    setSelectedDepartmentId("");
+    setAssignHodError("");
+  };
+
+  const assignHod = async () => {
+    if (!selectedDepartmentId || !selectedTeacherId) {
+      setAssignHodError("Please select a teacher");
+      return;
+    }
+
+    try {
+      setIsAssigningHod(true);
+      setAssignHodError("");
+      const res = await fetch(
+        `${import.meta.env.VITE_API_URL}/admin/department/${selectedDepartmentId}/assign-hod`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          credentials: "include",
+          body: JSON.stringify({ teacherId: selectedTeacherId }),
+        },
+      );
+      if (!res.ok) {
+        throw new Error("Failed to assign HOD");
+      }
+
+      setDepartmentsRefreshKey((key) => key + 1);
+      closeAssignHodModal();
+    } catch (error) {
+      setAssignHodError(error.message);
+    } finally {
+      setIsAssigningHod(false);
+    }
   };
 
   return (
@@ -79,7 +142,7 @@ const Departments = () => {
                   />{" "}
                 </div>
                 {/* details */}
-                <div className="flex flex-col gap-1 p-2">
+                <div className="flex flex-col gap-1 p-2 items-start">
                   <h2 className="text-2xl font-extrabold leading-tight">
                     {department.departmentName}
                     <span className="text-sm">
@@ -87,15 +150,24 @@ const Departments = () => {
                       ({department.departmentCode})
                     </span>
                   </h2>
-                  <p className="font-bold text-sm">
-                    Hod :{" "}
-                    {department.hod === null
-                      ? "not-assigned"
-                      : department.hod.userId.name}
+                  <p className="font-bold text-sm px-4 py-1 bg-orange-500/10 text-orange-500 rounded-full">
+                    Hod : {department.hod?.userId?.name ?? "not-assigned"}
                   </p>
+                  {!department.hod && (
+                    <button
+                      onClick={() => {
+                        setSelectedDepartmentId(department._id);
+                        setAssignHodError("");
+                        setAssignHodModal(true);
+                      }}
+                      className="text-indigo-500 text-sm hover:underline text-left font-medium px-3"
+                    >
+                      Assign Hod
+                    </button>
+                  )}
                 </div>
               </div>
-              <button className="mt-4 p-2 w-full bg-blue-600 text-md text-white font-bold hover:bg-blue-700 duration-200 cursor-pointer">
+              <button className="mt-2 p-2 w-full bg-blue-600 text-md text-white font-bold hover:bg-blue-700 duration-200 cursor-pointer">
                 View Department
               </button>
             </div>
@@ -103,12 +175,67 @@ const Departments = () => {
         ))}
       </div>
 
-      {/* Modal */}
+      {/* new department Modal */}
       {showModal && (
         <AddDepartmentModal
           onClose={() => setShowModal(false)}
           handleDepartmentCreate={handleDepartmentCreate}
         />
+      )}
+
+      {/* assign hod modal */}
+      {assignHodModal && (
+        <div
+          onClick={(e) => e.target === e.currentTarget && closeAssignHodModal()}
+          className="fixed z-70 inset-0 flex justify-center items-center bg-black/40"
+        >
+          <div className="p-6 rounded-lg shadow-xl bg-white max-w-md w-full">
+            <h2 className="text-xl font-bold">Assign Hod</h2>
+            <div className="mt-4 flex gap-4 items-center">
+              <label
+                htmlFor="selectTeacher"
+                className="text-xs font-medium uppercase"
+              >
+                Select Teacher :
+              </label>
+              <select
+                name="selectTeacher"
+                id="selectTeacher"
+                required
+                value={selectedTeacherId}
+                onChange={(e) => setSelectedTeacherId(e.target.value)}
+                className="bg-slate-200 border outline-0 border-slate-300 py-0.5 px-3 text-xs rounded"
+              >
+                {teachers.map((teacher) => (
+                  <option key={teacher._id} value={teacher._id}>
+                    {teacher?.userId?.name}
+                  </option>
+                ))}
+              </select>
+            </div>
+            {assignHodError && (
+              <p className="mt-3 text-sm text-red-600">{assignHodError}</p>
+            )}
+            <div className="flex gap-4 items-center justify-end mt-6">
+              <button
+                onClick={closeAssignHodModal}
+                type="button"
+                disabled={isAssigningHod}
+                className="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600 duration-200 text-sm font-medium"
+              >
+                Cancel
+              </button>
+              <button
+                onClick={assignHod}
+                type="button"
+                disabled={isAssigningHod}
+                className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 duration-200 text-sm font-medium"
+              >
+                {isAssigningHod ? "Assigning..." : "Assign"}
+              </button>
+            </div>
+          </div>
+        </div>
       )}
     </div>
   );

@@ -84,7 +84,7 @@ const AddStudentModel = ({ onClose, onStudentAdded }) => {
       }}
       className="fixed inset-0 bg-black/40 flex items-center justify-center z-50"
     >
-      <div className="rounded-2xl w-full overflow-auto h-[600px] max-w-xl sm:max-w-2xl shadow-xl bg-white border border-slate-700/40 p-6">
+      <div className="rounded-2xl w-full overflow-auto h-150 max-w-xl sm:max-w-2xl shadow-xl bg-white border border-slate-700/40 p-6">
         {/* heading */}
         <h1 className="font-semibold text-xl text-slate-900">Add Student</h1>
         <p className="text-gray-500 text-sm mt-1">
