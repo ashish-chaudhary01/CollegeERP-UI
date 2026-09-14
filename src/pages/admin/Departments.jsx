@@ -1,9 +1,11 @@
 import { Building2 } from "lucide-react";
 import { useEffect, useState } from "react";
+import AddDepartmentModal from "../../components/AddDepartmentModel";
 
 const Departments = () => {
   const [inputSearch, setInputSearch] = useState("");
   const [departments, setDepartments] = useState([]);
+  const [showModal, setShowModal] = useState(false);
 
   useEffect(() => {
     async function fetchDepartment() {
@@ -29,6 +31,11 @@ const Departments = () => {
           return department.departmentName.toLowerCase().includes(searchTerm);
         })
       : departments;
+
+  const handleDepartmentCreate = (newDepartment) => {
+    [...departments, newDepartment];
+  };
+
   return (
     <div className="min-h-screen overflow-hidden">
       {/* heading */}
@@ -46,10 +53,13 @@ const Departments = () => {
           />
         </div>
 
-        <div className="flex items-center gap-2 bg-blue-500 text-white px-4 py-2 rounded font-semibold shadow hover:bg-blue-700/80 duration-200 cursor-pointer">
+        <button
+          onClick={() => setShowModal(true)}
+          className="flex items-center gap-2 bg-blue-500 text-white px-4 py-2 rounded font-semibold shadow hover:bg-blue-700/80 duration-200 cursor-pointer"
+        >
           <span>+</span>
           <span className="hidden lg:block">Add Department</span>
-        </div>
+        </button>
       </div>
 
       {/* department grid */}
@@ -57,36 +67,49 @@ const Departments = () => {
         {filteredDepartments?.map((department, idx) => (
           <div
             key={idx}
-            className="rounded-lg border border-black/20 shadow-md hover:-translate-y-1.5 duration-300 ease-out p-4"
+            className="flex h-full flex-col rounded-lg border border-black/20 shadow-md hover:-translate-y-1.5 duration-300 ease-out p-4"
           >
-            <div className="flex gap-4 items-center">
-              {/* icon */}
-              <div>
-                <Building2
-                  size={60}
-                  className="bg-blue-400/20 text-blue-700 rounded-full p-2"
-                />{" "}
+            <div className="flex flex-1 flex-col">
+              <div className="flex-1 flex gap-4 items-center">
+                {/* icon */}
+                <div>
+                  <Building2
+                    size={60}
+                    className="bg-blue-400/20 text-blue-700 rounded-full p-2"
+                  />{" "}
+                </div>
+                {/* details */}
+                <div className="flex flex-col gap-1 p-2">
+                  <h2 className="text-2xl font-extrabold leading-tight">
+                    {department.departmentName}
+                    <span className="text-sm">
+                      {" "}
+                      ({department.departmentCode})
+                    </span>
+                  </h2>
+                  <p className="font-bold text-sm">
+                    Hod :{" "}
+                    {department.hod === null
+                      ? "not-assigned"
+                      : department.hod.userId.name}
+                  </p>
+                </div>
               </div>
-              {/* details */}
-              <div className="flex flex-col gap-1 p-2">
-                <h2 className="text-2xl font-extrabold leading-tight">
-                  {department.departmentName}
-                  <span className="text-sm">
-                    {" "}
-                    ({department.departmentCode})
-                  </span>
-                </h2>
-                <p className="font-bold text-sm">
-                  Hod : {department.hod.userId.name}
-                </p>
-              </div>
+              <button className="mt-4 p-2 w-full bg-blue-600 text-md text-white font-bold hover:bg-blue-700 duration-200 cursor-pointer">
+                View Department
+              </button>
             </div>
-            <button className="p-2 w-full bg-blue-600 text-md text-white font-bold hover:bg-blue-700 duration-200 cursor-pointer">
-              View Department
-            </button>
           </div>
         ))}
       </div>
+
+      {/* Modal */}
+      {showModal && (
+        <AddDepartmentModal
+          onClose={() => setShowModal(false)}
+          handleDepartmentCreate={handleDepartmentCreate}
+        />
+      )}
     </div>
   );
 };
