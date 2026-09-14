@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-const AddStudentModel = ({ onClose }) => {
+const AddStudentModel = ({ onClose, onStudentAdded }) => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
   const [departments, setDepartments] = useState([]);
@@ -67,6 +67,7 @@ const AddStudentModel = ({ onClose }) => {
       if (!res.ok) {
         throw new Error(res.message || "Failed To add student");
       }
+      onStudentAdded?.();
       onClose();
     } catch (error) {
       console.log(error.message);

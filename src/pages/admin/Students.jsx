@@ -7,8 +7,11 @@ const Students = () => {
   const [students, setStudents] = useState([]);
   const [departments, setDepartments] = useState([]);
   const [status, setStatus] = useState("active");
+  const [year, setYear] = useState("all");
+  const [semester, setSemester] = useState("all");
   const [selectedDepartment, setSelectedDepartment] = useState("all");
   const [showModal, setShowModal] = useState(false);
+  const [studentsRefreshKey, setStudentsRefreshKey] = useState(0);
 
   useEffect(() => {
     async function fetchDepartment() {
@@ -30,21 +33,22 @@ const Students = () => {
   useEffect(() => {
     async function fetchStudents() {
       try {
-        let url = `${import.meta.env.VITE_API_URL}/admin/students/?status=${status}`;
-        if (selectedDepartment !== "all") {
-          url += `&departmentId=${selectedDepartment}`;
-        }
-        const res = await fetch(url, { method: "GET", credentials: "include" });
+        let url = `${import.meta.env.VITE_API_URL}/admin/students/?status=${status}&departmentId=${selectedDepartment}&year=${year}&semester=${semester}`;
+        const res = await fetch(url, {
+          method: "GET",
+          credentials: "include",
+        });
+        if (!res.ok) throw new Error("Failed to Fetch Students");
 
         const data = await res.json();
-        setStudents(data.students);
+        setStudents(data.students ?? []);
       } catch (error) {
         console.log(error.message);
       }
     }
 
     fetchStudents();
-  }, [selectedDepartment, status]);
+  }, [selectedDepartment, status, studentsRefreshKey, year, semester]);
 
   const filteredStudents =
     inputSearch.trim().length > 0
@@ -128,6 +132,45 @@ const Students = () => {
             <option value="inactive">Inactive</option>
           </select>
         </div>
+        {/* year filter */}
+        <div className="flex gap-2 items-center">
+          <label htmlFor="year" className="text-sm font-medium ">
+            year :
+          </label>
+
+          <select
+            name="year"
+            value={year}
+            onChange={(e) => setYear(e.target.value)}
+            className="border border-gray-500 py-0.5 px-2 text-xs rounded-xl"
+          >
+            <option value="all">All</option>
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+          </select>
+        </div>
+        {/* semester filter */}
+        <div className="flex gap-2 items-center">
+          <label htmlFor="semester" className="text-sm font-medium ">
+            semester :
+          </label>
+
+          <select
+            name="semester"
+            value={semester}
+            onChange={(e) => setSemester(e.target.value)}
+            className="border border-gray-500 py-0.5 px-2 text-xs rounded-xl"
+          >
+            <option value="all">All</option>
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+            <option value="6">6</option>
+          </select>
+        </div>
       </div>
 
       {/* student grid */}
@@ -138,7 +181,12 @@ const Students = () => {
       </div>
 
       {/* Modal */}
-      {showModal && <AddStudentModel onClose={() => setShowModal(false)} />}
+      {showModal && (
+        <AddStudentModel
+          onClose={() => setShowModal(false)}
+          onStudentAdded={() => setStudentsRefreshKey((key) => key + 1)}
+        />
+      )}
 
       {/* Students Table
       <div className="mt-6 overflow-x-auto rounded-xl border">
