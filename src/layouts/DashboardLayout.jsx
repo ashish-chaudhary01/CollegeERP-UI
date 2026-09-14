@@ -26,7 +26,7 @@ const DashboardLayout = () => {
       />
 
       {/* content */}
-      <div className="md:pl-67 min-h-[200vh]">
+      <div className="md:pl-67 min-h-screen">
         <Header setSidebarOpen={setSidebarOpen} />
         {sidebarOpen && (
           <div

@@ -4,6 +4,7 @@ const AdminFeesPage = () => {
   const [studentFees, setStudentFees] = useState([]);
   const [departments, setDepartments] = useState([]);
   const [selectedDepartment, setSelectedDepartment] = useState("all");
+  const [feeStatus, setFeeStatus] = useState("all");
   const [status, setStatus] = useState("all");
   const [semester, setSemester] = useState("all");
 
@@ -28,7 +29,7 @@ const AdminFeesPage = () => {
   useEffect(() => {
     async function fetchStudentFees() {
       try {
-        let url = `${import.meta.env.VITE_API_URL}/admin/fees?department=${selectedDepartment}&semester=${semester}`;
+        let url = `${import.meta.env.VITE_API_URL}/admin/fees?department=${selectedDepartment}&semester=${semester}&status=${status}&feeStatus=${feeStatus}`;
         const res = await fetch(url, { method: "GET", credentials: "include" });
         const data = await res.json();
         setStudentFees(data);
@@ -37,7 +38,7 @@ const AdminFeesPage = () => {
       }
     }
     fetchStudentFees();
-  }, [semester, selectedDepartment, status]);
+  }, [semester, selectedDepartment, status, feeStatus]);
   return (
     <div className="min-h-screen overflow-hidden">
       {/* heading */}
@@ -48,7 +49,7 @@ const AdminFeesPage = () => {
       <div className="mt-6 px-4 py-2 bg-gray-200 rounded-xl flex gap-4 flex-wrap items-center text-sm">
         {/* department filter */}
         <div className="flex gap-2 items-center">
-          <label htmlFor="departments" className="font-medium ">
+          <label htmlFor="department" className="font-medium ">
             Departments :
           </label>
 
@@ -66,16 +67,16 @@ const AdminFeesPage = () => {
             ))}
           </select>
         </div>
-        {/* status filter */}
+        {/* Feestatus filter */}
         <div className="flex gap-2 items-center">
-          <label htmlFor="status" className="text-sm font-medium ">
-            Status :
+          <label htmlFor="feestatus" className="text-sm font-medium ">
+            Fee Status :
           </label>
 
           <select
-            name="status"
-            value={status}
-            onChange={(e) => setStatus(e.target.value)}
+            name="feestatus"
+            value={feeStatus}
+            onChange={(e) => setFeeStatus(e.target.value)}
             className="border border-gray-500 py-0.5 px-2 text-xs rounded-xl"
           >
             <option value="all">All</option>
@@ -104,6 +105,23 @@ const AdminFeesPage = () => {
             <option value="6">6</option>
           </select>
         </div>
+        {/* student status filter */}
+        <div className="flex gap-2 items-center">
+          <label htmlFor="status" className="text-sm font-medium ">
+            Status :
+          </label>
+
+          <select
+            name="status"
+            value={status}
+            onChange={(e) => setStatus(e.target.value)}
+            className="border border-gray-500 py-0.5 px-2 text-xs rounded-xl"
+          >
+            <option value="all">All</option>
+            <option value="active">Active</option>
+            <option value="inactive">Inactive</option>
+          </select>
+        </div>
       </div>
 
       {/* table */}
@@ -123,7 +141,7 @@ const AdminFeesPage = () => {
           <tbody className="divide-y divide-slate-100 text-slate-600">
             {studentFees.map((fee) => (
               <tr key={fee.email} className="tranisition hover:bg-slate-50">
-                <td className="px-6 py-2 font-medium capitalize">
+                <td className="px-6 py-2 font-medium capitalize text-black">
                   {fee.studentName}
                 </td>
                 <td className="px-6 py-2 font-medium text-indigo-400">
@@ -135,10 +153,12 @@ const AdminFeesPage = () => {
                 <td className="px-6 py-2 font-medium">{fee.departmentName}</td>
                 <td className="px-6 py-2 font-medium">{fee.year}</td>
                 <td className="px-6 py-2 font-medium">{fee.semester}</td>
-                <td
-                  className={`px-6 py-2 font-medium ${fee.status === "pending" ? "bg-red-50 text-red-700" : "bg-emerald-50 text-emerald-700"}`}
-                >
-                  {fee.status}
+                <td className={`px-6 py-2 font-medium capitalize `}>
+                  <span
+                    className={`px-3 text-xs py-1 rounded-xl ${fee.status === "pending" ? "bg-red-100 text-red-600" : "bg-emerald-100 text-emerald-600"}`}
+                  >
+                    {fee.status}
+                  </span>
                 </td>
               </tr>
             ))}
