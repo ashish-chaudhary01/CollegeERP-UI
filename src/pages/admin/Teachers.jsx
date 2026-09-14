@@ -1,9 +1,12 @@
 import { useEffect, useState } from "react";
 import TeacherCard from "../../components/TeacherCard";
+import AddTeacherModel from "../../components/AddTeacherModel";
 
 const Teachers = () => {
   const [inputSearch, setInputSearch] = useState("");
   const [teachers, setTeachers] = useState([]);
+  const [showModal, setShowModal] = useState(false);
+  const [teachersRefreshKey, setTeachersRefreshKey] = useState(0);
   useEffect(() => {
     async function fetchTeachers() {
       try {
@@ -20,7 +23,7 @@ const Teachers = () => {
     }
 
     fetchTeachers();
-  }, []);
+  }, [teachersRefreshKey]);
 
   const filteredTeachers =
     inputSearch.trim().length > 0
@@ -55,10 +58,13 @@ const Teachers = () => {
           />
         </div>
 
-        <div className="flex items-center gap-2 bg-blue-500 text-white px-4 py-2 rounded font-semibold shadow hover:bg-blue-700/80 duration-200 cursor-pointer">
+        <button
+          onClick={() => setShowModal(true)}
+          className="flex items-center gap-2 bg-blue-500 text-white px-4 py-2 rounded font-semibold shadow hover:bg-blue-700/80 duration-200 cursor-pointer"
+        >
           <span>+</span>
           <span className="hidden lg:block">Add Teachers</span>
-        </div>
+        </button>
       </div>
 
       {/* teacher grid */}
@@ -67,6 +73,14 @@ const Teachers = () => {
           <TeacherCard teacher={teacher} key={idx} />
         ))}
       </div>
+
+      {/* Modal */}
+      {showModal && (
+        <AddTeacherModel
+          onClose={() => setShowModal(false)}
+          onTeacherAdded={() => setTeachersRefreshKey((key) => key + 1)}
+        />
+      )}
     </div>
   );
 };

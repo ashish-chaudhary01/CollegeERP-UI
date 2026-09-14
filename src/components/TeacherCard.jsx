@@ -30,7 +30,7 @@ function TeacherCard({ teacher }) {
         </div>
         {/* other details */}
         <div className="mt-2 text-sm">
-          <p className="">Department : {teacher.department.departmentName}</p>
+          <p className="">Department : {teacher.department.departmentCode}</p>
         </div>
       </div>
       {/* view profile button */}

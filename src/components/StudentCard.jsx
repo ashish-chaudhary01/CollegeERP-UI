@@ -34,7 +34,7 @@ function Studentcard({ student }) {
         <div className="mt-2 text-sm">
           <p>UBTER-ID : {student?.rollNumber ?? "-"}</p>
           <p className="">
-            BRANCH : {student.department?.departmentName ?? "Not assigned"}
+            BRANCH : {student.department?.departmentCode ?? "Not assigned"}
           </p>
         </div>
       </div>
