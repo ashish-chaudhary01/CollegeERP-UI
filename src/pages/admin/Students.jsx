@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import Studentcard from "../../components/StudentCard";
+import AddStudentModel from "../../components/AddStudentModel";
 
 const Students = () => {
   const [inputSearch, setInputSearch] = useState("");
@@ -7,6 +8,7 @@ const Students = () => {
   const [departments, setDepartments] = useState([]);
   const [status, setStatus] = useState("active");
   const [selectedDepartment, setSelectedDepartment] = useState("all");
+  const [showModal, setShowModal] = useState(false);
 
   useEffect(() => {
     async function fetchDepartment() {
@@ -17,7 +19,7 @@ const Students = () => {
         );
         if (!res.ok) throw new Error("Failed to Fetch Departments");
         const data = await res.json();
-        setDepartments(data.departments);
+        setDepartments((data.departments ?? []).filter(Boolean));
       } catch (error) {
         console.log(error.message);
       }
@@ -79,10 +81,13 @@ const Students = () => {
           />
         </div>
 
-        <div className="flex items-center gap-2 bg-blue-500 text-white px-4 py-2 rounded font-semibold shadow hover:bg-blue-700/80 duration-200 cursor-pointer">
+        <button
+          onClick={() => setShowModal(true)}
+          className="flex items-center gap-2 bg-blue-500 text-white px-4 py-2 rounded font-semibold shadow hover:bg-blue-700/80 duration-200 cursor-pointer"
+        >
           <span>+</span>
           <span className="hidden lg:block">Add Student</span>
-        </div>
+        </button>
       </div>
 
       {/* filter container */}
@@ -131,6 +136,9 @@ const Students = () => {
           <Studentcard student={student} key={idx} />
         ))}
       </div>
+
+      {/* Modal */}
+      {showModal && <AddStudentModel onClose={() => setShowModal(false)} />}
 
       {/* Students Table
       <div className="mt-6 overflow-x-auto rounded-xl border">

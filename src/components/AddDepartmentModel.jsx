@@ -39,7 +39,14 @@ const AddDepartmentModel = ({ onClose, handleDepartmentCreate }) => {
     }
   };
   return (
-    <div className="fixed inset-0 bg-black/40 flex items-center justify-center z-50">
+    <div
+      onMouseDown={(e) => {
+        if (e.target === e.currentTarget) {
+          onClose();
+        }
+      }}
+      className="fixed inset-0 bg-black/40 flex items-center justify-center z-50"
+    >
       <div className="rounded-2xl w-full max-w-sm sm:max-w-md shadow-xl bg-white border border-slate-700/40 p-6">
         {/* heading */}
         <h1 className="font-semibold text-xl text-slate-900">Add Department</h1>

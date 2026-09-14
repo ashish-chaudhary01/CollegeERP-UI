@@ -33,7 +33,7 @@ const Departments = () => {
       : departments;
 
   const handleDepartmentCreate = (newDepartment) => {
-    [...departments, newDepartment];
+    setDepartments([...departments, newDepartment]);
   };
 
   return (
