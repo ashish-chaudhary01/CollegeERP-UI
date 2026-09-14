@@ -19,6 +19,20 @@ const Subjects = () => {
 
     fetchSubjects();
   }, []);
+
+  const filterSubject =
+    inputSearch.trim().length > 0
+      ? subjects.filter((sub) => {
+          const searchTerm = inputSearch.trim().toLowerCase();
+          const subjectName = sub.subjectName.toLowerCase();
+          const subjectCode = sub.subjectCode.toLowerCase();
+
+          return (
+            subjectCode.includes(searchTerm) || subjectName.includes(searchTerm)
+          );
+        })
+      : subjects;
+
   return (
     <div className="min-h-screen overflow-hidden">
       {/* heading */}
@@ -69,9 +83,9 @@ const Subjects = () => {
             </thead>
 
             <tbody className="divide-y divide-slate-100">
-              {subjects.map((subject) => (
+              {filterSubject.map((subject) => (
                 <tr
-                  key={subject.subjectCode}
+                  key={subject.subjectCode + subject.subjectName}
                   className="transition hover:bg-slate-50"
                 >
                   <td className="px-6 py-4 font-medium text-indigo-600">
