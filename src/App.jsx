@@ -11,7 +11,7 @@ import Student from "./pages/hod/Student";
 import About from "./pages/AppInfo/About";
 import StudentAttendance from "./pages/student/studentAttendance";
 import StundentTimeTable from "./pages/student/StundentTimeTable";
-import StudentResult from "./pages/student/StudentResult";
+// import StudentResult from "./pages/student/StudentResult";
 import StudentFees from "./pages/student/StudentFees";
 import TeacherClasses from "./pages/teacher/TeacherClasses";
 import TeacherAttendance from "./pages/teacher/TeacherAttendance";
@@ -40,7 +40,6 @@ function App() {
         <Route path="subjects" element={<StudentSubject />} />
         <Route path="attendance" element={<StudentAttendance />} />
         <Route path="timetable" element={<StundentTimeTable />} />
-        <Route path="result" element={<StudentResult />} />
         <Route path="fees" element={<StudentFees />} />
         <Route path="profile" element={<StudentProfile />} />
       </Route>
@@ -82,7 +81,7 @@ function App() {
       </Route>
 
       {/* bottom links */}
-      <Route path="campxErp" element={<DashboardLayout />}>
+      <Route path="cerp" element={<DashboardLayout />}>
         <Route path="about" element={<About />} />
       </Route>
     </Routes>

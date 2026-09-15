@@ -179,18 +179,18 @@ export const sidebarData = {
 export const bottomlinksData = {
   student: [
     { href: "/student/profile", label: "Profile", icon: User },
-    { href: "/campx/about", label: "About", icon: Info },
+    { href: "/cerp/about", label: "About", icon: Info },
   ],
   teacher: [
     { href: "/teacher/profile", label: "Profile", icon: User },
-    { href: "/campx/about", label: "About", icon: Info },
+    { href: "/cerp/about", label: "About", icon: Info },
   ],
   hod: [
     { href: "/hod/profile", label: "Profile", icon: User },
-    { href: "/campx/about", label: "About", icon: Info },
+    { href: "/cerp/about", label: "About", icon: Info },
   ],
   admin: [
     { href: "/admin/profile", label: "Profile", icon: User },
-    { href: "/campx/about", label: "About", icon: Info },
+    { href: "/cerp/about", label: "About", icon: Info },
   ],
 };
