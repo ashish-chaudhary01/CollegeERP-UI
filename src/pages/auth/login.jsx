@@ -14,6 +14,7 @@ function LoginPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
+  const [loginError, setLoginError] = useState("");
   const { login, user } = useAuth();
   const navigate = useNavigate();
 
@@ -31,6 +32,7 @@ function LoginPage() {
     e.preventDefault();
     try {
       setLoading(true);
+      setLoginError("");
       const res = await fetch(`${import.meta.env.VITE_API_URL}/auth/login`, {
         method: "POST",
         headers: {
@@ -41,6 +43,12 @@ function LoginPage() {
       });
 
       const data = await res.json();
+
+      if (!res.ok) {
+        throw new Error(
+          data.message || data.error || "Invalid email or password",
+        );
+      }
 
       const { user } = data; //user
 
@@ -61,7 +69,7 @@ function LoginPage() {
         navigate("/student/dashboard");
       }
     } catch (error) {
-      console.log(error.message);
+      setLoginError(error.message || "Unable to sign in. Please try again.");
     } finally {
       setLoading(false);
     }
@@ -102,7 +110,10 @@ function LoginPage() {
                 type="email"
                 name="email"
                 value={email}
-                onChange={(e) => setEmail(e.target.value)}
+                onChange={(e) => {
+                  setEmail(e.target.value);
+                  setLoginError("");
+                }}
                 placeholder="Enter your email"
                 className="w-full px-4 py-2 rounded border-2 border-black/40 outline-0 focus:border-blue-600 duration-200 text-sm bg-gray-100"
               />
@@ -120,10 +131,18 @@ function LoginPage() {
                 type="password"
                 name="password"
                 value={password}
-                onChange={(e) => setPassword(e.target.value)}
+                onChange={(e) => {
+                  setPassword(e.target.value);
+                  setLoginError("");
+                }}
                 placeholder="Enter your email"
                 className="w-full px-4 py-2 rounded border-2 border-black/40 outline-0 focus:border-blue-600 duration-200 text-sm bg-gray-100"
               />
+              {loginError && (
+                <p role="alert" className="mt-2 text-sm text-red-600">
+                  {loginError}
+                </p>
+              )}
             </div>
           </div>
 
