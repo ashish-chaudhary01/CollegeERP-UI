@@ -1,10 +1,12 @@
 import { useEffect, useState } from "react";
 import AddSubjectModel from "../../components/AddSubjectModel";
+import EditSubjectModel from "../../components/EditSubjectModel";
 
 const Subjects = () => {
   const [inputSearch, setInputSearch] = useState("");
   const [subjects, setSubjects] = useState([]);
   const [showModal, setShowModal] = useState(false);
+  const [editSubject, setEditSubject] = useState(null);
   const [subjectsRefreshKey, setSubjectsRefreshKey] = useState(0);
   const [assignTeacherModal, setAssignTeacherModal] = useState(false);
   const [teachers, setTeachers] = useState([]);
@@ -179,7 +181,7 @@ const Subjects = () => {
                         setAssignTeacherError("");
                         setAssignTeacherModal(true);
                       }}
-                      className={`px-3 py-1 text-xs rounded-full block ${subject.teacherName === "Assign Teacher" && "text-indigo-500 hover:underline"}`}
+                      className={`px-3 py-1 text-xs rounded-full block text-indigo-500 hover:underline`}
                     >
                       {subject.teacherName || "Assign Teacher"}
                     </span>
@@ -193,11 +195,14 @@ const Subjects = () => {
 
                   <td className="px-6 py-4">
                     <div className="flex gap-3">
-                      <button className="text-indigo-600 hover:underline">
+                      {/* <button className="text-indigo-600 hover:underline">
                         View
-                      </button>
+                      </button> */}
 
-                      <button className="text-slate-600 hover:underline">
+                      <button
+                        onClick={() => setEditSubject(subject)}
+                        className="text-slate-600 hover:underline"
+                      >
                         Edit
                       </button>
                     </div>
@@ -214,6 +219,14 @@ const Subjects = () => {
         <AddSubjectModel
           onClose={() => setShowModal(false)}
           onSubjectAdded={() => setSubjectsRefreshKey((key) => key + 1)}
+        />
+      )}
+
+      {editSubject && (
+        <EditSubjectModel
+          subject={editSubject}
+          onClose={() => setEditSubject(null)}
+          onSubjectUpdated={() => setSubjectsRefreshKey((key) => key + 1)}
         />
       )}
 
