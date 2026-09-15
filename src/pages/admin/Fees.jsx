@@ -142,10 +142,10 @@ const AdminFeesPage = () => {
             {studentFees.map((fee) => (
               <tr key={fee.email} className="tranisition hover:bg-slate-50">
                 <td className="px-6 py-2 font-medium capitalize text-black">
-                  {fee.studentName}
+                  {fee.studentName || "unknown"}
                 </td>
                 <td className="px-6 py-2 font-medium text-indigo-400">
-                  {fee.email}
+                  {fee.email ?? "no-email"}
                 </td>
                 <td className="px-6 py-2 font-medium">
                   {fee.studentRollNumber}

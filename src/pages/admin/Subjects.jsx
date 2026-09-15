@@ -1,14 +1,17 @@
 import { useEffect, useState } from "react";
+import AddSubjectModel from "../../components/AddSubjectModel";
 
 const Subjects = () => {
   const [inputSearch, setInputSearch] = useState("");
   const [subjects, setSubjects] = useState([]);
+  const [showModal, setShowModal] = useState(false);
+  const [subjectsRefreshKey, setSubjectsRefreshKey] = useState(0);
 
   useEffect(() => {
     async function fetchSubjects() {
       try {
         let url = `${import.meta.env.VITE_API_URL}/admin/subjects`;
-        const res = await fetch(url, { method: "GEt", credentials: "include" });
+        const res = await fetch(url, { method: "GET", credentials: "include" });
         if (!res.ok) throw new Error("Failed to fetch subjects");
         const data = await res.json();
         setSubjects(data.subjects);
@@ -18,7 +21,7 @@ const Subjects = () => {
     }
 
     fetchSubjects();
-  }, []);
+  }, [subjectsRefreshKey]);
 
   const filterSubject =
     inputSearch.trim().length > 0
@@ -53,10 +56,13 @@ const Subjects = () => {
           />
         </div>
 
-        <div className="flex items-center gap-2 bg-blue-500 text-white px-4 py-2 rounded font-semibold shadow hover:bg-blue-700/80 duration-200 cursor-pointer">
+        <button
+          onClick={() => setShowModal(true)}
+          className="flex items-center gap-2 bg-blue-500 text-white px-4 py-2 rounded font-semibold shadow hover:bg-blue-700/80 duration-200 cursor-pointer"
+        >
           <span>+</span>
           <span className="hidden lg:block">Add Subjects</span>
-        </div>
+        </button>
       </div>
 
       <div className="mt-6 overflow-hidden rounded-xl border border-slate-200 bg-white">
@@ -107,7 +113,11 @@ const Subjects = () => {
                   </td>
 
                   <td className="px-6 py-4 text-slate-600">
-                    {subject.teacherName || "Not Assigned"}
+                    <span
+                      className={`px-3 py-1 text-xs rounded-full block ${subject.teacherName === "Assign Teacher" && "text-indigo-500 hover:underline"}`}
+                    >
+                      {subject.teacherName || "Assign Teacher"}
+                    </span>
                   </td>
 
                   <td className="px-6 py-4">
@@ -133,6 +143,14 @@ const Subjects = () => {
           </table>
         </div>
       </div>
+
+      {/* Modal */}
+      {showModal && (
+        <AddSubjectModel
+          onClose={() => setShowModal(false)}
+          onSubjectAdded={() => setSubjectsRefreshKey((key) => key + 1)}
+        />
+      )}
     </div>
   );
 };
