@@ -196,13 +196,17 @@ const AddStudentModel = ({ onClose, onStudentAdded }) => {
                 id="year"
                 value={formData.year}
                 onChange={(e) =>
-                  setFormData({ ...formData, year: e.target.value })
+                  setFormData({
+                    ...formData,
+                    year: Number(e.target.value),
+                    semester: Number(e.target.value) * 2 - 1,
+                  })
                 }
                 className="bg-slate-200 border outline-0 border-slate-300 py-0.5 px-3 text-xs rounded"
               >
-                <option value="1">1</option>
-                <option value="2">2</option>
-                <option value="3">3</option>
+                <option value={1}>1</option>
+                <option value={2}>2</option>
+                <option value={3}>3</option>
               </select>
             </div>
 
@@ -220,16 +224,28 @@ const AddStudentModel = ({ onClose, onStudentAdded }) => {
                 id="semester"
                 value={formData.semester}
                 onChange={(e) =>
-                  setFormData({ ...formData, semester: e.target.value })
+                  setFormData({ ...formData, semester: Number(e.target.value) })
                 }
                 className="bg-slate-200 border outline-0 border-slate-300 py-0.5 px-3 text-xs rounded"
               >
-                <option value="1">1</option>
-                <option value="2">2</option>
-                <option value="3">3</option>
-                <option value="4">4</option>
-                <option value="5">5</option>
-                <option value="6">6</option>
+                {formData.year === 1 && (
+                  <>
+                    <option value={1}>1</option>
+                    <option value={2}>2</option>
+                  </>
+                )}
+                {formData.year === 2 && (
+                  <>
+                    <option value={3}>3</option>
+                    <option value={4}>4</option>
+                  </>
+                )}
+                {formData.year === 3 && (
+                  <>
+                    <option value={5}>5</option>
+                    <option value={6}>6</option>
+                  </>
+                )}
               </select>
             </div>
           </div>

@@ -6,7 +6,14 @@ const Subjects = () => {
   const [subjects, setSubjects] = useState([]);
   const [showModal, setShowModal] = useState(false);
   const [subjectsRefreshKey, setSubjectsRefreshKey] = useState(0);
+  const [assignTeacherModal, setAssignTeacherModal] = useState(false);
+  const [teachers, setTeachers] = useState([]);
+  const [selectedTeacherId, setSelectedTeacherId] = useState("");
+  const [assignTeacherError, setAssignTeacherError] = useState("");
+  const [selectedSubjectId, setSelectedSubjectId] = useState("");
+  const [isAssigningTeacher, setIsAssigningTeacher] = useState(false);
 
+  //  fetch subjects
   useEffect(() => {
     async function fetchSubjects() {
       try {
@@ -23,6 +30,29 @@ const Subjects = () => {
     fetchSubjects();
   }, [subjectsRefreshKey]);
 
+  // fetch teachers
+  useEffect(() => {
+    async function fetchTeacher() {
+      try {
+        const res = await fetch(
+          `${import.meta.env.VITE_API_URL}/admin/teachers`,
+          { method: "GET", credentials: "include" },
+        );
+        const data = await res.json();
+        setTeachers(data.teacher);
+        setSelectedTeacherId(data?.teacher?.[0]?._id ?? "");
+      } catch (error) {
+        console.log(error.message);
+      }
+    }
+    fetchTeacher();
+  }, []);
+
+  const closeAssignTeacherModal = () => {
+    setAssignTeacherModal(false);
+    setAssignTeacherError("");
+  };
+
   const filterSubject =
     inputSearch.trim().length > 0
       ? subjects.filter((sub) => {
@@ -35,6 +65,39 @@ const Subjects = () => {
           );
         })
       : subjects;
+
+  const assignTeacher = async () => {
+    if (!selectedTeacherId) {
+      setAssignTeacherError("Please select a teacher");
+      return;
+    }
+
+    try {
+      setIsAssigningTeacher(true);
+      setAssignTeacherError("");
+      const res = await fetch(
+        `${import.meta.env.VITE_API_URL}/admin/subject/${selectedSubjectId}/assign-subject`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          credentials: "include",
+          body: JSON.stringify({ teacherId: selectedTeacherId }),
+        },
+      );
+      if (!res.ok) {
+        throw new Error("Failed to assign Teacher");
+      }
+
+      setSubjectsRefreshKey((key) => key + 1);
+      closeAssignTeacherModal();
+    } catch (error) {
+      setAssignTeacherError(error.message);
+    } finally {
+      setIsAssigningTeacher(false);
+    }
+  };
 
   return (
     <div className="min-h-screen overflow-hidden">
@@ -67,7 +130,7 @@ const Subjects = () => {
 
       <div className="mt-6 overflow-hidden rounded-xl border border-slate-200 bg-white">
         <div className="overflow-x-auto">
-          <table className="w-full min-w-[900px] text-left text-sm">
+          <table className="w-full min-w-225 text-left text-sm">
             <thead className="bg-slate-50 text-xs uppercase text-slate-500">
               <tr>
                 <th className="px-6 py-4 font-semibold">Subject Code</th>
@@ -90,10 +153,7 @@ const Subjects = () => {
 
             <tbody className="divide-y divide-slate-100">
               {filterSubject.map((subject) => (
-                <tr
-                  key={subject.subjectCode + subject.subjectName}
-                  className="transition hover:bg-slate-50"
-                >
+                <tr key={subject._id} className="transition hover:bg-slate-50">
                   <td className="px-6 py-4 font-medium text-indigo-600">
                     {subject.subjectCode}
                   </td>
@@ -114,6 +174,11 @@ const Subjects = () => {
 
                   <td className="px-6 py-4 text-slate-600">
                     <span
+                      onClick={() => {
+                        setSelectedSubjectId(subject._id);
+                        setAssignTeacherError("");
+                        setAssignTeacherModal(true);
+                      }}
                       className={`px-3 py-1 text-xs rounded-full block ${subject.teacherName === "Assign Teacher" && "text-indigo-500 hover:underline"}`}
                     >
                       {subject.teacherName || "Assign Teacher"}
@@ -150,6 +215,63 @@ const Subjects = () => {
           onClose={() => setShowModal(false)}
           onSubjectAdded={() => setSubjectsRefreshKey((key) => key + 1)}
         />
+      )}
+
+      {/* assign teacher to subject modal */}
+      {assignTeacherModal && (
+        <div
+          onClick={(e) =>
+            e.target === e.currentTarget && closeAssignTeacherModal()
+          }
+          className="fixed z-70 inset-0 flex justify-center items-center bg-black/40"
+        >
+          <div className="p-6 rounded-lg shadow-xl bg-white max-w-md w-full">
+            <h2 className="text-xl font-bold">Assign Teacher</h2>
+            <div className="mt-4 flex gap-4 items-center">
+              <label
+                htmlFor="selectTeacher"
+                className="text-xs font-medium uppercase"
+              >
+                Select Teacher :
+              </label>
+              <select
+                name="selectTeacher"
+                id="selectTeacher"
+                required
+                value={selectedTeacherId}
+                onChange={(e) => setSelectedTeacherId(e.target.value)}
+                className="bg-slate-200 border outline-0 border-slate-300 py-0.5 px-3 text-xs rounded"
+              >
+                {teachers.map((teacher) => (
+                  <option key={teacher._id} value={teacher._id}>
+                    {teacher?.userId?.name}
+                  </option>
+                ))}
+              </select>
+            </div>
+            {assignTeacherError && (
+              <p className="mt-3 text-sm text-red-600">{assignTeacherError}</p>
+            )}
+            <div className="flex gap-4 items-center justify-end mt-6">
+              <button
+                onClick={closeAssignTeacherModal}
+                type="button"
+                disabled={isAssigningTeacher}
+                className="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600 duration-200 text-sm font-medium"
+              >
+                Cancel
+              </button>
+              <button
+                onClick={assignTeacher}
+                type="button"
+                disabled={isAssigningTeacher}
+                className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 duration-200 text-sm font-medium"
+              >
+                {isAssigningTeacher ? "Assigning..." : "Assign"}
+              </button>
+            </div>
+          </div>
+        </div>
       )}
     </div>
   );
