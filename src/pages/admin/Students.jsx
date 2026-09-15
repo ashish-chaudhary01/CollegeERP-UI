@@ -141,7 +141,10 @@ const Students = () => {
           <select
             name="year"
             value={year}
-            onChange={(e) => setYear(e.target.value)}
+            onChange={(e) => {
+              setYear(e.target.value);
+              setSemester(e.target.value * 2 - 1);
+            }}
             className="border border-gray-500 py-0.5 px-2 text-xs rounded-xl"
           >
             <option value="all">All</option>
@@ -162,13 +165,29 @@ const Students = () => {
             onChange={(e) => setSemester(e.target.value)}
             className="border border-gray-500 py-0.5 px-2 text-xs rounded-xl"
           >
-            <option value="all">All</option>
-            <option value="1">1</option>
-            <option value="2">2</option>
-            <option value="3">3</option>
-            <option value="4">4</option>
-            <option value="5">5</option>
-            <option value="6">6</option>
+            {year === "all" && (
+              <>
+                <option value="all">All</option>
+              </>
+            )}
+            {year === "1" && (
+              <>
+                <option value="1">1</option>
+                <option value="2">2</option>
+              </>
+            )}
+            {year === "2" && (
+              <>
+                <option value="3">3</option>
+                <option value="4">4</option>
+              </>
+            )}
+            {year === "3" && (
+              <>
+                <option value="5">5</option>
+                <option value="6">6</option>
+              </>
+            )}
           </select>
         </div>
       </div>
