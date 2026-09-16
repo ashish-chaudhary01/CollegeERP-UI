@@ -1,7 +1,9 @@
 import {
   Building2,
   CalendarFold,
+  CalendarClock,
   GraduationCap,
+  IndianRupee,
   UsersRound,
 } from "lucide-react";
 import { useEffect, useState } from "react";
@@ -45,10 +47,9 @@ function AdminDashboard() {
         </div>
       </div>
 
-      {/* overview cards */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-3 sm:gap-4 items-stretch md:p-4 py-4">
+      <div className="grid grid-cols-1 gap-3 py-4 sm:grid-cols-2 xl:grid-cols-6">
         {/* card 1 */}
-        <div className="p-3 sm:p-4 rounded-lg border border-black/20 bg-white flex items-center gap-3 sm:gap-4 min-w-0 w-full h-full">
+        <div className="flex min-w-0 items-center gap-3 rounded-xl border border-slate-200 bg-white p-4 sm:gap-4 xl:col-span-2">
           {/* icon */}
           <div className="shrink-0 rounded-full p-2 bg-blue-600/30 text-blue-700">
             <UsersRound size={30} />
@@ -60,7 +61,7 @@ function AdminDashboard() {
           </div>
         </div>
         {/* card 2 */}
-        <div className="p-3 sm:p-4 rounded-lg border border-black/20 bg-white flex items-center gap-3 sm:gap-4 min-w-0 w-full h-full">
+        <div className="flex min-w-0 items-center gap-3 rounded-xl border border-slate-200 bg-white p-4 sm:gap-4 xl:col-span-2">
           {/* icon */}
           <div className="shrink-0 rounded-full p-2 bg-red-600/30 text-red-700">
             <Building2 size={30} />
@@ -74,7 +75,7 @@ function AdminDashboard() {
           </div>
         </div>
         {/* card 3 */}
-        <div className="p-3 sm:p-4 rounded-lg border border-black/20 bg-white flex items-center gap-3 sm:gap-4 min-w-0 w-full h-full">
+        <div className="flex min-w-0 items-center gap-3 rounded-xl border border-slate-200 bg-white p-4 sm:gap-4 xl:col-span-2">
           {/* icon */}
           <div className="shrink-0 rounded-full p-2 bg-green-600/30 text-green-700">
             <GraduationCap size={30} />
@@ -86,7 +87,7 @@ function AdminDashboard() {
           </div>
         </div>
         {/* card 4 */}
-        <div className="p-3 sm:p-4 rounded-lg border border-black/20 bg-white flex items-center gap-3 sm:gap-4 min-w-0 w-full h-full">
+        <div className="flex min-w-0 items-center gap-3 rounded-xl border border-slate-200 bg-white p-4 sm:gap-4 xl:col-span-2">
           {/* icon */}
           <div className="shrink-0 rounded-full p-2 bg-orange-600/30 text-orange-700">
             <UsersRound size={30} />
@@ -99,6 +100,10 @@ function AdminDashboard() {
             <p className="text-sm">Attendance</p>
           </div>
         </div>
+      </div>
+      <div className="grid gap-4 md:grid-cols-2">
+        <div className="flex items-center gap-4 rounded-xl border border-slate-200 bg-white p-5"><CalendarClock className="text-cyan-600" /><div><p className="text-sm text-slate-500">Classes scheduled today</p><p className="text-2xl font-bold">{overviewData?.todayClasses ?? 0}</p></div></div>
+        <div className="flex items-center gap-4 rounded-xl border border-slate-200 bg-white p-5"><IndianRupee className="text-amber-600" /><div><p className="text-sm text-slate-500">Pending fee records</p><p className="text-2xl font-bold">{overviewData?.pendingFees ?? 0}</p></div></div>
       </div>
     </div>
   );

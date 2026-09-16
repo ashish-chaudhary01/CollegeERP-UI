@@ -19,6 +19,7 @@ import StudentList from "./pages/teacher/StudentList";
 import TeacherTimeTable from "./pages/teacher/TeacherTimeTable";
 import Fees from "./pages/teacher/Fees";
 import TeacherProfile from "./pages/teacher/TeacherProfile";
+import TeacherDashboard from "./pages/teacher/TeacherDashboard";
 import LoginPage from "./pages/auth/login";
 import AdminDashboard from "./pages/admin/AdminDashboard";
 import Departments from "./pages/admin/Departments";
@@ -46,7 +47,7 @@ function App() {
 
       {/* teacher route */}
       <Route path="teacher" element={<DashboardLayout />}>
-        <Route path="dashboard" element={<StudentDashboard />} />
+        <Route path="dashboard" element={<TeacherDashboard />} />
         <Route path="classes" element={<TeacherClasses />} />
         <Route path="students" element={<StudentList />} />
         <Route path="attendance" element={<TeacherAttendance />} />
