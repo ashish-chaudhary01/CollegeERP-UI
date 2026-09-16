@@ -42,6 +42,7 @@ const AdminProfile = () => {
     .map((part) => part[0].toUpperCase())
     .join("");
 
+  // profile update function
   const updateProfile = async (event) => {
     event.preventDefault();
 
@@ -93,18 +94,41 @@ const AdminProfile = () => {
     }
   };
 
-  const updatePassword = (event) => {
+  // change password function
+  const updatePassword = async (event) => {
     event.preventDefault();
-    if (passwords.next !== passwords.confirm) {
-      setPasswordSaved(false);
-      setPasswordError("New password and confirmation do not match.");
-      return;
-    }
+    try {
+      if (passwords.next !== passwords.confirm) {
+        setPasswordSaved(false);
+        setPasswordError("New password and confirmation do not match.");
+        return;
+      }
+      setPasswordError("");
+      const res = await fetch(
+        `${import.meta.env.VITE_API_URL}/auth/changePassword/${user._id}`,
+        {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          credentials: "include",
+          body: JSON.stringify(passwords),
+        },
+      );
 
-    setPasswordError("");
-    setPasswordSaved(true);
-    setPasswords({ current: "", next: "", confirm: "" });
-    setTimeout(() => setPasswordSaved(false), 2500);
+      const data = await res.json();
+      if (!res.ok) {
+        setPasswordError(data.message || "password change failed");
+        throw new Error("password change failed");
+      }
+
+      setPasswordSaved(true);
+      setPasswords({ current: "", next: "", confirm: "" });
+      setTimeout(() => setPasswordSaved(false), 2500);
+    } catch (error) {
+      console.log(error.message);
+      setPasswordError(error.message);
+    }
   };
 
   const inputClass =
@@ -293,12 +317,13 @@ const AdminProfile = () => {
                       required
                       type={showPasswords ? "text" : "password"}
                       value={passwords[field]}
-                      onChange={(event) =>
+                      onChange={(event) => {
                         setPasswords({
                           ...passwords,
                           [field]: event.target.value,
-                        })
-                      }
+                        });
+                        setPasswordError("");
+                      }}
                       className={`${inputClass} pr-10`}
                     />
                     {field === "confirm" && (
