@@ -9,7 +9,7 @@ import HodFees from "./pages/hod/Fees";
 import Teacher from "./pages/hod/Teacher";
 import Student from "./pages/hod/Student";
 import About from "./pages/AppInfo/About";
-import StudentAttendance from "./pages/student/studentAttendance";
+import StudentAttendance from "./pages/student/StudentAttendance";
 import StundentTimeTable from "./pages/student/StundentTimeTable";
 // import StudentResult from "./pages/student/StudentResult";
 import StudentFees from "./pages/student/StudentFees";
