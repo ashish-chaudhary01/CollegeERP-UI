@@ -7,6 +7,7 @@ import {
   UsersRound,
 } from "lucide-react";
 import { useEffect, useState } from "react";
+import { DashboardSkeleton } from "../../components/ui/Skeletons";
 
 function AdminDashboard() {
   const [overviewData, setOverviewData] = useState(null);
@@ -26,7 +27,9 @@ function AdminDashboard() {
       }
     }
     fetchAdminDashboard();
-  }, []);
+  }, [API_URL]);
+
+  if (!overviewData) return <DashboardSkeleton />;
 
   return (
     <div className="min-h-screen overflow-hidden">
@@ -102,8 +105,24 @@ function AdminDashboard() {
         </div>
       </div>
       <div className="grid gap-4 md:grid-cols-2">
-        <div className="flex items-center gap-4 rounded-xl border border-slate-200 bg-white p-5"><CalendarClock className="text-cyan-600" /><div><p className="text-sm text-slate-500">Classes scheduled today</p><p className="text-2xl font-bold">{overviewData?.todayClasses ?? 0}</p></div></div>
-        <div className="flex items-center gap-4 rounded-xl border border-slate-200 bg-white p-5"><IndianRupee className="text-amber-600" /><div><p className="text-sm text-slate-500">Pending fee records</p><p className="text-2xl font-bold">{overviewData?.pendingFees ?? 0}</p></div></div>
+        <div className="flex items-center gap-4 rounded-xl border border-slate-200 bg-white p-5">
+          <CalendarClock className="text-cyan-600" />
+          <div>
+            <p className="text-sm text-slate-500">Classes scheduled today</p>
+            <p className="text-2xl font-bold">
+              {overviewData?.todayClasses ?? 0}
+            </p>
+          </div>
+        </div>
+        <div className="flex items-center gap-4 rounded-xl border border-slate-200 bg-white p-5">
+          <IndianRupee className="text-amber-600" />
+          <div>
+            <p className="text-sm text-slate-500">Pending fee records</p>
+            <p className="text-2xl font-bold">
+              {overviewData?.pendingFees ?? 0}
+            </p>
+          </div>
+        </div>
       </div>
     </div>
   );

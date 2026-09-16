@@ -1,7 +1,9 @@
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router";
 
 const StudentList = () => {
   const [students, setStudents] = useState([]);
+  const navigate = useNavigate();
   useEffect(() => {
     fetch(`${import.meta.env.VITE_API_URL}/teacher/students`, {
       credentials: "include",
@@ -21,7 +23,7 @@ const StudentList = () => {
         </p>
       </div>
       <div className="overflow-x-auto rounded-xl border border-slate-200 bg-white">
-        <table className="w-full min-w-[650px] text-left text-sm">
+        <table className="w-full min-w-162.5 text-left text-sm">
           <thead className="bg-slate-50 text-xs uppercase text-slate-500">
             <tr>
               <th className="px-5 py-4">Name</th>
@@ -33,7 +35,11 @@ const StudentList = () => {
           </thead>
           <tbody className="divide-y divide-slate-100">
             {students.map((student) => (
-              <tr key={student._id}>
+              <tr
+                key={student._id}
+                onClick={() => navigate(`/teacher/student/${student._id}`)}
+                className="cursor-pointer hover:bg-slate-50"
+              >
                 <td className="px-5 py-4 font-semibold">
                   {student.userId?.name}
                 </td>

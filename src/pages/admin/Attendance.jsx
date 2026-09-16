@@ -64,6 +64,8 @@ const Attendance = () => {
 
   useEffect(() => {
     loadData();
+    // Filter changes intentionally control this reload effect.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [filters.from, filters.to, filters.department]);
   const totals = data?.totals || {
     present: 0,

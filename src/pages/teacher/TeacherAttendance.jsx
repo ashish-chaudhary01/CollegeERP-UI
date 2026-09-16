@@ -16,7 +16,7 @@ const TeacherAttendance = () => {
         setSubjects(data.teacherSubjects || []);
         setSubjectId(data.teacherSubjects?.[0]?._id || "");
       });
-  }, []);
+  }, [API_URL]);
   useEffect(() => {
     if (!subjectId) return;
     fetch(`${API_URL}/teacher/attendance?subjectId=${subjectId}&date=${date}`, {
@@ -24,7 +24,7 @@ const TeacherAttendance = () => {
     })
       .then((response) => response.json())
       .then((data) => setStudents(data.students || []));
-  }, [subjectId, date]);
+  }, [API_URL, subjectId, date]);
   const updateStatus = (studentId, status) =>
     setStudents((current) =>
       current.map((student) =>

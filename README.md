@@ -2,3 +2,17 @@
 
 - auth context
 - login page
+
+## Vercel deployment
+
+Deploy this repository as a Vite project:
+
+- Root directory: leave blank; this repository is already the frontend root
+- Build command: `npm run build`
+- Output directory: `dist`
+
+Add this Vercel environment variable before deploying:
+
+```env
+VITE_API_URL=https://your-backend.onrender.com/api
+```

@@ -5,7 +5,7 @@ import StudentSubject from "./pages/student/StudentSubject";
 import StudentProfile from "./pages/student/StudentProfile";
 import HodDashboard from "./pages/hod/HodDashboard";
 import Subject from "./pages/hod/Subjects";
-import HodProfile from "./pages/hod/HodProfile";
+import HodFees from "./pages/hod/Fees";
 import Teacher from "./pages/hod/Teacher";
 import Student from "./pages/hod/Student";
 import About from "./pages/AppInfo/About";
@@ -18,7 +18,6 @@ import TeacherAttendance from "./pages/teacher/TeacherAttendance";
 import StudentList from "./pages/teacher/StudentList";
 import TeacherTimeTable from "./pages/teacher/TeacherTimeTable";
 import Fees from "./pages/teacher/Fees";
-import TeacherProfile from "./pages/teacher/TeacherProfile";
 import TeacherDashboard from "./pages/teacher/TeacherDashboard";
 import LoginPage from "./pages/auth/login";
 import AdminDashboard from "./pages/admin/AdminDashboard";
@@ -30,6 +29,9 @@ import Attendance from "./pages/admin/Attendance";
 import Timetable from "./pages/admin/Timetable";
 import AdminFeesPage from "./pages/admin/Fees";
 import AdminProfile from "./pages/admin/AdminProfile";
+import StudentProfileView from "./pages/shared/StudentProfileView";
+import RoleProfile from "./pages/shared/RoleProfile";
+import TeacherProfileView from "./pages/shared/TeacherProfileView";
 
 function App() {
   return (
@@ -43,6 +45,7 @@ function App() {
         <Route path="timetable" element={<StundentTimeTable />} />
         <Route path="fees" element={<StudentFees />} />
         <Route path="profile" element={<StudentProfile />} />
+        <Route path="profile/details" element={<StudentProfileView />} />
       </Route>
 
       {/* teacher route */}
@@ -50,22 +53,28 @@ function App() {
         <Route path="dashboard" element={<TeacherDashboard />} />
         <Route path="classes" element={<TeacherClasses />} />
         <Route path="students" element={<StudentList />} />
+        <Route path="student/:studentId" element={<StudentProfileView />} />
         <Route path="attendance" element={<TeacherAttendance />} />
         <Route path="timetable" element={<TeacherTimeTable />} />
         <Route path="fees" element={<Fees />} />
-        <Route path="profile" element={<TeacherProfile />} />
+        <Route path="profile" element={<RoleProfile role="teacher" />} />
       </Route>
 
       {/* hod route */}
       <Route path="hod" element={<DashboardLayout />}>
         <Route path="dashboard" element={<HodDashboard />} />
         <Route path="teachers" element={<Teacher />} />
+        <Route
+          path="teacher/:teacherId"
+          element={<TeacherProfileView role="hod" />}
+        />
         <Route path="students" element={<Student />} />
+        <Route path="student/:studentId" element={<StudentProfileView />} />
         <Route path="subjects" element={<Subject />} />
         <Route path="attendance" element={<StudentSubject />} />
         <Route path="timetable" element={<StudentSubject />} />
-        <Route path="fees" element={<StudentSubject />} />
-        <Route path="profile" element={<HodProfile />} />
+        <Route path="fees" element={<HodFees />} />
+        <Route path="profile" element={<RoleProfile role="hod" />} />
       </Route>
 
       {/* admin route */}
@@ -73,7 +82,12 @@ function App() {
         <Route path="dashboard" element={<AdminDashboard />} />
         <Route path="departments" element={<Departments />} />
         <Route path="students" element={<Students />} />
+        <Route path="student/:studentId" element={<StudentProfileView />} />
         <Route path="teachers" element={<Teachers />} />
+        <Route
+          path="teacher/:teacherId"
+          element={<TeacherProfileView role="admin" />}
+        />
         <Route path="subjects" element={<Subjects />} />
         <Route path="attendance" element={<Attendance />} />
         <Route path="timetable" element={<Timetable />} />

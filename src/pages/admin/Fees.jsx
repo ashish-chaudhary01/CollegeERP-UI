@@ -7,6 +7,9 @@ const AdminFeesPage = () => {
   const [feeStatus, setFeeStatus] = useState("all");
   const [status, setStatus] = useState("all");
   const [semester, setSemester] = useState("all");
+  const [session, setSession] = useState(
+    `${new Date().getFullYear()}-${String(new Date().getFullYear() + 1).slice(-2)}`,
+  );
 
   // fetch departments
   useEffect(() => {
@@ -29,7 +32,7 @@ const AdminFeesPage = () => {
   useEffect(() => {
     async function fetchStudentFees() {
       try {
-        let url = `${import.meta.env.VITE_API_URL}/admin/fees?department=${selectedDepartment}&semester=${semester}&status=${status}&feeStatus=${feeStatus}`;
+        let url = `${import.meta.env.VITE_API_URL}/admin/fees?department=${selectedDepartment}&semester=${semester}&status=${status}&feeStatus=${feeStatus}&session=${encodeURIComponent(session)}`;
         const res = await fetch(url, { method: "GET", credentials: "include" });
         const data = await res.json();
         setStudentFees(data);
@@ -38,15 +41,28 @@ const AdminFeesPage = () => {
       }
     }
     fetchStudentFees();
-  }, [semester, selectedDepartment, status, feeStatus]);
+  }, [semester, selectedDepartment, status, feeStatus, session]);
+  const pendingCount = studentFees.filter(
+    (fee) => fee.status === "pending",
+  ).length;
   return (
     <div className="min-h-screen overflow-hidden">
       {/* heading */}
-      <h1 className="text-3xl md:text-4xl font-bold">Fees</h1>
-      <p className="text-sm text-gray-500">Manage Fees of students</p>
+      <h1 className="text-3xl md:text-4xl font-bold">Fees collection</h1>
+      <p className="text-sm text-gray-500">
+        Track paid and pending fee status for every student.
+      </p>
 
       {/* filter container */}
       <div className="mt-6 px-4 py-2 bg-gray-200 rounded-xl flex gap-4 flex-wrap items-center text-sm">
+        <label className="flex items-center gap-2 font-medium">
+          Session :
+          <input
+            value={session}
+            onChange={(e) => setSession(e.target.value)}
+            className="border border-gray-500 py-1 px-2 text-xs rounded-lg"
+          />
+        </label>
         {/* department filter */}
         <div className="flex gap-2 items-center">
           <label htmlFor="department" className="font-medium ">
@@ -121,6 +137,22 @@ const AdminFeesPage = () => {
             <option value="active">Active</option>
             <option value="inactive">Inactive</option>
           </select>
+        </div>
+      </div>
+      <div className="mt-4 grid gap-3 sm:grid-cols-3">
+        <div className="rounded-xl border border-slate-200 bg-white p-4">
+          <p className="text-sm text-slate-500">Students in view</p>
+          <p className="text-2xl font-bold">{studentFees.length}</p>
+        </div>
+        <div className="rounded-xl border border-emerald-100 bg-emerald-50 p-4">
+          <p className="text-sm text-emerald-700">Paid</p>
+          <p className="text-2xl font-bold text-emerald-700">
+            {studentFees.length - pendingCount}
+          </p>
+        </div>
+        <div className="rounded-xl border border-rose-100 bg-rose-50 p-4">
+          <p className="text-sm text-rose-700">Pending</p>
+          <p className="text-2xl font-bold text-rose-700">{pendingCount}</p>
         </div>
       </div>
 

@@ -153,23 +153,38 @@ const Departments = () => {
                   <p className="font-bold text-sm px-4 py-1 bg-orange-500/10 text-orange-500 rounded-full">
                     Hod : {department.hod?.userId?.name ?? "not-assigned"}
                   </p>
-                  {!department.hod && (
-                    <button
-                      onClick={() => {
-                        setSelectedDepartmentId(department._id);
-                        setAssignHodError("");
-                        setAssignHodModal(true);
-                      }}
-                      className="text-indigo-500 text-sm hover:underline text-left font-medium px-3"
-                    >
-                      Assign Hod
-                    </button>
-                  )}
+                  <button
+                    onClick={() => {
+                      setSelectedDepartmentId(department._id);
+                      setAssignHodError("");
+                      setAssignHodModal(true);
+                    }}
+                    className="text-indigo-500 text-sm hover:underline text-left font-medium px-3"
+                  >
+                    {department.hod ? "Change HOD" : "Assign HOD"}
+                  </button>
                 </div>
               </div>
-              <button className="mt-2 p-2 w-full bg-blue-600 text-md text-white font-bold hover:bg-blue-700 duration-200 cursor-pointer">
-                View Department
-              </button>
+              <div className="mt-4 grid grid-cols-3 gap-2 border-t border-slate-100 pt-4 text-center">
+                <div>
+                  <p className="text-xl font-bold text-slate-900">
+                    {department.studentCount ?? 0}
+                  </p>
+                  <p className="text-xs text-slate-500">Students</p>
+                </div>
+                <div>
+                  <p className="text-xl font-bold text-slate-900">
+                    {department.teacherCount ?? 0}
+                  </p>
+                  <p className="text-xs text-slate-500">Teachers</p>
+                </div>
+                <div>
+                  <p className="text-xl font-bold text-emerald-600">
+                    {department.activeTeacherCount ?? 0}
+                  </p>
+                  <p className="text-xs text-slate-500">Active</p>
+                </div>
+              </div>
             </div>
           </div>
         ))}

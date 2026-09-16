@@ -32,9 +32,8 @@ function MobileSidebar({ sidebarOpen, setSidebarOpen, role }) {
     >
       {/* logo */}
       <div className="flex items-center p-4 justify-between">
-        <h2 className="font-bold text-2xl">
-          Camp
-          <span className="text-secondary">X</span>
+        <h2 className="font-black tracking-tight text-2xl text-slate-900">
+          CER<span className="text-cyan-600">P</span>
         </h2>
         <span onClick={() => setSidebarOpen(false)}>
           <X />

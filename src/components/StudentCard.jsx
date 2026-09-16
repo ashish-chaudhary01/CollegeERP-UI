@@ -1,12 +1,18 @@
+import { useNavigate } from "react-router";
+
 function Studentcard({ student }) {
+  const navigate = useNavigate();
   const image_url = student?.profilePictureUrl || "/no-image.jpg";
   return (
-    <div className="rounded-lg border border-black/20 shadow-md hover:shadow-lg w-full h-full hover:-translate-y-1.5 duration-300 ease-out flex flex-col justify-between overflow-hidden">
+    <div className="flex h-full w-full flex-col justify-between overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm transition duration-300 hover:-translate-y-1 hover:shadow-xl">
       <div className="aspect-square">
         <img
           src={image_url}
-          alt="student-image"
-          className="w-full h-full object-cover  rounded-t-lg"
+          alt="student profile"
+          onError={(event) => {
+            event.currentTarget.src = "/no-image.jpg";
+          }}
+          className="h-full w-full object-cover"
         />
       </div>
       {/* details */}
@@ -39,7 +45,10 @@ function Studentcard({ student }) {
         </div>
       </div>
       {/* view profile button */}
-      <button className="w-full p-2 bg-blue-600 text-white font-bold text-md rounded-b-lg cursor-pointer">
+      <button
+        onClick={() => navigate(`/admin/student/${student._id}`)}
+        className="w-full bg-slate-900 p-3 text-sm font-bold text-white transition hover:bg-cyan-700"
+      >
         View Profile
       </button>
     </div>

@@ -1,5 +1,7 @@
+import StudentProfileView from "../shared/StudentProfileView";
+
 function StudentProfile() {
-  return <div>Profile</div>;
+  return <StudentProfileView />;
 }
 
 export default StudentProfile;
