@@ -33,12 +33,17 @@ const Students = () => {
   useEffect(() => {
     async function fetchStudents() {
       try {
-        let url = `${import.meta.env.VITE_API_URL}/admin/students/?status=${status}&departmentId=${selectedDepartment}&year=${year}&semester=${semester}`;
+        const url = `${import.meta.env.VITE_API_URL}/admin/students?status=${status}&departmentId=${selectedDepartment}&year=${year}&semester=${semester}`;
         const res = await fetch(url, {
           method: "GET",
           credentials: "include",
         });
-        if (!res.ok) throw new Error("Failed to Fetch Students");
+        const contentType = res.headers.get("content-type") || "";
+        if (!res.ok || !contentType.includes("application/json")) {
+          throw new Error(
+            "Could not load students. Confirm that VITE_API_URL points to the API server.",
+          );
+        }
 
         const data = await res.json();
         setStudents(data.students ?? []);
