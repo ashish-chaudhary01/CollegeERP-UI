@@ -14,5 +14,7 @@ Deploy this repository as a Vite project:
 Add this Vercel environment variable before deploying:
 
 ```env
-VITE_API_URL=https://your-backend.onrender.com/api
+VITE_API_URL=/api
 ```
+
+The repository's `vercel.json` proxies `/api/*` to the Render backend. Use `/api` in Vercel production as well, then redeploy.
