@@ -15,26 +15,30 @@ const DashboardLayout = () => {
   }
 
   return (
-    <div className="min-h-screen">
-      {/* desktop siderbar */}
+    <div className="min-h-screen bg-slate-50/50">
+      {/* desktop sidebar */}
       <Sidebar role={user.role} />
-      {/* mobile sidebar */}
+
+      {/* mobile backdrop overlay */}
+      {sidebarOpen && (
+        <div
+          onClick={() => setSidebarOpen(false)}
+          className="fixed inset-0 z-40 bg-slate-900/60 backdrop-blur-xs md:hidden transition-opacity"
+          aria-hidden="true"
+        />
+      )}
+
+      {/* mobile sidebar (z-50) */}
       <MobileSidebar
         role={user.role}
         sidebarOpen={sidebarOpen}
         setSidebarOpen={setSidebarOpen}
       />
 
-      {/* content */}
-      <div className="md:pl-67 min-h-screen">
+      {/* content wrapper */}
+      <div className="md:pl-67 min-h-screen flex flex-col">
         <Header setSidebarOpen={setSidebarOpen} />
-        {sidebarOpen && (
-          <div
-            onClick={() => setSidebarOpen(false)}
-            className="fixed md:hidden min-h-screen inset-0 z-5 bg-black/30"
-          />
-        )}
-        <main className="p-4">
+        <main className="flex-1 p-4 sm:p-6 lg:p-8 max-w-7xl w-full mx-auto">
           <Outlet />
         </main>
       </div>

@@ -1,13 +1,13 @@
 import { NavLink, useNavigate } from "react-router";
 import { bottomlinksData, sidebarData } from "./sidebarData";
-import { GraduationCap, LogOut } from "lucide-react";
+import { LogOut } from "lucide-react";
 import { useAuth } from "../../../context/AuthContext";
 
 function Sidebar({ role }) {
   // sidebar menu based on role
-  const sidebarMenu = sidebarData[role];
+  const sidebarMenu = sidebarData[role] || [];
   // bottom links based on role
-  const bottomlinks = bottomlinksData[role];
+  const bottomlinks = bottomlinksData[role] || [];
   const { logout } = useAuth();
   const navigate = useNavigate();
 
@@ -27,68 +27,77 @@ function Sidebar({ role }) {
   };
 
   return (
-    <aside className="w-67 hidden md:flex fixed top-0 bottom-0 left-0 z-10 min-h-screen flex-col bg-white border-r border-black/10">
+    <aside className="fixed top-0 bottom-0 left-0 z-20 hidden md:flex h-full w-67 flex-col bg-white border-r border-slate-200">
       {/* logo */}
-      <div className="flex items-center p-4 gap-4">
-        <div className="bg-linear-to-br from-indigo-600 to-violet-500 rounded-xl p-2 text-white">
-          <GraduationCap size={27} />{" "}
-        </div>
-        <div className="font-bold text-2xl flex flex-col">
-          <span className="text-violet-600">CERP</span>
-          <span className="text-gray-500 text-xs">College ERP System</span>
-        </div>
+      <div className="flex items-center justify-between border-b border-slate-100 p-4">
+        <h2 className="text-2xl font-black tracking-tight text-slate-900">
+          CER<span className="text-cyan-600">P</span>
+        </h2>
       </div>
 
       {/* navlinks */}
-      <nav className="overflow-y-auto p-4 space-y-6">
+      <nav className="flex-1 overflow-y-auto p-4 space-y-6">
         {sidebarMenu.map((g, gidx) => (
           <div key={gidx}>
-            <p className="text-xs font-bold text-gray-400 uppercase mb-4">
+            <p className="text-[11px] font-bold text-slate-400 uppercase tracking-wider mb-2">
               {g.section}
             </p>
 
-            {g.items.map((item, idx) => (
+            <div className="space-y-1">
+              {g.items.map((item, idx) => (
+                <NavLink to={item.href} key={idx}>
+                  {({ isActive }) => (
+                    <div
+                      className={`flex items-center gap-3 px-3.5 py-2.5 text-sm rounded-xl transition-colors ${
+                        isActive
+                          ? "bg-slate-900 text-white font-bold shadow-sm"
+                          : "font-medium text-slate-600 hover:bg-slate-100 hover:text-slate-900"
+                      }`}
+                    >
+                      <item.icon size={18} />
+                      <span>{item.label}</span>
+                    </div>
+                  )}
+                </NavLink>
+              ))}
+            </div>
+          </div>
+        ))}
+
+        {/* bottom links */}
+        <div>
+          <p className="text-[11px] font-bold text-slate-400 uppercase tracking-wider mb-2">
+            User & Settings
+          </p>
+          <div className="space-y-1">
+            {bottomlinks.map((item, idx) => (
               <NavLink to={item.href} key={idx}>
                 {({ isActive }) => (
                   <div
-                    className={`flex items-center gap-3 px-4 py-2 mb-2 text-sm rounded-lg ${isActive ? "bg-secondary text-white font-bold" : "font-semibold hover:bg-gray-200"}`}
+                    className={`flex items-center gap-3 px-3.5 py-2.5 text-sm rounded-xl transition-colors ${
+                      isActive
+                        ? "bg-slate-900 text-white font-bold shadow-sm"
+                        : "font-medium text-slate-600 hover:bg-slate-100 hover:text-slate-900"
+                    }`}
                   >
-                    <span>{<item.icon />}</span>
+                    <item.icon size={18} />
                     <span>{item.label}</span>
                   </div>
                 )}
               </NavLink>
             ))}
           </div>
-        ))}
-
-        {/* bottom links */}
-        <div>
-          <p className="text-xs font-bold text-gray-400 uppercase mb-4">
-            user & settings
-          </p>
-          {bottomlinks.map((item, idx) => (
-            <NavLink to={item.href} key={idx}>
-              {({ isActive }) => (
-                <div
-                  className={`flex items-center gap-4 px-4 py-2 mb-2 text-sm rounded-lg ${isActive ? "bg-secondary text-white font-bold" : "font-semibold hover:bg-gray-200"}`}
-                >
-                  <span>{<item.icon />}</span>
-                  <span>{item.label}</span>
-                </div>
-              )}
-            </NavLink>
-          ))}
         </div>
       </nav>
+
       {/* logout button */}
-      <div className="p-1 border-t border-black/10">
+      <div className="p-3 border-t border-slate-100">
         <button
           onClick={handleLogout}
-          className="w-full pl-8 py-3 text-red-400 flex items-center gap-2 rounded hover:bg-red-500 duration-200 hover:text-white"
+          className="w-full flex items-center justify-center gap-2 rounded-xl bg-rose-50 px-4 py-2.5 text-sm font-bold text-rose-600 hover:bg-rose-600 hover:text-white transition-colors duration-200 cursor-pointer"
         >
-          <LogOut />
-          <span>logout</span>
+          <LogOut size={16} />
+          <span>Logout</span>
         </button>
       </div>
     </aside>

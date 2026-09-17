@@ -34,19 +34,14 @@ export const sidebarData = {
           icon: CalendarCheck,
         },
         { href: "/student/timetable", label: "Time Table", icon: CalendarDays },
-      ],
-    },
-    {
-      section: "FEE & RESULT",
-      items: [
-        { href: "/student/result", label: "Result", icon: SquareText },
         {
-          href: "/student/Fees",
+          href: "/student/fees",
           label: "Fees",
           icon: ReceiptIndianRupee,
         },
       ],
     },
+
   ],
   teacher: [
     {
@@ -76,7 +71,7 @@ export const sidebarData = {
         { href: "/teacher/timetable", label: "Time Table", icon: CalendarDays },
         { href: "/teacher/students", label: "Students", icon: Users },
         {
-          href: "/teacher/Fees",
+          href: "/teacher/fees",
           label: "Fees management",
           icon: ReceiptIndianRupee,
         },
@@ -119,7 +114,7 @@ export const sidebarData = {
           icon: CalendarDays,
         },
         {
-          href: "/hod/Fees",
+          href: "/hod/fees",
           label: "Fees management",
           icon: ReceiptIndianRupee,
         },
@@ -167,7 +162,7 @@ export const sidebarData = {
           icon: CalendarDays,
         },
         {
-          href: "/admin/Fees",
+          href: "/admin/fees",
           label: "Fees management",
           icon: ReceiptIndianRupee,
         },

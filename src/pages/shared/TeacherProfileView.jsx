@@ -105,6 +105,15 @@ const TeacherProfileView = ({ role }) => {
             <ShieldCheck size={14} />
             {teacher.userId?.role === "hod" ? "Head of Department" : "Teacher"}
           </span>
+          <span
+            className={`mt-2 inline-flex items-center rounded-full px-3 py-1 text-xs font-semibold ${
+              teacher.status === "active"
+                ? "bg-emerald-500/20 text-emerald-300"
+                : "bg-rose-500/20 text-rose-300"
+            }`}
+          >
+            Status: {teacher.status || "active"}
+          </span>
         </aside>
         <div className="space-y-5">
           <form
@@ -128,8 +137,20 @@ const TeacherProfileView = ({ role }) => {
               {input("phoneNumber", "Phone number")}
               {input("address", "Address")}
               {input("designation", "Designation")}
-              {input("profilePictureUrl", "Photo URL")}
-              {input("status", "Status")}
+              <label className="text-sm font-semibold text-slate-700">
+                Status
+                <select
+                  value={form.status || "active"}
+                  disabled={!editing}
+                  onChange={(event) =>
+                    setForm({ ...form, status: event.target.value })
+                  }
+                  className="mt-1 w-full rounded-lg border border-slate-200 bg-white p-3 font-normal disabled:bg-slate-50 outline-none focus:border-cyan-600 capitalize"
+                >
+                  <option value="active">Active</option>
+                  <option value="inactive">Inactive</option>
+                </select>
+              </label>
             </div>
             {editing && (
               <button className="mt-5 inline-flex items-center gap-2 rounded-lg bg-cyan-600 px-4 py-2 text-sm font-semibold text-white">

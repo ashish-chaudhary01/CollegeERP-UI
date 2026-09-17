@@ -9,7 +9,7 @@ const StudentProfileView = () => {
   const { user } = useAuth();
   const navigate = useNavigate();
   const isSelf = !studentId;
-  const canEdit = user?.role === "admin" || isSelf;
+  const canEdit = user?.role === "admin" || user?.role === "hod" || isSelf;
   const endpoint = isSelf
     ? `${import.meta.env.VITE_API_URL}/student/profile`
     : `${import.meta.env.VITE_API_URL}/${user?.role === "admin" ? "admin" : user?.role}/student/${studentId}`;
@@ -200,6 +200,15 @@ const StudentProfileView = () => {
           <p className="mt-5 text-sm text-cyan-300">
             {student.department?.departmentCode || "Department not assigned"}
           </p>
+          <span
+            className={`mt-3 inline-flex items-center rounded-full px-3 py-1 text-xs font-semibold ${
+              student.status === "active"
+                ? "bg-emerald-500/20 text-emerald-300"
+                : "bg-rose-500/20 text-rose-300"
+            }`}
+          >
+            Status: {student.status || "active"}
+          </span>
           <div className="mt-5 grid grid-cols-2 gap-2 text-center text-xs">
             <div className="rounded-lg bg-white/10 p-3">
               <b className="block text-lg">{attendance.percentage}%</b>
@@ -240,6 +249,20 @@ const StudentProfileView = () => {
               {input("academicSession", "Academic session")}
               {input("year", "Year", "number")}
               {input("semester", "Semester", "number")}
+              <label className="text-sm font-semibold text-slate-700">
+                Status
+                <select
+                  value={form.status || "active"}
+                  disabled={!editing || isSelf}
+                  onChange={(event) =>
+                    setForm({ ...form, status: event.target.value })
+                  }
+                  className="mt-1 w-full rounded-lg border border-slate-200 bg-white p-2.5 font-normal disabled:bg-slate-50 outline-none focus:border-cyan-600 capitalize"
+                >
+                  <option value="active">Active</option>
+                  <option value="inactive">Inactive</option>
+                </select>
+              </label>
             </div>
             {editing && (
               <button className="mt-5 inline-flex items-center gap-2 rounded-lg bg-cyan-600 px-4 py-2 text-sm font-semibold text-white">

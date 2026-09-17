@@ -81,11 +81,11 @@ function LoginPage() {
       <div className="flex justify-center pt-44 w-full h-full">
         {/* logo */}
         <div className="absolute top-10 left-10 flex gap-3">
-          <div className="bg-linear-to-br from-indigo-600 to-violet-500 rounded-xl p-3 text-white">
+          <div className="bg-linear-to-br from-cyan-500 to-cyan-700 rounded-xl p-3 text-white">
             <GraduationCap size={27} />{" "}
           </div>
           <div className="font-bold text-2xl flex flex-col">
-            <span className="text-violet-600">CERP</span>
+            <span className="text-slate-900">CER<span className="text-cyan-600">P</span></span>
             <span className="text-gray-500 text-xs">College ERP System</span>
           </div>
         </div>
