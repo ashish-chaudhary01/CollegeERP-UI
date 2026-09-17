@@ -1,5 +1,7 @@
+import RoleProfile from "../shared/RoleProfile";
+
 function HodProfile() {
-  return <div>Hod Profile</div>;
+  return <RoleProfile role="hod" />;
 }
 
 export default HodProfile;

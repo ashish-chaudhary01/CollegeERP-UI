@@ -1,3 +1,4 @@
+import { Plus, Search } from "lucide-react";
 import { useEffect, useState } from "react";
 import TeacherCard from "../../components/TeacherCard";
 import AddTeacherModel from "../../components/AddTeacherModel";
@@ -41,34 +42,36 @@ const Teachers = () => {
   return (
     <div className="min-h-screen overflow-hidden">
       {/* heading */}
-      <h1 className="text-4xl font-bold">Teachers</h1>
-      <p className="text-gray-400 text-[13px]">
+      <p className="text-sm font-semibold uppercase tracking-[0.18em] text-indigo-600">Academic directory</p>
+      <h1 className="mt-1 text-3xl font-bold text-slate-900 sm:text-4xl">Faculty</h1>
+      <p className="mt-1 text-sm text-slate-500">
         Search, view and manage Teacher records
       </p>
 
       {/* search bar */}
-      <div className="flex items-center mt-4 gap-2 max-w-3xl">
-        <div className="flex items-center flex-1">
+      <div className="mt-5 flex max-w-4xl flex-col gap-3 sm:flex-row">
+        <div className="relative flex flex-1 items-center">
+          <Search size={18} className="absolute left-3 text-slate-400" />
           <input
             type="text"
             value={inputSearch}
             onChange={(e) => setInputSearch(e.target.value)}
             placeholder="Search by name or email..."
-            className="outline-0 border-black/15 px-4 py-2 rounded bg-gray-200 placeholder:text-sm flex-1 text-md text-slate-700"
+            className="w-full rounded-xl border border-slate-200 bg-white py-3 pl-10 pr-4 text-sm text-slate-700 shadow-sm outline-none transition focus:border-indigo-500 focus:ring-4 focus:ring-indigo-100"
           />
         </div>
 
         <button
           onClick={() => setShowModal(true)}
-          className="flex items-center gap-2 bg-blue-500 text-white px-4 py-2 rounded font-semibold shadow hover:bg-blue-700/80 duration-200 cursor-pointer"
+          className="flex shrink-0 items-center justify-center gap-2 rounded-xl bg-indigo-600 px-5 py-3 text-sm font-semibold text-white shadow-sm transition hover:bg-indigo-700"
         >
-          <span>+</span>
-          <span className="hidden lg:block">Add Teachers</span>
+          <Plus size={18} />
+          <span>Add faculty</span>
         </button>
       </div>
 
       {/* teacher grid */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 xl:grid-cols-5 gap-3 sm:gap-4 items-stretch md:p-4 py-4">
+      <div className="grid grid-cols-1 items-stretch gap-4 py-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5">
         {filteredTeachers?.map((teacher, idx) => (
           <TeacherCard
             teacher={teacher}

@@ -4,6 +4,9 @@ import StudentDashboard from "./pages/student/StudentDashboard";
 import StudentSubject from "./pages/student/StudentSubject";
 import StudentProfile from "./pages/student/StudentProfile";
 import HodDashboard from "./pages/hod/HodDashboard";
+import HodProfile from "./pages/hod/HodProfile";
+import HodAttendance from "./pages/hod/HodAttendance";
+import HodTimetable from "./pages/hod/HodTimetable";
 import Subject from "./pages/hod/Subjects";
 import HodFees from "./pages/hod/Fees";
 import Teacher from "./pages/hod/Teacher";
@@ -11,7 +14,6 @@ import Student from "./pages/hod/Student";
 import About from "./pages/AppInfo/About";
 import StudentAttendance from "./pages/student/StudentAttendance";
 import StundentTimeTable from "./pages/student/StundentTimeTable";
-// import StudentResult from "./pages/student/StudentResult";
 import StudentFees from "./pages/student/StudentFees";
 import TeacherClasses from "./pages/teacher/TeacherClasses";
 import TeacherAttendance from "./pages/teacher/TeacherAttendance";
@@ -71,10 +73,10 @@ function App() {
         <Route path="students" element={<Student />} />
         <Route path="student/:studentId" element={<StudentProfileView />} />
         <Route path="subjects" element={<Subject />} />
-        <Route path="attendance" element={<StudentSubject />} />
-        <Route path="timetable" element={<StudentSubject />} />
+        <Route path="attendance" element={<HodAttendance />} />
+        <Route path="timetable" element={<HodTimetable />} />
         <Route path="fees" element={<HodFees />} />
-        <Route path="profile" element={<RoleProfile role="hod" />} />
+        <Route path="profile" element={<HodProfile />} />
       </Route>
 
       {/* admin route */}

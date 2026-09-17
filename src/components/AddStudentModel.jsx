@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-const AddStudentModel = ({ onClose, onStudentAdded }) => {
+const AddStudentModel = ({ onClose, onStudentAdded, role = "admin" }) => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
   const [departments, setDepartments] = useState([]);
@@ -18,8 +18,12 @@ const AddStudentModel = ({ onClose, onStudentAdded }) => {
     address: "",
   });
 
-  //   departments
+  const isHod = role === "hod";
+
+  // Department selection is an admin-only field. The HOD API always assigns
+  // the student to the signed-in HOD's department.
   useEffect(() => {
+    if (isHod) return;
     async function fetchDepartment() {
       try {
         const res = await fetch(
@@ -47,7 +51,7 @@ const AddStudentModel = ({ onClose, onStudentAdded }) => {
       }
     }
     fetchDepartment();
-  }, []);
+  }, [isHod]);
 
   //   form submit
   const handleSubmit = async (e) => {
@@ -55,7 +59,7 @@ const AddStudentModel = ({ onClose, onStudentAdded }) => {
     try {
       setLoading(true);
       setError("");
-      const url = `${import.meta.env.VITE_API_URL}/admin/student`;
+      const url = `${import.meta.env.VITE_API_URL}/${role}/student`;
       const res = await fetch(url, {
         method: "POST",
         headers: {
@@ -64,8 +68,9 @@ const AddStudentModel = ({ onClose, onStudentAdded }) => {
         credentials: "include",
         body: JSON.stringify(formData),
       });
+      const data = await res.json().catch(() => ({}));
       if (!res.ok) {
-        throw new Error(res.message || "Failed To add student");
+        throw new Error(data.message || "Failed To add student");
       }
       onStudentAdded?.();
       onClose();
@@ -88,7 +93,7 @@ const AddStudentModel = ({ onClose, onStudentAdded }) => {
         {/* heading */}
         <h1 className="font-semibold text-xl text-slate-900">Add Student</h1>
         <p className="text-gray-500 text-sm mt-1">
-          Add a new student to College
+          {isHod ? "Add a student to your department" : "Add a new student to College"}
         </p>
 
         {/* form data */}
@@ -160,7 +165,7 @@ const AddStudentModel = ({ onClose, onStudentAdded }) => {
           {/* department, year , semester */}
           <div className="flex gap-6 items-center flex-wrap">
             {/* department */}
-            <div className="flex gap-2 items-center">
+            {!isHod && <div className="flex gap-2 items-center">
               <label
                 className="text-xs font-semibold uppercase"
                 htmlFor="department"
@@ -183,7 +188,7 @@ const AddStudentModel = ({ onClose, onStudentAdded }) => {
                   </option>
                 ))}
               </select>
-            </div>
+            </div>}
 
             {/* year */}
             <div className="flex gap-2 items-center">

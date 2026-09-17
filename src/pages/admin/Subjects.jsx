@@ -1,3 +1,4 @@
+import { Plus, Search } from "lucide-react";
 import { useEffect, useState } from "react";
 import AddSubjectModel from "../../components/AddSubjectModel";
 import EditSubjectModel from "../../components/EditSubjectModel";
@@ -104,33 +105,35 @@ const Subjects = () => {
   return (
     <div className="min-h-screen overflow-hidden">
       {/* heading */}
-      <h1 className="text-4xl font-bold">Subjects</h1>
-      <p className="text-gray-400 text-[13px]">
+      <p className="text-sm font-semibold uppercase tracking-[0.18em] text-indigo-600">Academic catalog</p>
+      <h1 className="mt-1 text-3xl font-bold text-slate-900 sm:text-4xl">Subjects</h1>
+      <p className="mt-1 text-sm text-slate-500">
         Search, view and manage subjects
       </p>
 
       {/* search bar */}
-      <div className="flex items-center mt-4 gap-2 max-w-3xl">
-        <div className="flex items-center flex-1">
+      <div className="mt-5 flex max-w-4xl flex-col gap-3 sm:flex-row">
+        <div className="relative flex flex-1 items-center">
+          <Search size={18} className="absolute left-3 text-slate-400" />
           <input
             type="text"
             value={inputSearch}
             onChange={(e) => setInputSearch(e.target.value)}
-            placeholder="Search subject by name.."
-            className="outline-0 border-black/15 px-4 py-2 rounded bg-gray-200 placeholder:text-sm flex-1 text-md text-slate-700"
+            placeholder="Search by subject name or code..."
+            className="w-full rounded-xl border border-slate-200 bg-white py-3 pl-10 pr-4 text-sm text-slate-700 shadow-sm outline-none transition focus:border-indigo-500 focus:ring-4 focus:ring-indigo-100"
           />
         </div>
 
         <button
           onClick={() => setShowModal(true)}
-          className="flex items-center gap-2 bg-blue-500 text-white px-4 py-2 rounded font-semibold shadow hover:bg-blue-700/80 duration-200 cursor-pointer"
+          className="flex shrink-0 items-center justify-center gap-2 rounded-xl bg-indigo-600 px-5 py-3 text-sm font-semibold text-white shadow-sm transition hover:bg-indigo-700"
         >
-          <span>+</span>
-          <span className="hidden lg:block">Add Subjects</span>
+          <Plus size={18} />
+          <span>Add subject</span>
         </button>
       </div>
 
-      <div className="mt-6 overflow-hidden rounded-xl border border-slate-200 bg-white">
+      <div className="mt-6 overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm">
         <div className="overflow-x-auto">
           <table className="w-full min-w-225 text-left text-sm">
             <thead className="bg-slate-50 text-xs uppercase text-slate-500">

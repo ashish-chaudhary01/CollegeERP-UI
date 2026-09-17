@@ -73,26 +73,27 @@ const Students = () => {
   return (
     <div className="min-h-screen overflow-hidden">
       {/* heading */}
-      <h1 className="text-4xl font-bold">Students</h1>
-      <p className="text-gray-400 text-[13px]">
+      <p className="text-sm font-semibold uppercase tracking-[0.18em] text-indigo-600">Academic directory</p>
+      <h1 className="mt-1 text-3xl font-bold text-slate-900 sm:text-4xl">Students</h1>
+      <p className="mt-1 text-sm text-slate-500">
         Search, view and manage student records
       </p>
 
       {/* search bar */}
-      <div className="flex items-center mt-4 gap-2 max-w-3xl">
+      <div className="mt-5 flex max-w-4xl flex-col gap-3 sm:flex-row">
         <div className="flex items-center flex-1">
           <input
             type="text"
             value={inputSearch}
             onChange={(e) => setInputSearch(e.target.value)}
-            placeholder="Search by name or student ID..."
-            className="outline-0 border-black/15 px-4 py-2 rounded bg-gray-200 placeholder:text-sm flex-1 text-md text-slate-700"
+            placeholder="Search by name, email or roll number..."
+            className="w-full rounded-xl border border-slate-200 bg-white px-4 py-3 text-sm text-slate-700 shadow-sm outline-none transition focus:border-indigo-500 focus:ring-4 focus:ring-indigo-100"
           />
         </div>
 
         <button
           onClick={() => setShowModal(true)}
-          className="flex items-center gap-2 bg-blue-500 text-white px-4 py-2 rounded font-semibold shadow hover:bg-blue-700/80 duration-200 cursor-pointer"
+          className="flex shrink-0 items-center justify-center gap-2 rounded-xl bg-indigo-600 px-4 py-3 font-semibold text-white shadow-sm transition hover:bg-indigo-700"
         >
           <span>+</span>
           <span className="hidden lg:block">Add Student</span>
@@ -100,18 +101,16 @@ const Students = () => {
       </div>
 
       {/* filter container */}
-      <div className="mt-6 px-4 py-2 bg-gray-200 rounded-xl flex gap-4 flex-wrap items-center text-sm">
+      <div className="mt-6 grid gap-3 rounded-2xl border border-slate-200 bg-linear-to-br from-white to-indigo-50/70 p-4 shadow-sm sm:grid-cols-2 xl:grid-cols-4">
         {/* department filter */}
-        <div className="flex gap-2 items-center">
-          <label htmlFor="departments" className="font-medium ">
-            Departments :
-          </label>
+        <label className="block text-xs font-semibold uppercase tracking-wide text-slate-500">
+            Department
 
           <select
             name="department"
             value={selectedDepartment}
             onChange={(e) => setSelectedDepartment(e.target.value)}
-            className="border border-gray-500 py-0.5 px-2 text-xs rounded-xl"
+            className="mt-1 w-full rounded-lg border border-slate-200 bg-white px-3 py-2.5 text-sm font-medium text-slate-700 outline-none focus:border-indigo-500"
           >
             <option value="all">All</option>
             {departments.map((department) => (
@@ -120,61 +119,51 @@ const Students = () => {
               </option>
             ))}
           </select>
-        </div>
+        </label>
         {/* active filter */}
-        <div className="flex gap-2 items-center">
-          <label htmlFor="status" className="text-sm font-medium ">
-            Status :
-          </label>
+        <label className="block text-xs font-semibold uppercase tracking-wide text-slate-500">
+            Status
 
           <select
             name="status"
             value={status}
             onChange={(e) => setStatus(e.target.value)}
-            className="border border-gray-500 py-0.5 px-2 text-xs rounded-xl"
+            className="mt-1 w-full rounded-lg border border-slate-200 bg-white px-3 py-2.5 text-sm font-medium text-slate-700 outline-none focus:border-indigo-500"
           >
             <option value="active">Active</option>
             <option value="inactive">Inactive</option>
           </select>
-        </div>
+        </label>
         {/* year filter */}
-        <div className="flex gap-2 items-center">
-          <label htmlFor="year" className="text-sm font-medium ">
-            year :
-          </label>
+        <label className="block text-xs font-semibold uppercase tracking-wide text-slate-500">
+            Year
 
           <select
             name="year"
             value={year}
             onChange={(e) => {
               setYear(e.target.value);
-              setSemester(e.target.value * 2 - 1);
+                setSemester("all");
             }}
-            className="border border-gray-500 py-0.5 px-2 text-xs rounded-xl"
+            className="mt-1 w-full rounded-lg border border-slate-200 bg-white px-3 py-2.5 text-sm font-medium text-slate-700 outline-none focus:border-indigo-500"
           >
             <option value="all">All</option>
             <option value="1">1</option>
             <option value="2">2</option>
             <option value="3">3</option>
           </select>
-        </div>
+        </label>
         {/* semester filter */}
-        <div className="flex gap-2 items-center">
-          <label htmlFor="semester" className="text-sm font-medium ">
-            semester :
-          </label>
+        <label className="block text-xs font-semibold uppercase tracking-wide text-slate-500">
+            Semester
 
           <select
             name="semester"
             value={semester}
             onChange={(e) => setSemester(e.target.value)}
-            className="border border-gray-500 py-0.5 px-2 text-xs rounded-xl"
+            className="mt-1 w-full rounded-lg border border-slate-200 bg-white px-3 py-2.5 text-sm font-medium text-slate-700 outline-none focus:border-indigo-500"
           >
-            {year === "all" && (
-              <>
-                <option value="all">All</option>
-              </>
-            )}
+            <option value="all">All semesters</option>
             {year === "1" && (
               <>
                 <option value="1">1</option>
@@ -194,11 +183,11 @@ const Students = () => {
               </>
             )}
           </select>
-        </div>
+        </label>
       </div>
 
       {/* student grid */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 xl:grid-cols-5 gap-3 sm:gap-4 items-stretch md:p-4 py-4">
+      <div className="grid grid-cols-1 items-stretch gap-4 py-5 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5">
         {filteredStudents?.map((student, idx) => (
           <Studentcard student={student} key={idx} />
         ))}

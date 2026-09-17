@@ -137,7 +137,7 @@ const Timetable = () => {
             className="mt-1 w-full rounded-lg border border-slate-200 bg-white p-2 font-normal"
           >
             <option value="all">All semesters</option>
-            {[1, 2, 3, 4, 5, 6, 7, 8].map((item) => (
+            {[1, 2, 3, 4, 5, 6].map((item) => (
               <option key={item} value={item}>
                 Semester {item}
               </option>
