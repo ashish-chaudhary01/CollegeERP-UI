@@ -11,6 +11,7 @@ const Teachers = () => {
   const [selectedDepartment, setSelectedDepartment] = useState("all");
   const [showModal, setShowModal] = useState(false);
   const [teachersRefreshKey, setTeachersRefreshKey] = useState(0);
+  const [onDeleted, setOnDeleted] = useState(0);
 
   useEffect(() => {
     async function fetchDepartments() {
@@ -46,19 +47,19 @@ const Teachers = () => {
     }
 
     fetchTeachers();
-  }, [status, selectedDepartment, teachersRefreshKey]);
+  }, [status, selectedDepartment, onDeleted, teachersRefreshKey]);
 
   const filteredTeachers =
     inputSearch.trim().length > 0
       ? teachers.filter((teacher) => {
-          const teacherName = teacher?.userId?.name?.toLowerCase() ?? "";
-          const teacherEmail = teacher?.userId?.email?.toLowerCase() ?? "";
-          const searchTerm = inputSearch.trim().toLowerCase();
-          return (
-            teacherName.includes(searchTerm) ||
-            teacherEmail.includes(searchTerm)
-          );
-        })
+        const teacherName = teacher?.userId?.name?.toLowerCase() ?? "";
+        const teacherEmail = teacher?.userId?.email?.toLowerCase() ?? "";
+        const searchTerm = inputSearch.trim().toLowerCase();
+        return (
+          teacherName.includes(searchTerm) ||
+          teacherEmail.includes(searchTerm)
+        );
+      })
       : teachers;
 
   return (
@@ -141,6 +142,7 @@ const Teachers = () => {
         {filteredTeachers?.map((teacher, idx) => (
           <TeacherCard
             teacher={teacher}
+            onDeleted={() => setOnDeleted((key) => key + 1)}
             key={idx}
             profileBase="/admin/teacher"
           />

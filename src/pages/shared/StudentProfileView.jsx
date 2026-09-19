@@ -197,7 +197,17 @@ const StudentProfileView = () => {
           )}
           <h2 className="mt-5 text-xl font-bold">{student.userId?.name}</h2>
           <p className="mt-1 text-sm text-slate-300">{student.userId?.email}</p>
-          <p className="mt-5 text-sm text-cyan-300">
+          {student.phoneNumber && (
+            <p className="mt-2 text-sm text-slate-400">
+              📞 {student.phoneNumber}
+            </p>
+          )}
+          {student.fatherName && (
+            <p className="mt-1 text-sm text-slate-400">
+              👤 Father: {student.fatherName}
+            </p>
+          )}
+          <p className="mt-4 text-sm text-cyan-300">
             {student.department?.departmentCode || "Department not assigned"}
           </p>
           <span

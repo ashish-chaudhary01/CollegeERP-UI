@@ -12,6 +12,7 @@ const Students = () => {
   const [selectedDepartment, setSelectedDepartment] = useState("all");
   const [showModal, setShowModal] = useState(false);
   const [studentsRefreshKey, setStudentsRefreshKey] = useState(0);
+  const [onDeleted, setOnDeleted] = useState(0);
 
   useEffect(() => {
     async function fetchDepartment() {
@@ -53,21 +54,21 @@ const Students = () => {
     }
 
     fetchStudents();
-  }, [selectedDepartment, status, studentsRefreshKey, year, semester]);
+  }, [selectedDepartment, status, studentsRefreshKey, onDeleted, year, semester]);
 
   const filteredStudents =
     inputSearch.trim().length > 0
       ? students.filter((student) => {
-          const studentName = student?.userId?.name?.toLowerCase() ?? "";
-          const studentEmail = student?.userId?.email?.toLowerCase() ?? "";
-          const studentRollNumber = student?.rollNumber ?? "";
-          const searchTerm = inputSearch.trim().toLowerCase();
-          return (
-            studentName.includes(searchTerm) ||
-            studentRollNumber.includes(searchTerm) ||
-            studentEmail.includes(searchTerm)
-          );
-        })
+        const studentName = student?.userId?.name?.toLowerCase() ?? "";
+        const studentEmail = student?.userId?.email?.toLowerCase() ?? "";
+        const studentRollNumber = student?.rollNumber ?? "";
+        const searchTerm = inputSearch.trim().toLowerCase();
+        return (
+          studentName.includes(searchTerm) ||
+          studentRollNumber.includes(searchTerm) ||
+          studentEmail.includes(searchTerm)
+        );
+      })
       : students;
 
   return (
@@ -104,7 +105,7 @@ const Students = () => {
       <div className="mt-6 grid gap-3 rounded-2xl border border-slate-200 bg-linear-to-br from-white to-indigo-50/70 p-4 shadow-sm sm:grid-cols-2 xl:grid-cols-4">
         {/* department filter */}
         <label className="block text-xs font-semibold uppercase tracking-wide text-slate-500">
-            Department
+          Department
 
           <select
             name="department"
@@ -122,7 +123,7 @@ const Students = () => {
         </label>
         {/* active filter */}
         <label className="block text-xs font-semibold uppercase tracking-wide text-slate-500">
-            Status
+          Status
 
           <select
             name="status"
@@ -136,14 +137,14 @@ const Students = () => {
         </label>
         {/* year filter */}
         <label className="block text-xs font-semibold uppercase tracking-wide text-slate-500">
-            Year
+          Year
 
           <select
             name="year"
             value={year}
             onChange={(e) => {
               setYear(e.target.value);
-                setSemester("all");
+              setSemester("all");
             }}
             className="mt-1 w-full rounded-lg border border-slate-200 bg-white px-3 py-2.5 text-sm font-medium text-slate-700 outline-none focus:border-indigo-500"
           >
@@ -155,7 +156,7 @@ const Students = () => {
         </label>
         {/* semester filter */}
         <label className="block text-xs font-semibold uppercase tracking-wide text-slate-500">
-            Semester
+          Semester
 
           <select
             name="semester"
@@ -189,7 +190,7 @@ const Students = () => {
       {/* student grid */}
       <div className="grid grid-cols-1 items-stretch gap-4 py-5 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5">
         {filteredStudents?.map((student, idx) => (
-          <Studentcard student={student} key={idx} />
+          <Studentcard student={student} onDeleted={() => setOnDeleted((prev) => prev + 1)} key={`${student._id}-${onDeleted}`} />
         ))}
       </div>
 
