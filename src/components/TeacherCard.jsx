@@ -24,6 +24,9 @@ function TeacherCard({ teacher, onDeleted, profileBase = "/admin/teacher" }) {
       onDeleted?.();
     } catch (error) {
       setError(error.message);
+      setTimeout(() => {
+        setError("")
+      }, 2500)
     } finally {
       setDeleting(false);
       setConfirming(false);
@@ -69,6 +72,8 @@ function TeacherCard({ teacher, onDeleted, profileBase = "/admin/teacher" }) {
               Department : {teacher.department?.departmentCode || "Not assigned"}
             </p>
           </div>
+          {/* error */}
+          {error && (<p className="mt-2 text-xs text-red-500 font-medium">{error}</p>)}
         </div>
         {/* view profile button */}
         <div className="flex">
