@@ -1,4 +1,4 @@
-import { Building2 } from "lucide-react";
+import { Building2, Trash2 } from "lucide-react";
 import { useEffect, useState } from "react";
 import AddDepartmentModal from "../../components/AddDepartmentModel";
 
@@ -86,8 +86,9 @@ const Departments = () => {
           body: JSON.stringify({ teacherId: selectedTeacherId }),
         },
       );
+      const data = await res.json();
       if (!res.ok) {
-        throw new Error("Failed to assign HOD");
+        throw new Error(data.message);
       }
 
       setDepartmentsRefreshKey((key) => key + 1);
@@ -138,7 +139,7 @@ const Departments = () => {
                 <div>
                   <Building2
                     size={60}
-                    className="bg-blue-400/20 text-blue-700 rounded-full p-2"
+                    className="bg-blue-100 text-blue-500 rounded-full p-2"
                   />{" "}
                 </div>
                 {/* details */}
@@ -150,7 +151,7 @@ const Departments = () => {
                       ({department.departmentCode})
                     </span>
                   </h2>
-                  <p className="font-bold text-sm px-4 py-1 bg-orange-500/10 text-orange-500 rounded-full">
+                  <p className="font-bold text-sm px-4 py-1 bg-green-100 text-green-500 rounded-full">
                     Hod : {department.hod?.userId?.name ?? "not-assigned"}
                   </p>
                   <button
@@ -184,6 +185,14 @@ const Departments = () => {
                   </p>
                   <p className="text-xs text-slate-500">Active</p>
                 </div>
+                {/* <div>
+                  <button
+                    className="bg-rose-500 px-3 py-3 text-white transition hover:bg-rose-600"
+                    title="Delete Department"
+                  >
+                    <Trash2 size={16} />
+                  </button>
+                </div> */}
               </div>
             </div>
           </div>
