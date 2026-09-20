@@ -54,28 +54,39 @@ const Students = () => {
     }
 
     fetchStudents();
-  }, [selectedDepartment, status, studentsRefreshKey, onDeleted, year, semester]);
+  }, [
+    selectedDepartment,
+    status,
+    studentsRefreshKey,
+    onDeleted,
+    year,
+    semester,
+  ]);
 
   const filteredStudents =
     inputSearch.trim().length > 0
       ? students.filter((student) => {
-        const studentName = student?.userId?.name?.toLowerCase() ?? "";
-        const studentEmail = student?.userId?.email?.toLowerCase() ?? "";
-        const studentRollNumber = student?.rollNumber ?? "";
-        const searchTerm = inputSearch.trim().toLowerCase();
-        return (
-          studentName.includes(searchTerm) ||
-          studentRollNumber.includes(searchTerm) ||
-          studentEmail.includes(searchTerm)
-        );
-      })
+          const studentName = student?.userId?.name?.toLowerCase() ?? "";
+          const studentEmail = student?.userId?.email?.toLowerCase() ?? "";
+          const studentRollNumber = student?.rollNumber ?? "";
+          const searchTerm = inputSearch.trim().toLowerCase();
+          return (
+            studentName.includes(searchTerm) ||
+            studentRollNumber.includes(searchTerm) ||
+            studentEmail.includes(searchTerm)
+          );
+        })
       : students;
 
   return (
     <div className="min-h-screen overflow-hidden">
       {/* heading */}
-      <p className="text-sm font-semibold uppercase tracking-[0.18em] text-indigo-600">Academic directory</p>
-      <h1 className="mt-1 text-3xl font-bold text-slate-900 sm:text-4xl">Students</h1>
+      <p className="text-sm font-semibold uppercase tracking-[0.18em] text-indigo-600">
+        Academic directory
+      </p>
+      <h1 className="mt-1 text-3xl font-bold text-slate-900 sm:text-4xl">
+        Students
+      </h1>
       <p className="mt-1 text-sm text-slate-500">
         Search, view and manage student records
       </p>
@@ -106,7 +117,6 @@ const Students = () => {
         {/* department filter */}
         <label className="block text-xs font-semibold uppercase tracking-wide text-slate-500">
           Department
-
           <select
             name="department"
             value={selectedDepartment}
@@ -124,7 +134,6 @@ const Students = () => {
         {/* active filter */}
         <label className="block text-xs font-semibold uppercase tracking-wide text-slate-500">
           Status
-
           <select
             name="status"
             value={status}
@@ -138,7 +147,6 @@ const Students = () => {
         {/* year filter */}
         <label className="block text-xs font-semibold uppercase tracking-wide text-slate-500">
           Year
-
           <select
             name="year"
             value={year}
@@ -157,7 +165,6 @@ const Students = () => {
         {/* semester filter */}
         <label className="block text-xs font-semibold uppercase tracking-wide text-slate-500">
           Semester
-
           <select
             name="semester"
             value={semester}
@@ -189,8 +196,12 @@ const Students = () => {
 
       {/* student grid */}
       <div className="grid grid-cols-1 items-stretch gap-4 py-5 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5">
-        {filteredStudents?.map((student, idx) => (
-          <Studentcard student={student} onDeleted={() => setOnDeleted((prev) => prev + 1)} key={`${student._id}-${onDeleted}`} />
+        {filteredStudents?.map((student) => (
+          <Studentcard
+            student={student}
+            onDeleted={() => setOnDeleted((prev) => prev + 1)}
+            key={`${student._id}-${onDeleted}`}
+          />
         ))}
       </div>
 

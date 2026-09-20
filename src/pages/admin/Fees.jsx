@@ -54,18 +54,21 @@ const AdminFeesPage = () => {
       </p>
 
       {/* filter container */}
-      <div className="mt-6 px-4 py-2 bg-gray-200 rounded-xl flex gap-4 flex-wrap items-center text-sm">
-        <label className="flex items-center gap-2 font-medium">
+      <div className="mt-6 px-4 py-3 border border-slate-200 bg-linear-to-br from-white to-indigo-50/70 shadow-sm rounded-xl text-sm grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-3">
+        <label className="font-semibold text-xs tracking-wide uppercase text-slate-500 block">
           Session :
           <input
             value={session}
             onChange={(e) => setSession(e.target.value)}
-            className="border border-gray-500 py-1 px-2 text-xs rounded-lg"
+            className="mt-1 w-full rounded-lg border border-slate-200 bg-white px-3 py-2.5 text-sm font-medium text-slate-700 outline-none focus:border-indigo-500"
           />
         </label>
         {/* department filter */}
-        <div className="flex gap-2 items-center">
-          <label htmlFor="department" className="font-medium ">
+        <div className="">
+          <label
+            htmlFor="department"
+            className="font-semibold text-xs uppercase text-slate-500 tracking-wide block"
+          >
             Departments :
           </label>
 
@@ -73,7 +76,7 @@ const AdminFeesPage = () => {
             name="department"
             value={selectedDepartment}
             onChange={(e) => setSelectedDepartment(e.target.value)}
-            className="border border-gray-500 py-0.5 px-2 text-xs rounded-xl"
+            className="mt-1 w-full rounded-lg border border-slate-200 bg-white px-3 py-2.5 text-sm font-medium text-slate-700 outline-none focus:border-indigo-500"
           >
             <option value="all">All</option>
             {departments.map((department) => (
@@ -84,8 +87,11 @@ const AdminFeesPage = () => {
           </select>
         </div>
         {/* Feestatus filter */}
-        <div className="flex gap-2 items-center">
-          <label htmlFor="feestatus" className="text-sm font-medium ">
+        <div>
+          <label
+            htmlFor="feestatus"
+            className="font-semibold text-xs uppercase text-slate-500 tracking-wide block"
+          >
             Fee Status :
           </label>
 
@@ -93,7 +99,7 @@ const AdminFeesPage = () => {
             name="feestatus"
             value={feeStatus}
             onChange={(e) => setFeeStatus(e.target.value)}
-            className="border border-gray-500 py-0.5 px-2 text-xs rounded-xl"
+            className="mt-1 w-full rounded-lg border border-slate-200 bg-white px-3 py-2.5 text-sm font-medium text-slate-700 outline-none focus:border-indigo-500"
           >
             <option value="all">All</option>
             <option value="paid">Paid</option>
@@ -101,8 +107,11 @@ const AdminFeesPage = () => {
           </select>
         </div>
         {/* semester filter */}
-        <div className="flex gap-2 items-center">
-          <label htmlFor="semester" className="text-sm font-medium ">
+        <div>
+          <label
+            htmlFor="semester"
+            className="font-semibold text-xs uppercase text-slate-500 tracking-wide block"
+          >
             Semester :
           </label>
 
@@ -110,7 +119,7 @@ const AdminFeesPage = () => {
             name="semester"
             value={semester}
             onChange={(e) => setSemester(e.target.value)}
-            className="border border-gray-500 py-0.5 px-2 text-xs rounded-xl"
+            className="mt-1 w-full rounded-lg border border-slate-200 bg-white px-3 py-2.5 text-sm font-medium text-slate-700 outline-none focus:border-indigo-500"
           >
             <option value="all">All</option>
             <option value="1">1</option>
@@ -122,8 +131,11 @@ const AdminFeesPage = () => {
           </select>
         </div>
         {/* student status filter */}
-        <div className="flex gap-2 items-center">
-          <label htmlFor="status" className="text-sm font-medium ">
+        <div>
+          <label
+            htmlFor="status"
+            className="font-semibold text-xs uppercase text-slate-500 tracking-wide block"
+          >
             Status :
           </label>
 
@@ -131,7 +143,7 @@ const AdminFeesPage = () => {
             name="status"
             value={status}
             onChange={(e) => setStatus(e.target.value)}
-            className="border border-gray-500 py-0.5 px-2 text-xs rounded-xl"
+            className="mt-1 w-full rounded-lg border border-slate-200 bg-white px-3 py-2.5 text-sm font-medium text-slate-700 outline-none focus:border-indigo-500"
           >
             <option value="all">All</option>
             <option value="active">Active</option>

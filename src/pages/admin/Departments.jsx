@@ -105,7 +105,7 @@ const Departments = () => {
       <h1 className="text-2xl font-bold">Departments</h1>
 
       {/* search bar */}
-      <div className="flex items-center mt-4 gap-2 max-w-3xl">
+      <div className="flex sm:flex-row flex-col sm:items-center mt-4 gap-2 max-w-3xl">
         <div className="flex items-center flex-1">
           <input
             type="text"
@@ -118,7 +118,7 @@ const Departments = () => {
 
         <button
           onClick={() => setShowModal(true)}
-          className="flex items-center gap-2 bg-blue-500 text-white px-4 py-2 rounded font-semibold shadow hover:bg-blue-700/80 duration-200 cursor-pointer"
+          className="flex justify-center items-center gap-2 bg-indigo-600 text-white px-4 py-2 rounded-lg font-semibold shadow hover:bg-indigo-700 duration-200 cursor-pointer"
         >
           <span>+</span>
           <span className="hidden lg:block">Add Department</span>
