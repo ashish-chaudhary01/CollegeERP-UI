@@ -77,7 +77,7 @@ const AddTeacherModel = ({ onClose, onTeacherAdded }) => {
           onClose();
         }
       }}
-      className="fixed inset-0 bg-black/40 flex items-center justify-center z-50"
+      className="fixed inset-0 bg-black/40 flex items-center justify-center z-50 p-2 md:p-0"
     >
       <div className="rounded-2xl w-full overflow-auto max-w-xl sm:max-w-2xl shadow-xl bg-white border border-slate-700/40 p-6">
         {/* heading */}
@@ -90,7 +90,10 @@ const AddTeacherModel = ({ onClose, onTeacherAdded }) => {
         <form onSubmit={handleSubmit} className="mt-6 space-y-4">
           {/* name */}
           <div>
-            <label className="text-xs font-semibold" htmlFor="teacherName">
+            <label
+              className="text-xs font-semibold capitalize block text-slate-500"
+              htmlFor="teacherName"
+            >
               Teacher Name :
             </label>
             <input
@@ -111,7 +114,7 @@ const AddTeacherModel = ({ onClose, onTeacherAdded }) => {
             {/* email */}
             <div className="flex-1">
               <label
-                className="text-xs font-semibold uppercase"
+                className="text-xs font-semibold capitalize block text-slate-500"
                 htmlFor="email"
               >
                 Email :
@@ -132,7 +135,7 @@ const AddTeacherModel = ({ onClose, onTeacherAdded }) => {
             {/* phone */}
             <div className="flex-1">
               <label
-                className="text-xs font-semibold uppercase"
+                className="text-xs font-semibold capitalize block text-slate-500"
                 htmlFor="phone"
               >
                 Phone No :
@@ -153,9 +156,9 @@ const AddTeacherModel = ({ onClose, onTeacherAdded }) => {
           </div>
 
           {/* department */}
-          <div className="flex gap-2 items-center">
+          <div className="">
             <label
-              className="text-xs font-semibold uppercase"
+              className="text-xs font-semibold capitalize block text-slate-500"
               htmlFor="department"
             >
               Department :
@@ -168,7 +171,7 @@ const AddTeacherModel = ({ onClose, onTeacherAdded }) => {
                 setFormData({ ...formData, department: e.target.value })
               }
               required
-              className="bg-slate-200 border outline-0 border-slate-300 py-0.5 px-3 text-xs rounded"
+              className="mt-1 w-full rounded-lg border border-slate-200 bg-white px-3 py-2.5 text-sm font-medium text-slate-700 outline-none focus:border-indigo-500"
             >
               {departments.map((department) => (
                 <option key={department._id} value={department._id}>
@@ -181,7 +184,7 @@ const AddTeacherModel = ({ onClose, onTeacherAdded }) => {
           {/* password */}
           <div>
             <label
-              className="text-xs font-semibold uppercase"
+              className="text-xs font-semibold capitalize block text-slate-500"
               htmlFor="password"
             >
               password :

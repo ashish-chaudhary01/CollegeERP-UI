@@ -109,7 +109,7 @@ const EditSubjectModel = ({ subject, onClose, onSubjectUpdated }) => {
           onClose();
         }
       }}
-      className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 p-4"
+      className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 p-2 md:p-0"
     >
       <div className="max-h-[90vh] w-full max-w-xl overflow-auto rounded-2xl border border-slate-700/40 bg-white p-6 shadow-xl sm:max-w-2xl">
         <h1 className="text-xl font-semibold text-slate-900">Edit Subject</h1>
@@ -119,9 +119,10 @@ const EditSubjectModel = ({ subject, onClose, onSubjectUpdated }) => {
 
         <form onSubmit={handleSubmit} className="mt-6 space-y-4">
           <div className="flex flex-col gap-4 sm:flex-row sm:items-center">
+            {/* subject name */}
             <div className="flex-1">
               <label
-                className="text-xs font-semibold"
+                className="block text-xs font-semibold uppercase tracking-wide text-slate-500"
                 htmlFor="editSubjectName"
               >
                 Subject Name :
@@ -137,10 +138,10 @@ const EditSubjectModel = ({ subject, onClose, onSubjectUpdated }) => {
                 className="mt-1 w-full rounded-lg border border-slate-200 px-4 py-3 text-sm outline-0 duration-150 focus:border-indigo-500"
               />
             </div>
-
+            {/* subject code */}
             <div className="flex-1">
               <label
-                className="text-xs font-semibold"
+                className="block text-xs font-semibold uppercase tracking-wide text-slate-500"
                 htmlFor="editSubjectCode"
               >
                 Subject Code :
@@ -158,10 +159,10 @@ const EditSubjectModel = ({ subject, onClose, onSubjectUpdated }) => {
             </div>
           </div>
 
-          <div className="flex flex-wrap items-center gap-6">
-            <div className="flex items-center gap-2">
+          <div className="flex sm:items-center flex-col sm:flex-row gap-4">
+            <div className="flex-1">
               <label
-                className="text-xs font-semibold uppercase"
+                className="block text-xs font-semibold uppercase tracking-wide text-slate-500"
                 htmlFor="editDepartment"
               >
                 Department :
@@ -174,7 +175,7 @@ const EditSubjectModel = ({ subject, onClose, onSubjectUpdated }) => {
                 onChange={(event) =>
                   handleChange("departmentId", event.target.value)
                 }
-                className="rounded border border-slate-300 bg-slate-200 px-3 py-0.5 text-xs outline-0"
+                className="mt-1 w-full rounded-lg border border-slate-200 px-4 py-3 text-sm outline-0 duration-150 focus:border-indigo-500"
               >
                 {departments.map((department) => (
                   <option key={department._id} value={department._id}>
@@ -184,9 +185,9 @@ const EditSubjectModel = ({ subject, onClose, onSubjectUpdated }) => {
               </select>
             </div>
 
-            <div className="flex items-center gap-2">
+            <div className="flex-1">
               <label
-                className="text-xs font-semibold uppercase"
+                className="block text-xs font-semibold uppercase tracking-wide text-slate-500"
                 htmlFor="editYear"
               >
                 Year :
@@ -196,7 +197,7 @@ const EditSubjectModel = ({ subject, onClose, onSubjectUpdated }) => {
                 id="editYear"
                 value={formData.year}
                 onChange={(event) => handleYearChange(event.target.value)}
-                className="rounded border border-slate-300 bg-slate-200 px-3 py-0.5 text-xs outline-0"
+                className="mt-1 w-full rounded-lg border border-slate-200 px-4 py-3 text-sm outline-0 duration-150 focus:border-indigo-500"
               >
                 <option value={1}>1</option>
                 <option value={2}>2</option>
@@ -204,9 +205,9 @@ const EditSubjectModel = ({ subject, onClose, onSubjectUpdated }) => {
               </select>
             </div>
 
-            <div className="flex items-center gap-2">
+            <div className="flex-1">
               <label
-                className="text-xs font-semibold uppercase"
+                className="block text-xs font-semibold uppercase tracking-wide text-slate-500"
                 htmlFor="editSemester"
               >
                 Semester :
@@ -218,7 +219,7 @@ const EditSubjectModel = ({ subject, onClose, onSubjectUpdated }) => {
                 onChange={(event) =>
                   handleChange("semester", Number(event.target.value))
                 }
-                className="rounded border border-slate-300 bg-slate-200 px-3 py-0.5 text-xs outline-0"
+                className="mt-1 w-full rounded-lg border border-slate-200 px-4 py-3 text-sm outline-0 duration-150 focus:border-indigo-500"
               >
                 {formData.year === 1 && (
                   <>

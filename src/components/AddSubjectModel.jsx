@@ -76,7 +76,7 @@ const AddSubjectModel = ({ onClose, onSubjectAdded }) => {
           onClose();
         }
       }}
-      className="fixed inset-0 bg-black/40 flex items-center justify-center z-50"
+      className="fixed inset-0 bg-black/40 flex items-center justify-center z-50 p-2 md:p-0"
     >
       <div className="rounded-2xl w-full overflow-auto max-w-xl sm:max-w-2xl shadow-xl bg-white border border-slate-700/40 p-6">
         {/* heading */}
@@ -90,9 +90,9 @@ const AddSubjectModel = ({ onClose, onSubjectAdded }) => {
           {/* subject name and subject code */}
           <div className="flex gap-4 sm:items-center flex-col sm:flex-row">
             {/* subject name */}
-            <div>
+            <div className="flex-1">
               <label
-                className="flex-1 text-xs font-semibold"
+                className="text-xs font-semibold capitalize block text-slate-500"
                 htmlFor="subjectName"
               >
                 Subject Name :
@@ -111,9 +111,9 @@ const AddSubjectModel = ({ onClose, onSubjectAdded }) => {
               />
             </div>
             {/* subject code */}
-            <div>
+            <div className="flex-1">
               <label
-                className="flex-1 text-xs font-semibold"
+                className="text-xs font-semibold capitalize block text-slate-500"
                 htmlFor="subjectCode"
               >
                 Subject Code :
@@ -134,11 +134,11 @@ const AddSubjectModel = ({ onClose, onSubjectAdded }) => {
           </div>
 
           {/* department, year , semester */}
-          <div className="flex gap-6 items-center flex-wrap">
+          <div className="flex gap-6 sm:items-center flex-col sm:flex-row">
             {/* department */}
-            <div className="flex gap-2 items-center">
+            <div className="flex-1">
               <label
-                className="text-xs font-semibold uppercase"
+                className="text-xs font-semibold capitalize block text-slate-500"
                 htmlFor="department"
               >
                 Department :
@@ -151,7 +151,7 @@ const AddSubjectModel = ({ onClose, onSubjectAdded }) => {
                   setFormData({ ...formData, departmentId: e.target.value })
                 }
                 required
-                className="bg-slate-200 border outline-0 border-slate-300 py-0.5 px-3 text-xs rounded"
+                className="mt-1 w-full rounded-lg border border-slate-200 bg-white px-3 py-2.5 text-sm font-medium text-slate-700 outline-none focus:border-indigo-500"
               >
                 {departments.map((department) => (
                   <option key={department._id} value={department._id}>
@@ -162,8 +162,11 @@ const AddSubjectModel = ({ onClose, onSubjectAdded }) => {
             </div>
 
             {/* year */}
-            <div className="flex gap-2 items-center">
-              <label className="text-xs font-semibold uppercase" htmlFor="year">
+            <div className="flex-1">
+              <label
+                className="text-xs font-semibold capitalize block text-slate-500"
+                htmlFor="year"
+              >
                 year :
               </label>
 
@@ -178,7 +181,7 @@ const AddSubjectModel = ({ onClose, onSubjectAdded }) => {
                     semester: Number(e.target.value) * 2 - 1,
                   })
                 }
-                className="bg-slate-200 border outline-0 border-slate-300 py-0.5 px-3 text-xs rounded"
+                className="mt-1 w-full rounded-lg border border-slate-200 bg-white px-3 py-2.5 text-sm font-medium text-slate-700 outline-none focus:border-indigo-500"
               >
                 <option value={1}>1</option>
                 <option value={2}>2</option>
@@ -187,9 +190,9 @@ const AddSubjectModel = ({ onClose, onSubjectAdded }) => {
             </div>
 
             {/* semester */}
-            <div className="flex gap-2 items-center">
+            <div className="flex-1">
               <label
-                className="text-xs font-semibold uppercase"
+                className="text-xs font-semibold capitalize block text-slate-500"
                 htmlFor="semester"
               >
                 semester :
@@ -202,7 +205,7 @@ const AddSubjectModel = ({ onClose, onSubjectAdded }) => {
                 onChange={(e) =>
                   setFormData({ ...formData, semester: Number(e.target.value) })
                 }
-                className="bg-slate-200 border outline-0 border-slate-300 py-0.5 px-3 text-xs rounded"
+                className="mt-1 w-full rounded-lg border border-slate-200 bg-white px-3 py-2.5 text-sm font-medium text-slate-700 outline-none focus:border-indigo-500"
               >
                 {formData.year === 1 && (
                   <>
