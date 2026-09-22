@@ -263,7 +263,7 @@ const StudentProfileView = () => {
                 Status
                 <select
                   value={form.status || "active"}
-                  disabled={!editing || isSelf}
+                  disabled={!editing}
                   onChange={(event) =>
                     setForm({ ...form, status: event.target.value })
                   }

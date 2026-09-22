@@ -52,7 +52,7 @@ function AdminDashboard() {
       }
     }
     fetchAdminDashboard();
-  }, [API_URL]);
+  }, []);
 
   if (!overviewData) return <DashboardSkeleton />;
 
@@ -211,14 +211,40 @@ function AdminDashboard() {
       <div className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
         <div className="flex items-center gap-2 mb-4">
           <AlertCircle size={16} className="text-cyan-600" />
-          <h2 className="font-bold text-slate-800 text-sm uppercase tracking-wider">Quick Navigation</h2>
+          <h2 className="font-bold text-slate-800 text-sm uppercase tracking-wider">
+            Quick Navigation
+          </h2>
         </div>
         <div className="grid grid-cols-2 gap-3 sm:grid-cols-4">
           {[
-            { label: "Manage Students", icon: Users, href: "/admin/students", color: "text-blue-600", bg: "bg-blue-50 hover:bg-blue-100" },
-            { label: "Manage Teachers", icon: GraduationCap, href: "/admin/teachers", color: "text-violet-600", bg: "bg-violet-50 hover:bg-violet-100" },
-            { label: "Departments", icon: Building2, href: "/admin/departments", color: "text-amber-600", bg: "bg-amber-50 hover:bg-amber-100" },
-            { label: "Fee Records", icon: IndianRupee, href: "/admin/fees", color: "text-emerald-600", bg: "bg-emerald-50 hover:bg-emerald-100" },
+            {
+              label: "Manage Students",
+              icon: Users,
+              href: "/admin/students",
+              color: "text-blue-600",
+              bg: "bg-blue-50 hover:bg-blue-100",
+            },
+            {
+              label: "Manage Teachers",
+              icon: GraduationCap,
+              href: "/admin/teachers",
+              color: "text-violet-600",
+              bg: "bg-violet-50 hover:bg-violet-100",
+            },
+            {
+              label: "Departments",
+              icon: Building2,
+              href: "/admin/departments",
+              color: "text-amber-600",
+              bg: "bg-amber-50 hover:bg-amber-100",
+            },
+            {
+              label: "Fee Records",
+              icon: IndianRupee,
+              href: "/admin/fees",
+              color: "text-emerald-600",
+              bg: "bg-emerald-50 hover:bg-emerald-100",
+            },
           ].map(({ label, icon: Icon, href, color, bg }) => (
             <a
               key={label}

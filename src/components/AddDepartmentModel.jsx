@@ -45,7 +45,7 @@ const AddDepartmentModel = ({ onClose, handleDepartmentCreate }) => {
           onClose();
         }
       }}
-      className="fixed inset-0 bg-black/40 flex items-center justify-center z-50"
+      className="fixed inset-0 bg-black/40 flex items-center justify-center z-50 p-2 sm:p-0"
     >
       <div className="rounded-2xl w-full max-w-sm sm:max-w-md shadow-xl bg-white border border-slate-700/40 p-6">
         {/* heading */}

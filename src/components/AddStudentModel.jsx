@@ -87,20 +87,25 @@ const AddStudentModel = ({ onClose, onStudentAdded, role = "admin" }) => {
           onClose();
         }
       }}
-      className="fixed inset-0 bg-black/40 flex items-center justify-center z-50"
+      className="fixed inset-0 bg-black/40 flex items-center justify-center z-50 p-2.5 sm:p-0"
     >
       <div className="rounded-2xl w-full overflow-auto h-150 max-w-xl sm:max-w-2xl shadow-xl bg-white border border-slate-700/40 p-6">
         {/* heading */}
         <h1 className="font-semibold text-xl text-slate-900">Add Student</h1>
         <p className="text-gray-500 text-sm mt-1">
-          {isHod ? "Add a student to your department" : "Add a new student to College"}
+          {isHod
+            ? "Add a student to your department"
+            : "Add a new student to College"}
         </p>
 
         {/* form data */}
         <form onSubmit={handleSubmit} className="mt-6 space-y-4">
           {/* name */}
           <div>
-            <label className="text-xs font-semibold" htmlFor="studentName">
+            <label
+              className="text-xs font-semibold capitalize block text-slate-500"
+              htmlFor="studentName"
+            >
               Student Name :
             </label>
             <input
@@ -121,7 +126,7 @@ const AddStudentModel = ({ onClose, onStudentAdded, role = "admin" }) => {
             {/* email */}
             <div className="flex-1">
               <label
-                className="text-xs font-semibold uppercase"
+                className="text-xs font-semibold capitalize block text-slate-500"
                 htmlFor="email"
               >
                 Email :
@@ -142,7 +147,7 @@ const AddStudentModel = ({ onClose, onStudentAdded, role = "admin" }) => {
             {/* phone */}
             <div className="flex-1">
               <label
-                className="text-xs font-semibold uppercase"
+                className="text-xs font-semibold capitalize block text-slate-500"
                 htmlFor="phone"
               >
                 Phone No :
@@ -163,36 +168,41 @@ const AddStudentModel = ({ onClose, onStudentAdded, role = "admin" }) => {
           </div>
 
           {/* department, year , semester */}
-          <div className="flex gap-6 items-center flex-wrap">
+          <div className="flex gap-4 flex-col sm:flex-row sm:items-center">
             {/* department */}
-            {!isHod && <div className="flex gap-2 items-center">
-              <label
-                className="text-xs font-semibold uppercase"
-                htmlFor="department"
-              >
-                Department :
-              </label>
+            {!isHod && (
+              <div className="flex-1">
+                <label
+                  className="text-xs font-semibold capitalize block text-slate-500"
+                  htmlFor="department"
+                >
+                  Department:
+                </label>
 
-              <select
-                name="department"
-                value={formData.department}
-                onChange={(e) =>
-                  setFormData({ ...formData, department: e.target.value })
-                }
-                required
-                className="bg-slate-200 border outline-0 border-slate-300 py-0.5 px-3 text-xs rounded"
-              >
-                {departments.map((department) => (
-                  <option key={department._id} value={department._id}>
-                    {department.departmentCode}
-                  </option>
-                ))}
-              </select>
-            </div>}
+                <select
+                  name="department"
+                  value={formData.department}
+                  onChange={(e) =>
+                    setFormData({ ...formData, department: e.target.value })
+                  }
+                  required
+                  className="mt-1 w-full rounded-lg border border-slate-200 bg-white px-3 py-2.5 text-sm font-medium text-slate-700 outline-none focus:border-indigo-500"
+                >
+                  {departments.map((department) => (
+                    <option key={department._id} value={department._id}>
+                      {department.departmentCode}
+                    </option>
+                  ))}
+                </select>
+              </div>
+            )}
 
             {/* year */}
-            <div className="flex gap-2 items-center">
-              <label className="text-xs font-semibold uppercase" htmlFor="year">
+            <div className="flex-1">
+              <label
+                className="text-xs font-semibold capitalize block text-slate-500"
+                htmlFor="year"
+              >
                 year :
               </label>
 
@@ -207,7 +217,7 @@ const AddStudentModel = ({ onClose, onStudentAdded, role = "admin" }) => {
                     semester: Number(e.target.value) * 2 - 1,
                   })
                 }
-                className="bg-slate-200 border outline-0 border-slate-300 py-0.5 px-3 text-xs rounded"
+                className="mt-1 w-full rounded-lg border border-slate-200 bg-white px-3 py-2.5 text-sm font-medium text-slate-700 outline-none focus:border-indigo-500"
               >
                 <option value={1}>1</option>
                 <option value={2}>2</option>
@@ -216,9 +226,9 @@ const AddStudentModel = ({ onClose, onStudentAdded, role = "admin" }) => {
             </div>
 
             {/* semester */}
-            <div className="flex gap-2 items-center">
+            <div className="flex-1">
               <label
-                className="text-xs font-semibold uppercase"
+                className="text-xs font-semibold capitalize block text-slate-500"
                 htmlFor="semester"
               >
                 semester :
@@ -231,7 +241,7 @@ const AddStudentModel = ({ onClose, onStudentAdded, role = "admin" }) => {
                 onChange={(e) =>
                   setFormData({ ...formData, semester: Number(e.target.value) })
                 }
-                className="bg-slate-200 border outline-0 border-slate-300 py-0.5 px-3 text-xs rounded"
+                className="mt-1 w-full rounded-lg border border-slate-200 bg-white px-3 py-2.5 text-sm font-medium text-slate-700 outline-none focus:border-indigo-500"
               >
                 {formData.year === 1 && (
                   <>
@@ -260,7 +270,7 @@ const AddStudentModel = ({ onClose, onStudentAdded, role = "admin" }) => {
             {/* roll number */}
             <div className="flex-1">
               <label
-                className="text-xs font-semibold uppercase"
+                className="text-xs font-semibold capitalize block text-slate-500"
                 htmlFor="rollNumber"
               >
                 Roll no :
@@ -281,7 +291,7 @@ const AddStudentModel = ({ onClose, onStudentAdded, role = "admin" }) => {
             {/*  academic session */}
             <div className="flex-1">
               <label
-                className="text-xs font-semibold uppercase"
+                className="text-xs font-semibold capitalize block text-slate-500"
                 htmlFor="session"
               >
                 academic session :
@@ -302,11 +312,11 @@ const AddStudentModel = ({ onClose, onStudentAdded, role = "admin" }) => {
           </div>
 
           {/* addhar card number */}
-          <div className="flex gap-4 sm:items-center sm:flex-row flex-col">
+          <div className="flex gap-4 flex-col sm:items-center sm:flex-row ">
             {/* addhar */}
-            <div>
+            <div className="flex-1">
               <label
-                className="text-xs font-semibold uppercase"
+                className="text-xs font-semibold capitalize block text-slate-500"
                 htmlFor="addhar"
               >
                 addhar number :
@@ -321,13 +331,13 @@ const AddStudentModel = ({ onClose, onStudentAdded, role = "admin" }) => {
                 }
                 placeholder="e.g. 0000 0000 0000"
                 type="number"
-                className="mt-1 w-full px-4 py-3 border border-slate-200 focus:border-indigo-500 duration-150 rounded-lg placeholder:text-sm outline-0 text-sm"
+                className="w-full mt-1  px-4 py-3 border border-slate-200 focus:border-indigo-500 duration-150 rounded-lg placeholder:text-sm outline-0 text-sm"
               />
             </div>
             {/* password */}
-            <div>
+            <div className="flex-1">
               <label
-                className="text-xs font-semibold uppercase"
+                className="text-xs font-semibold capitalize block text-slate-500"
                 htmlFor="password"
               >
                 password :
@@ -342,7 +352,7 @@ const AddStudentModel = ({ onClose, onStudentAdded, role = "admin" }) => {
                 }
                 placeholder="e.g. *********"
                 type="text"
-                className="mt-1 w-full px-4 py-3 border border-slate-200 focus:border-indigo-500 duration-150 rounded-lg placeholder:text-sm outline-0 text-sm"
+                className="w-full mt-1 px-4 py-3 border border-slate-200 focus:border-indigo-500 duration-150 rounded-lg placeholder:text-sm outline-0 text-sm"
               />
             </div>
           </div>
@@ -350,7 +360,7 @@ const AddStudentModel = ({ onClose, onStudentAdded, role = "admin" }) => {
           {/* address */}
           <div>
             <label
-              className="text-xs uppercase font-semibold"
+              className="text-xs font-semibold capitalize block text-slate-500"
               htmlFor="address"
             >
               address :

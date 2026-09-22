@@ -18,7 +18,7 @@ function LoginPage() {
   const { login, user } = useAuth();
   const navigate = useNavigate();
 
-  if (user) {
+  if (user && user.role != null) {
     if (user.role === "admin")
       return <Navigate to="/admin/dashboard" replace />;
     if (user.role === "hod") return <Navigate to="/hod/dashboard" replace />;
@@ -33,6 +33,7 @@ function LoginPage() {
     try {
       setLoading(true);
       setLoginError("");
+      await fetch(`${import.meta.env.VITE_API_URL}/health`);
       const res = await fetch(`${import.meta.env.VITE_API_URL}/auth/login`, {
         method: "POST",
         headers: {
@@ -85,7 +86,9 @@ function LoginPage() {
             <GraduationCap size={27} />{" "}
           </div>
           <div className="font-bold text-2xl flex flex-col">
-            <span className="text-slate-900">CER<span className="text-cyan-600">P</span></span>
+            <span className="text-slate-900">
+              CER<span className="text-cyan-600">P</span>
+            </span>
             <span className="text-gray-500 text-xs">College ERP System</span>
           </div>
         </div>

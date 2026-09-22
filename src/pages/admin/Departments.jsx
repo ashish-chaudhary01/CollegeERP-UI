@@ -1,4 +1,4 @@
-import { Building2, Trash2 } from "lucide-react";
+import { Building2 } from "lucide-react";
 import { useEffect, useState } from "react";
 import AddDepartmentModal from "../../components/AddDepartmentModel";
 
@@ -211,14 +211,14 @@ const Departments = () => {
       {assignHodModal && (
         <div
           onClick={(e) => e.target === e.currentTarget && closeAssignHodModal()}
-          className="fixed z-70 inset-0 flex justify-center items-center bg-black/40"
+          className="fixed z-70 inset-0 flex justify-center items-center bg-black/40 p-2 sm:p-0"
         >
-          <div className="p-6 rounded-lg shadow-xl bg-white max-w-md w-full">
-            <h2 className="text-xl font-bold">Assign Hod</h2>
-            <div className="mt-4 flex gap-4 items-center">
+          <div className="p-6 rounded-2xl shadow-xl bg-white max-w-md w-full">
+            <h2 className="text-2xl font-bold text-slate-800">Assign Hod</h2>
+            <div className="mt-4 ">
               <label
                 htmlFor="selectTeacher"
-                className="text-xs font-medium uppercase"
+                className="text-xs font-semibold uppercase tracking-wide text-slate-500 block"
               >
                 Select Teacher :
               </label>
@@ -228,7 +228,7 @@ const Departments = () => {
                 required
                 value={selectedTeacherId}
                 onChange={(e) => setSelectedTeacherId(e.target.value)}
-                className="bg-slate-200 border outline-0 border-slate-300 py-0.5 px-3 text-xs rounded"
+                className="mt-1 w-full py-2.5 px-3 rounded-md text-sm outline-none focus:border-indigo-500 font-medium border border-gray-200 bg-white text-slate-700"
               >
                 {teachers.map((teacher) => (
                   <option key={teacher._id} value={teacher._id}>
