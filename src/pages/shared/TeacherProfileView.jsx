@@ -101,19 +101,23 @@ const TeacherProfileView = ({ role }) => {
           <p className="mt-5 text-sm text-cyan-300">
             {teacher.department?.departmentCode || "Department not assigned"}
           </p>
-          <span className="mt-4 inline-flex items-center gap-2 rounded-full bg-emerald-400/15 px-3 py-1 text-xs text-emerald-300">
-            <ShieldCheck size={14} />
-            {teacher.userId?.role === "hod" ? "Head of Department" : "Teacher"}
-          </span>
-          <span
-            className={`mt-2 inline-flex items-center rounded-full px-3 py-1 text-xs font-semibold ${
-              teacher.status === "active"
-                ? "bg-emerald-500/20 text-emerald-300"
-                : "bg-rose-500/20 text-rose-300"
-            }`}
-          >
-            Status: {teacher.status || "active"}
-          </span>
+          <div className="flex items-center gap-1 mt-4">
+            <span className=" inline-flex items-center gap-2 rounded-full bg-emerald-400/15 px-3 py-1 text-xs text-emerald-300">
+              <ShieldCheck size={14} />
+              {teacher.userId?.role === "hod"
+                ? "Head of Department"
+                : "Teacher"}
+            </span>
+            <span
+              className={` inline-flex items-center rounded-full px-3 py-1 text-xs font-semibold ${
+                teacher.status === "active"
+                  ? "bg-emerald-500/20 text-emerald-300"
+                  : "bg-rose-500/20 text-rose-300"
+              }`}
+            >
+              Status: {teacher.status || "active"}
+            </span>
+          </div>
         </aside>
         <div className="space-y-5">
           <form
