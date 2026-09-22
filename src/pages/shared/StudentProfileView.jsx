@@ -196,7 +196,7 @@ const StudentProfileView = () => {
             </button>
           )}
           <h2 className="mt-5 text-xl font-bold">{student.userId?.name}</h2>
-          <p className="mt-1 text-sm text-slate-300">{student.userId?.email}</p>
+          <p className="mt-1 text-xs text-slate-300">{student.userId?.email}</p>
           {student.phoneNumber && (
             <p className="mt-2 text-sm text-slate-400">
               📞 {student.phoneNumber}
