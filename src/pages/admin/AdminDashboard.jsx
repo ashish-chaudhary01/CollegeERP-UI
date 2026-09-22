@@ -36,15 +36,17 @@ function StatCard({ icon: Icon, label, value, color, bg, trend }) {
 function AdminDashboard() {
   const [overviewData, setOverviewData] = useState(null);
   const { user } = useAuth();
-  const API_URL = import.meta.env.VITE_API_URL;
 
   useEffect(() => {
     async function fetchAdminDashboard() {
       try {
-        const res = await fetch(`${API_URL}/admin/dashboard`, {
-          method: "GET",
-          credentials: "include",
-        });
+        const res = await fetch(
+          `${import.meta.env.VITE_API_URL}/admin/dashboard`,
+          {
+            method: "GET",
+            credentials: "include",
+          },
+        );
         const data = await res.json();
         setOverviewData(data);
       } catch (error) {
@@ -76,7 +78,7 @@ function AdminDashboard() {
   return (
     <div className="min-h-screen space-y-6 overflow-hidden">
       {/* ── Hero greeting ── */}
-      <div className="relative overflow-hidden rounded-2xl bg-gradient-to-br from-slate-900 via-slate-800 to-cyan-900 p-6 text-white shadow-lg">
+      <div className="relative overflow-hidden rounded-2xl bg-linear-to-br from-slate-900 via-slate-800 to-cyan-900 p-6 text-white shadow-lg">
         {/* decorative blobs */}
         <div className="pointer-events-none absolute -right-10 -top-10 h-48 w-48 rounded-full bg-cyan-500/20 blur-3xl" />
         <div className="pointer-events-none absolute -bottom-10 right-32 h-32 w-32 rounded-full bg-indigo-500/20 blur-2xl" />
@@ -155,7 +157,7 @@ function AdminDashboard() {
           {/* progress bar */}
           <div className="mt-5 h-3 overflow-hidden rounded-full bg-slate-100">
             <div
-              className="h-full rounded-full bg-gradient-to-r from-cyan-500 to-emerald-500 transition-all duration-700"
+              className="h-full rounded-full bg-linear-to-r from-cyan-500 to-emerald-500 transition-all duration-700"
               style={{ width: `${Math.min(attendancePct, 100)}%` }}
             />
           </div>
