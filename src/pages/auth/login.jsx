@@ -7,7 +7,7 @@ import {
   Users,
 } from "lucide-react";
 import { useState } from "react";
-import { Navigate, useNavigate } from "react-router";
+import { Link, Navigate, useNavigate } from "react-router";
 import { useAuth } from "../../context/AuthContext";
 
 function LoginPage() {
@@ -150,16 +150,19 @@ function LoginPage() {
           </div>
 
           {/* button */}
-          <div className="">
+          <div className="text-center">
             <button
               disabled={loading}
               className="w-full py-2 bg-blue-700 rounded text-white font-semibold text-md shadow hover:bg-blue-600 duration-200"
             >
               {loading ? "Signing In..." : "Sign In"}
             </button>
-            <p className="text-center text-[#6766CF] text-sm mt-2">
+            <Link
+              to="/forgot-password"
+              className="text-center text-[#6766CF] text-sm mt-3 block"
+            >
               Forgot your password?
-            </p>
+            </Link>
           </div>
         </form>
       </div>

@@ -34,11 +34,13 @@ import AdminProfile from "./pages/admin/AdminProfile";
 import StudentProfileView from "./pages/shared/StudentProfileView";
 import RoleProfile from "./pages/shared/RoleProfile";
 import TeacherProfileView from "./pages/shared/TeacherProfileView";
+import ForgotPassword from "./pages/auth/ForgotPassword";
 
 function App() {
   return (
     <Routes>
       <Route path="/" element={<LoginPage />} />
+      <Route path="/forgot-password" element={<ForgotPassword />} />
       {/* student dashboard layout and route */}
       <Route path="student" element={<DashboardLayout />}>
         <Route path="dashboard" element={<StudentDashboard />} />
