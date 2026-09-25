@@ -7,11 +7,11 @@ function Studentcard({ student, onDeleted, profileBase = "/admin/student" }) {
   const image_url = student?.profilePictureUrl || "/no-image.jpg";
   const [confirming, setConfirming] = useState(false);
   const [deleting, setDeleting] = useState(false);
-  const [error, setError] = useState("")
+  const [error, setError] = useState("");
 
   const handleDelete = async () => {
     try {
-      setError("")
+      setError("");
       setDeleting(true);
       const res = await fetch(
         `${import.meta.env.VITE_API_URL}/admin/student/${student._id}`,
@@ -46,7 +46,7 @@ function Studentcard({ student, onDeleted, profileBase = "/admin/student" }) {
           <h2 className="mt-2 font-bold text-xl capitalize leading-tight">
             {student.userId?.name ?? "Unknown student"}
           </h2>
-          <p className="text-[13px] text-slate-500">
+          <p className="text-xs wrap-break-word whitespace-normal text-slate-500">
             {student.userId?.email ?? "No email"}
           </p>
           <div className="mt-1 text-xs text-gray-700 flex gap-1 flex-wrap">
@@ -65,7 +65,9 @@ function Studentcard({ student, onDeleted, profileBase = "/admin/student" }) {
           {/* other details */}
           <div className="mt-2 text-sm">
             <p>UBTER-ID : {student?.rollNumber ?? "-"}</p>
-            <p>BRANCH : {student.department?.departmentCode ?? "Not assigned"}</p>
+            <p>
+              BRANCH : {student.department?.departmentCode ?? "Not assigned"}
+            </p>
           </div>
         </div>
         {/* buttons */}
@@ -93,7 +95,9 @@ function Studentcard({ student, onDeleted, profileBase = "/admin/student" }) {
           onClick={(e) => e.target === e.currentTarget && setConfirming(false)}
         >
           <div className="w-full max-w-sm rounded-2xl bg-white p-6 shadow-xl">
-            <h3 className="text-lg font-bold text-slate-800">Delete Student?</h3>
+            <h3 className="text-lg font-bold text-slate-800">
+              Delete Student?
+            </h3>
             <p className="mt-2 text-sm text-slate-500">
               Are you sure you want to delete{" "}
               <span className="font-semibold text-slate-800">

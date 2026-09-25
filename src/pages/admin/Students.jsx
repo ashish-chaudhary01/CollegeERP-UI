@@ -15,7 +15,7 @@ const Students = () => {
   const [showModal, setShowModal] = useState(false);
   const [studentsRefreshKey, setStudentsRefreshKey] = useState(0);
   const [onDeleted, setOnDeleted] = useState(0);
-  const [gridView, setGridView] = useState(false);
+  const [gridView, setGridView] = useState(true);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
 
@@ -24,6 +24,8 @@ const Students = () => {
   useEffect(() => {
     async function fetchDepartment() {
       try {
+        setLoading(true);
+        setError("");
         const res = await fetch(
           `${import.meta.env.VITE_API_URL}/admin/departments`,
           { method: "GET", credentials: "include" },
@@ -32,7 +34,9 @@ const Students = () => {
         const data = await res.json();
         setDepartments((data.departments ?? []).filter(Boolean));
       } catch (error) {
-        console.log(error.message);
+        setError(error.message);
+      } finally {
+        setLoading(false);
       }
     }
     fetchDepartment();
@@ -41,6 +45,8 @@ const Students = () => {
   useEffect(() => {
     async function fetchStudents() {
       try {
+        setLoading(true);
+        setError("");
         const url = `${import.meta.env.VITE_API_URL}/admin/students?status=${status}&departmentId=${selectedDepartment}&year=${year}&semester=${semester}`;
         const res = await fetch(url, {
           method: "GET",
@@ -56,7 +62,9 @@ const Students = () => {
         const data = await res.json();
         setStudents(data.students ?? []);
       } catch (error) {
-        console.log(error.message);
+        setError(error.message);
+      } finally {
+        setLoading(false);
       }
     }
 
@@ -203,7 +211,7 @@ const Students = () => {
       {/* grid view or table view */}
       <div className="flex justify-between items-center px-4 mt-2">
         {/* total students */}
-        <p className="text-xs text-gray-500 font-medium ">
+        <p className="text-xs font-medium text-gray-500">
           Showing {students.length} students
         </p>
 
@@ -227,17 +235,25 @@ const Students = () => {
       {/* error  */}
       {error && <p className="text-sm text-rose-600">{error}</p>}
 
-      {/* student grid */}
+      {/* student grid and table view*/}
       {gridView ? (
-        <div className="grid grid-cols-1 items-stretch gap-4 py-5 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 mt-3">
-          {filteredStudents?.map((student) => (
-            <Studentcard
-              student={student}
-              onDeleted={() => setOnDeleted((prev) => prev + 1)}
-              key={`${student._id}-${onDeleted}`}
-            />
-          ))}
-        </div>
+        <>
+          <div className="grid grid-cols-1 items-stretch gap-4 py-5 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 mt-3">
+            {filteredStudents?.map((student) => (
+              <Studentcard
+                student={student}
+                onDeleted={() => setOnDeleted((prev) => prev + 1)}
+                key={`${student._id}-${onDeleted}`}
+              />
+            ))}
+          </div>
+          {/* loading */}
+          {loading && (
+            <div className="mt-5 text-gray-500 text-center">
+              Loading Students....
+            </div>
+          )}
+        </>
       ) : (
         <div className="overflow-x-auto rounded-2xl border border-slate-200 bg-white shadow-sm mt-3">
           <table className="w-full min-w-170 text-left text-sm">

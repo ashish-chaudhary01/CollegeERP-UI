@@ -1,7 +1,14 @@
-import { Filter, Plus, Search } from "lucide-react";
+import {
+  Filter,
+  LayoutGrid,
+  Plus,
+  Search,
+  TableOfContents,
+} from "lucide-react";
 import { useEffect, useMemo, useState } from "react";
 import { useNavigate } from "react-router";
 import AddStudentModel from "../../components/AddStudentModel";
+import Studentcard from "../../components/StudentCard";
 
 function Student() {
   const [students, setStudents] = useState([]);
@@ -10,8 +17,10 @@ function Student() {
   const [semester, setSemester] = useState("all");
   const [status, setStatus] = useState("all");
   const [showModal, setShowModal] = useState(false);
+  const [gridView, setGridView] = useState(true);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
+  const [onDeleted, setOnDeleted] = useState(0);
   const navigate = useNavigate();
   const API_URL = import.meta.env.VITE_API_URL;
   const loadStudents = async () => {
@@ -49,7 +58,7 @@ function Student() {
     return () => {
       active = false;
     };
-  }, [API_URL]);
+  }, [API_URL, onDeleted]);
   const filteredStudents = useMemo(() => {
     const term = search.trim().toLowerCase();
     return students.filter((student) => {
@@ -157,55 +166,107 @@ function Student() {
           {students.length} department students
         </p>
       </div>
-      {error && <p className="text-sm text-rose-600">{error}</p>}
-      <div className="overflow-x-auto rounded-2xl border border-slate-200 bg-white shadow-sm">
-        <table className="w-full min-w-170 text-left text-sm">
-          <thead className="bg-slate-50 text-xs uppercase text-slate-500">
-            <tr>
-              <th className="px-5 py-4">Student</th>
-              <th className="px-5 py-4">Roll number</th>
-              <th className="px-5 py-4">Year</th>
-              <th className="px-5 py-4">Semester</th>
-              <th className="px-5 py-4">Status</th>
-            </tr>
-          </thead>
-          <tbody className="divide-y divide-slate-100">
-            {loading ? (
-              <tr>
-                <td colSpan="5" className="p-10 text-center text-slate-500">
-                  Loading students...
-                </td>
-              </tr>
-            ) : (
-              filteredStudents.map((student) => (
-                <tr
-                  key={student._id}
-                  onClick={() => navigate(`/hod/student/${student._id}`)}
-                  className="cursor-pointer hover:bg-slate-50"
-                >
-                  <td className="px-5 py-4 font-semibold">
-                    {student.userId?.name || "Unknown student"}
-                    <span className="ml-2 font-normal text-slate-500">
-                      {student.userId?.email}
-                    </span>
-                  </td>
-                  <td className="px-5 py-4">{student.rollNumber}</td>
-                  <td className="px-5 py-4">{student.year}</td>
-                  <td className="px-5 py-4">{student.semester}</td>
-                  <td className="px-5 py-4 capitalize">{student.status}</td>
-                </tr>
-              ))
-            )}
-            {!loading && !filteredStudents.length && (
-              <tr>
-                <td colSpan="5" className="p-10 text-center text-slate-400">
-                  No students found.
-                </td>
-              </tr>
-            )}
-          </tbody>
-        </table>
+
+      {/* grid view or table view */}
+      <div className="flex justify-between items-center px-4 mt-2">
+        {/* total students */}
+        <p className="text-xs font-medium text-gray-500">
+          Showing {students.length} students
+        </p>
+
+        {/* grid and table showcase container */}
+        <div className="bg-white/90 shadow flex items-center gap-2 rounded-bl-2xl rounded-br rounded-tl rounded-tr-2xl">
+          <span
+            onClick={() => setGridView(false)}
+            className={`py-2 px-4 rounded-tl rounded-bl-2xl ${!gridView && "bg-indigo-700 text-indigo-50"}`}
+          >
+            <TableOfContents size={20} />
+          </span>
+          <span
+            onClick={() => setGridView(true)}
+            className={`py-2 px-4 rounded-br rounded-tr-2xl ${gridView && "bg-indigo-700 text-indigo-50"}`}
+          >
+            <LayoutGrid size={20} />
+          </span>
+        </div>
       </div>
+
+      {error && <p className="text-sm text-rose-600">{error}</p>}
+
+      {/* student grid and table view*/}
+      {gridView ? (
+        <>
+          <div className="grid grid-cols-1 items-stretch gap-4 py-5 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 mt-3">
+            {filteredStudents?.map((student) => (
+              <Studentcard
+                student={student}
+                onDeleted={() => setOnDeleted((prev) => prev + 1)}
+                key={`${student._id}-${onDeleted}`}
+              />
+            ))}
+          </div>
+          {/* loading */}
+          {loading && (
+            <div className="mt-5 text-gray-500 text-center">
+              Loading Students....
+            </div>
+          )}
+        </>
+      ) : (
+        <div className="overflow-x-auto rounded-2xl border border-slate-200 bg-white shadow-sm mt-3">
+          <table className="w-full min-w-170 text-left text-sm">
+            <thead className="bg-slate-50 text-xs uppercase text-slate-500">
+              <tr>
+                <th className="px-5 py-4">Student</th>
+                <th className="px-5 py-4">Roll number</th>
+                <th className="px-5 py-4">Year</th>
+                <th className="px-5 py-4">Semester</th>
+                <th className="px-5 py-4">Status</th>
+              </tr>
+            </thead>
+            <tbody className="divide-y divide-slate-100">
+              {loading ? (
+                <tr>
+                  <td colSpan="5" className="p-10 text-center text-slate-500">
+                    Loading students...
+                  </td>
+                </tr>
+              ) : (
+                filteredStudents.map((student) => (
+                  <tr
+                    key={student._id}
+                    onClick={() => navigate(`/admin/student/${student._id}`)}
+                    className="cursor-pointer hover:bg-slate-50"
+                  >
+                    <td className="px-5 py-4 font-semibold">
+                      <span className="capitalize">
+                        {student.userId?.name || "Unknown student"}
+                      </span>
+
+                      <span className="ml-2 font-normal text-indigo-600">
+                        {student.userId?.email}
+                      </span>
+                    </td>
+                    <td className="px-5 py-4">{student.rollNumber}</td>
+                    <td className="px-5 py-4">{student.year}</td>
+                    <td className="px-5 py-4">{student.semester}</td>
+                    <td className="px-5 py-4 capitalize text-green-600">
+                      {student.status}
+                    </td>
+                  </tr>
+                ))
+              )}
+              {!loading && !filteredStudents.length && (
+                <tr>
+                  <td colSpan="5" className="p-10 text-center text-slate-400">
+                    No students found.
+                  </td>
+                </tr>
+              )}
+            </tbody>
+          </table>
+        </div>
+      )}
       {showModal && (
         <AddStudentModel
           role="hod"

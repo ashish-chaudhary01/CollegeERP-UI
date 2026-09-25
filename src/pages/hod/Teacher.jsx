@@ -1,4 +1,4 @@
-import { Filter, Plus, Search } from "lucide-react";
+import { Filter, Search } from "lucide-react";
 import { useEffect, useState } from "react";
 import TeacherCard from "../../components/TeacherCard";
 import AddTeacherModel from "../../components/AddTeacherModel";
@@ -83,6 +83,13 @@ function Teacher() {
           {teachers.length} department teachers
         </p>
       </div>
+
+      {/* loading  */}
+      {loading && (
+        <div className="text-center text-gray-500 mt-10">
+          Loading teachers....
+        </div>
+      )}
 
       {/* Grid */}
       <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
