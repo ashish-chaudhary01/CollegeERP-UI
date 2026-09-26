@@ -116,8 +116,8 @@ function ForgotPassword() {
       setPasswordReseted(true);
       setTimeout(() => {
         setPasswordReseted(false);
-      }, 3000);
-      navigate("/", { replace: true });
+        navigate("/", { replace: true });
+      }, 1500);
     } catch (error) {
       setError("unable to reset password");
       console.log(error.message);
