@@ -61,6 +61,7 @@ const StudentProfileView = () => {
       });
   }, [endpoint, isSelf, user?.role]);
 
+  // profile save fucntion
   const save = async (event) => {
     event.preventDefault();
     const response = await fetch(updateEndpoint, {
@@ -79,6 +80,8 @@ const StudentProfileView = () => {
       setStudent(data.student || student);
     }
   };
+
+  // change password
   const changePassword = async (event) => {
     event.preventDefault();
     const response = await fetch(
@@ -94,6 +97,8 @@ const StudentProfileView = () => {
     setMessage(data.message || "Password update failed");
     if (response.ok) setPasswords({ current: "", next: "", confirm: "" });
   };
+
+  // upload photo
   const uploadPhoto = async (event) => {
     const file = event.target.files?.[0];
     if (!file || !isSelf) return;
@@ -113,6 +118,8 @@ const StudentProfileView = () => {
     setUploadingPhoto(false);
     event.target.value = "";
   };
+
+  // remove photo
   const removePhoto = async () => {
     if (!isSelf) return;
     const response = await fetch(
@@ -126,13 +133,23 @@ const StudentProfileView = () => {
       setForm({ ...form, profilePictureUrl: "" });
     }
   };
+
+  // input field function
   const input = (key, label, type = "text") => (
     <label className="text-sm font-semibold text-slate-700">
       {label}
       <input
         type={type}
         value={form[key] ?? ""}
-        disabled={!editing}
+        disabled={
+          key === "year"
+            ? "true"
+            : key === "semester"
+              ? true
+              : key === "academicSession"
+                ? "true"
+                : !editing
+        }
         onChange={(event) => setForm({ ...form, [key]: event.target.value })}
         className="mt-1 w-full rounded-lg border border-slate-200 bg-white p-2.5 font-normal disabled:bg-slate-50"
       />
@@ -263,7 +280,7 @@ const StudentProfileView = () => {
                 Status
                 <select
                   value={form.status || "active"}
-                  disabled={!editing}
+                  disabled="true"
                   onChange={(event) =>
                     setForm({ ...form, status: event.target.value })
                   }
