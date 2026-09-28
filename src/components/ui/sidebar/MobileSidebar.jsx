@@ -1,4 +1,4 @@
-import { NavLink, useNavigate } from "react-router";
+import { Link, NavLink, useNavigate } from "react-router";
 import { bottomlinksData, sidebarData } from "./sidebarData";
 import { LogOut, X } from "lucide-react";
 import { useAuth } from "../../../context/AuthContext";
@@ -33,7 +33,10 @@ function MobileSidebar({ sidebarOpen, setSidebarOpen, role }) {
       }`}
     >
       {/* logo & close button */}
-      <div className="flex items-center justify-between border-b border-slate-100 p-4">
+      <Link
+        to="/"
+        className="flex items-center justify-between border-b border-slate-100 p-4"
+      >
         <h2 className="text-2xl font-black tracking-tight text-slate-900">
           CER<span className="text-cyan-600">P</span>
         </h2>
@@ -44,7 +47,7 @@ function MobileSidebar({ sidebarOpen, setSidebarOpen, role }) {
         >
           <X size={18} />
         </button>
-      </div>
+      </Link>
 
       {/* navlinks */}
       <nav className="flex-1 overflow-y-auto p-4 space-y-6">

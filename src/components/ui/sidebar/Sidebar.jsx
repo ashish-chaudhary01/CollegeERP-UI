@@ -1,4 +1,4 @@
-import { NavLink, useNavigate } from "react-router";
+import { Link, NavLink, useNavigate } from "react-router";
 import { bottomlinksData, sidebarData } from "./sidebarData";
 import { LogOut } from "lucide-react";
 import { useAuth } from "../../../context/AuthContext";
@@ -29,11 +29,14 @@ function Sidebar({ role }) {
   return (
     <aside className="fixed top-0 bottom-0 left-0 z-20 hidden md:flex h-full w-67 flex-col bg-white border-r border-slate-200">
       {/* logo */}
-      <div className="flex items-center justify-between border-b border-slate-100 p-4">
+      <Link
+        to="/"
+        className="flex items-center justify-between border-b border-slate-100 p-4"
+      >
         <h2 className="text-2xl font-black tracking-tight text-slate-900">
           CER<span className="text-cyan-600">P</span>
         </h2>
-      </div>
+      </Link>
 
       {/* navlinks */}
       <nav className="flex-1 overflow-y-auto p-4 space-y-6">
