@@ -5,7 +5,7 @@
   "rewrites": [
     {
       "source": "/api/:path*",
-      "destination": "https://gpk-cerp.onrender.com/api/:path*"
+      "destination": "https://collegeerp-backend-gptf.onrender.com/api/:path*"
     },
     { "source": "/(.*)", "destination": "/index.html" }
   ]
