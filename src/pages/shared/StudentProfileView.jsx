@@ -141,15 +141,7 @@ const StudentProfileView = () => {
       <input
         type={type}
         value={form[key] ?? ""}
-        disabled={
-          key === "year"
-            ? "true"
-            : key === "semester"
-              ? true
-              : key === "academicSession"
-                ? "true"
-                : !editing
-        }
+        disabled={!editing}
         onChange={(event) => setForm({ ...form, [key]: event.target.value })}
         className="mt-1 w-full rounded-lg border border-slate-200 bg-white p-2.5 font-normal disabled:bg-slate-50"
       />
@@ -280,7 +272,7 @@ const StudentProfileView = () => {
                 Status
                 <select
                   value={form.status || "active"}
-                  disabled="true"
+                  disabled={!editing}
                   onChange={(event) =>
                     setForm({ ...form, status: event.target.value })
                   }

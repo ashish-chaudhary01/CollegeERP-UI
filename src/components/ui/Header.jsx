@@ -1,5 +1,6 @@
 import { CalendarDays, Menu } from "lucide-react";
 import { useAuth } from "../../context/AuthContext";
+import { Link } from "react-router";
 
 function Header({ setSidebarOpen }) {
   const { user } = useAuth();
@@ -11,6 +12,7 @@ function Header({ setSidebarOpen }) {
     .map((part) => part[0])
     .join("")
     .toUpperCase();
+
   return (
     <header className="flex items-center justify-between border-b border-slate-200 bg-white px-4 py-3 shadow-sm md:justify-end md:gap-6 md:px-7">
       {/* menu icon for mobile */}
@@ -31,19 +33,22 @@ function Header({ setSidebarOpen }) {
             day: "numeric",
           })}
         </div>
-        <div className="flex items-center gap-3 border-l border-slate-200 pl-4">
+        <Link
+          to={`/${user.role}/profile`}
+          className="flex items-center gap-3 border-l border-slate-200 pl-4 cursor-pointer"
+        >
           <div className="flex h-10 w-10 items-center justify-center rounded-full bg-slate-900 text-sm font-bold text-white">
             {initials || "U"}
           </div>
           <div className="hidden min-w-0 sm:block">
-            <p className="max-w-32 truncate text-sm font-semibold text-slate-900">
+            <p className="max-w-32 truncate text-sm font-semibold text-slate-900 capitalize">
               {displayName}
             </p>
             <p className="text-xs capitalize text-cyan-600">
               {user?.role || "user"}
             </p>
           </div>
-        </div>
+        </Link>
       </div>
     </header>
   );
