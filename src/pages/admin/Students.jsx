@@ -3,6 +3,7 @@ import Studentcard from "../../components/StudentCard";
 import AddStudentModel from "../../components/AddStudentModel";
 import { useNavigate } from "react-router";
 import { LayoutGrid, TableOfContents } from "lucide-react";
+import { StudentsSkeleton } from "../../components/ui/Skeletons";
 
 const Students = () => {
   const [inputSearch, setInputSearch] = useState("");
@@ -93,6 +94,9 @@ const Students = () => {
         })
       : students;
 
+  if (loading) {
+    return <StudentsSkeleton gridView={gridView} />;
+  }
   return (
     <div className="min-h-screen overflow-hidden">
       {/* heading */}

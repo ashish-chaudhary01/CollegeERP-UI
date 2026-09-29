@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { StudentFeesSkeleton } from "../../components/ui/Skeletons";
 
 const Fees = () => {
   const [fees, setFees] = useState([]);
@@ -19,6 +20,10 @@ const Fees = () => {
       active = false;
     };
   }, [API_URL, session]);
+
+  if (fees.length <= 0) {
+    return <StudentFeesSkeleton />;
+  }
 
   return (
     <section className="space-y-5">

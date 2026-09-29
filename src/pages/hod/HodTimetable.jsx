@@ -1,12 +1,13 @@
 import { CalendarDays } from "lucide-react";
 import { useEffect, useState } from "react";
+import { HodTimetableSkeleton } from "../../components/ui/Skeletons";
 
 const HodTimetable = () => {
   const API_URL = import.meta.env.VITE_API_URL;
   const [semester, setSemester] = useState("all");
   const [rows, setRows] = useState([]);
   const [error, setError] = useState("");
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
   useEffect(() => {
     const fetchTimeTable = async () => {
       try {
@@ -28,6 +29,11 @@ const HodTimetable = () => {
     };
     fetchTimeTable();
   }, [API_URL, semester]);
+
+  if (loading) {
+    return <HodTimetableSkeleton />;
+  }
+
   return (
     <section className="space-y-5">
       <div className="flex flex-col justify-between gap-4 sm:flex-row sm:items-end">

@@ -2,6 +2,7 @@ import { Plus, Search } from "lucide-react";
 import { useEffect, useState } from "react";
 import AddSubjectModel from "../../components/AddSubjectModel";
 import EditSubjectModel from "../../components/EditSubjectModel";
+import { SubjectsSkeleton } from "../../components/ui/Skeletons";
 
 const Subjects = () => {
   const [inputSearch, setInputSearch] = useState("");
@@ -102,11 +103,19 @@ const Subjects = () => {
     }
   };
 
+  if (subjects.length <= 0) {
+    return <SubjectsSkeleton />;
+  }
+
   return (
     <div className="min-h-screen overflow-hidden">
       {/* heading */}
-      <p className="text-sm font-semibold uppercase tracking-[0.18em] text-indigo-600">Academic catalog</p>
-      <h1 className="mt-1 text-3xl font-bold text-slate-900 sm:text-4xl">Subjects</h1>
+      <p className="text-sm font-semibold uppercase tracking-[0.18em] text-indigo-600">
+        Academic catalog
+      </p>
+      <h1 className="mt-1 text-3xl font-bold text-slate-900 sm:text-4xl">
+        Subjects
+      </h1>
       <p className="mt-1 text-sm text-slate-500">
         Search, view and manage subjects
       </p>

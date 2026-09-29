@@ -1,5 +1,6 @@
 import { BookOpen } from "lucide-react";
 import { useEffect, useState } from "react";
+import { MyClassesSkeleton } from "../../components/ui/Skeletons";
 
 const TeacherClasses = () => {
   const [subjects, setSubjects] = useState([]);
@@ -10,6 +11,10 @@ const TeacherClasses = () => {
       .then((response) => response.json())
       .then((data) => setSubjects(data.teacherSubjects || []));
   }, []);
+
+  if (subjects.length <= 0) {
+    return <MyClassesSkeleton />;
+  }
   return (
     <section className="space-y-5">
       <div>

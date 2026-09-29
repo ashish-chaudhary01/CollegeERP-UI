@@ -1,6 +1,7 @@
 import { Filter, Search } from "lucide-react";
 import { useEffect, useMemo, useState } from "react";
 import { useNavigate } from "react-router";
+import { StudentsSkeleton } from "../../components/ui/Skeletons";
 
 const StudentList = () => {
   const [students, setStudents] = useState([]);
@@ -12,17 +13,20 @@ const StudentList = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    setLoading(true);
-    fetch(
-      `${import.meta.env.VITE_API_URL}/teacher/students?status=${status}&year=${year}&semester=${semester}`,
-      {
-        credentials: "include",
-      },
-    )
-      .then((response) => response.json())
-      .then((data) => setStudents(data.students || []))
-      .catch((err) => console.log(err.message))
-      .finally(() => setLoading(false));
+    async function fetchStudent() {
+      setLoading(true);
+      fetch(
+        `${import.meta.env.VITE_API_URL}/teacher/students?status=${status}&year=${year}&semester=${semester}`,
+        {
+          credentials: "include",
+        },
+      )
+        .then((response) => response.json())
+        .then((data) => setStudents(data.students || []))
+        .catch((err) => console.log(err.message))
+        .finally(() => setLoading(false));
+    }
+    fetchStudent();
   }, [status, year, semester]);
 
   const filteredStudents = useMemo(() => {
@@ -39,6 +43,9 @@ const StudentList = () => {
   const selectClass =
     "w-full rounded-lg border border-slate-200 bg-white px-3 py-2.5 text-sm outline-none focus:border-cyan-500";
 
+  if (loading) {
+    return <StudentsSkeleton gridView={false} />;
+  }
   return (
     <section className="space-y-5">
       <div>

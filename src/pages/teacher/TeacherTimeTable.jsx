@@ -1,5 +1,6 @@
 import { CalendarClock } from "lucide-react";
 import { useEffect, useState } from "react";
+import { MyTimetableSkeleton } from "../../components/ui/Skeletons";
 
 const days = [
   "monday",
@@ -19,6 +20,10 @@ const TeacherTimeTable = () => {
       .then((response) => response.json())
       .then((data) => setRows(data.timetable || []));
   }, []);
+
+  if (rows.length <= 0) {
+    return <MyTimetableSkeleton />;
+  }
   return (
     <section className="space-y-5">
       <div>

@@ -1,5 +1,6 @@
 import { Check, Save } from "lucide-react";
 import { useEffect, useState } from "react";
+import { TakeAttendanceSkeleton } from "../../components/ui/Skeletons";
 
 const TeacherAttendance = () => {
   const API_URL = import.meta.env.VITE_API_URL;
@@ -50,6 +51,10 @@ const TeacherAttendance = () => {
     const result = await response.json();
     setMessage(result.message || "Attendance saved");
   };
+
+  if (subjects.length <= 0) {
+    return <TakeAttendanceSkeleton />;
+  }
 
   return (
     <section className="mx-auto max-w-4xl space-y-5">

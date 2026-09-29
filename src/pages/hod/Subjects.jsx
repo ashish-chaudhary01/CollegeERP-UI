@@ -1,5 +1,6 @@
 import { BookOpen, Pencil, Plus, Search, X } from "lucide-react";
 import { useEffect, useMemo, useState } from "react";
+import { SubjectsSkeleton } from "../../components/ui/Skeletons";
 
 const emptyForm = { subjectName: "", subjectCode: "", year: "", semester: "" };
 
@@ -142,6 +143,10 @@ function Subject() {
       setEditSaving(false);
     }
   };
+
+  if (subjects.length <= 0) {
+    return <SubjectsSkeleton />;
+  }
 
   return (
     <section className="min-h-screen">

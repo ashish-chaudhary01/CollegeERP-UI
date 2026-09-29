@@ -2,6 +2,7 @@ import { Building2, Pencil } from "lucide-react";
 import { useEffect, useState } from "react";
 import AddDepartmentModal from "../../components/AddDepartmentModel";
 import EditDepartmentModel from "../../components/EditDepartmentModel";
+import { DepartmentSkeleton } from "../../components/ui/Skeletons";
 
 const Departments = () => {
   const [inputSearch, setInputSearch] = useState("");
@@ -109,6 +110,9 @@ const Departments = () => {
     }
   };
 
+  if (!departments.length > 0) {
+    return <DepartmentSkeleton />;
+  }
   return (
     <div className="min-h-screen overflow-hidden">
       {/* heading */}

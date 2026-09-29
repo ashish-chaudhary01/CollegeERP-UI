@@ -9,6 +9,7 @@ import { useEffect, useMemo, useState } from "react";
 import { useNavigate } from "react-router";
 import AddStudentModel from "../../components/AddStudentModel";
 import Studentcard from "../../components/StudentCard";
+import { StudentsSkeleton } from "../../components/ui/Skeletons";
 
 function Student() {
   const [students, setStudents] = useState([]);
@@ -86,6 +87,10 @@ function Student() {
   ].sort((a, b) => a - b);
   const selectClass =
     "w-full rounded-lg border border-slate-200 bg-white px-3 py-2.5 text-sm outline-none focus:border-cyan-500";
+
+  if (loading) {
+    return <StudentsSkeleton gridView={gridView} />;
+  }
   return (
     <section className="space-y-5">
       <div className="flex flex-col justify-between gap-4 sm:flex-row sm:items-end">
