@@ -31,7 +31,7 @@ function Sidebar({ role }) {
       {/* logo */}
       <Link
         to="/"
-        className="flex items-center justify-between border-b border-slate-100 p-4"
+        className="flex items-center justify-between border-b border-slate-200 p-4"
       >
         <h2 className="text-2xl font-black tracking-tight text-slate-900">
           CER<span className="text-cyan-600">P</span>
@@ -94,7 +94,7 @@ function Sidebar({ role }) {
       </nav>
 
       {/* logout button */}
-      <div className="p-3 border-t border-slate-100">
+      <div className="p-3 border-t border-slate-200">
         <button
           onClick={handleLogout}
           className="w-full flex items-center justify-center gap-2 rounded-xl bg-rose-50 px-4 py-2.5 text-sm font-bold text-rose-600 hover:bg-rose-600 hover:text-white transition-colors duration-200 cursor-pointer"
