@@ -9,6 +9,7 @@ const HodAttendance = () => {
     to: today,
   });
   const [data, setData] = useState([]);
+  const [loading, setLoading] = useState(true);
   const load = async () => {
     const response = await fetch(
       `${API_URL}/hod/attendance/analytics?${new URLSearchParams(filters)}`,
@@ -25,7 +26,8 @@ const HodAttendance = () => {
       .then((response) => response.json())
       .then((responseData) => {
         if (active) setData(responseData);
-      });
+      })
+      .then(() => setLoading(false));
     return () => {
       active = false;
     };
@@ -36,7 +38,7 @@ const HodAttendance = () => {
     leave: 0,
     percentage: 0,
   };
-  if (data.length <= 0) {
+  if (data.length <= 0 && loading) {
     return <TakeAttendanceSkeleton />;
   }
   return (

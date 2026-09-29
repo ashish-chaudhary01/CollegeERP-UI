@@ -7,7 +7,7 @@ const HodTimetable = () => {
   const [semester, setSemester] = useState("all");
   const [rows, setRows] = useState([]);
   const [error, setError] = useState("");
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
   useEffect(() => {
     const fetchTimeTable = async () => {
       try {
@@ -20,11 +20,10 @@ const HodTimetable = () => {
           .then(({ response, data }) => {
             if (!response.ok) throw new Error(data.message);
             setRows(data.timetable || []);
-          });
+          })
+          .then(() => setLoading(false));
       } catch (error) {
         setError(error.message);
-      } finally {
-        setLoading(false);
       }
     };
     fetchTimeTable();

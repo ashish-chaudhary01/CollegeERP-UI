@@ -5,6 +5,7 @@ import { TakeAttendanceSkeleton } from "../../components/ui/Skeletons";
 const TeacherAttendance = () => {
   const API_URL = import.meta.env.VITE_API_URL;
   const [subjects, setSubjects] = useState([]);
+  const [loading, setLoading] = useState(true);
   const [subjectId, setSubjectId] = useState("");
   const [date, setDate] = useState(new Date().toISOString().slice(0, 10));
   const [students, setStudents] = useState([]);
@@ -16,7 +17,8 @@ const TeacherAttendance = () => {
       .then((data) => {
         setSubjects(data.teacherSubjects || []);
         setSubjectId(data.teacherSubjects?.[0]?._id || "");
-      });
+      })
+      .then(() => setLoading(false));
   }, [API_URL]);
   useEffect(() => {
     if (!subjectId) return;
@@ -52,7 +54,7 @@ const TeacherAttendance = () => {
     setMessage(result.message || "Attendance saved");
   };
 
-  if (subjects.length <= 0) {
+  if (subjects.length <= 0 && loading) {
     return <TakeAttendanceSkeleton />;
   }
 

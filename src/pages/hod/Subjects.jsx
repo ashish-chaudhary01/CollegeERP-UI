@@ -144,7 +144,7 @@ function Subject() {
     }
   };
 
-  if (subjects.length <= 0) {
+  if (subjects.length <= 0 && loading) {
     return <SubjectsSkeleton />;
   }
 

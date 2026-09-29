@@ -3,6 +3,7 @@ import { StudentFeesSkeleton } from "../../components/ui/Skeletons";
 
 const Fees = () => {
   const [fees, setFees] = useState([]);
+  const [loading, setLoading] = useState(true);
   const [session, setSession] = useState("");
   const API_URL = import.meta.env.VITE_API_URL;
 
@@ -14,14 +15,17 @@ const Fees = () => {
     )
       .then((response) => response.json())
       .then((data) => {
-        if (active) setFees((data.fees || []).filter((fee) => fee.studentId));
+        if (active)
+          setFees((data.fees || []).filter((fee) => fee.studentId)).then(() =>
+            setLoading(false),
+          );
       });
     return () => {
       active = false;
     };
   }, [API_URL, session]);
 
-  if (fees.length <= 0) {
+  if (fees.length <= 0 && loading) {
     return <StudentFeesSkeleton />;
   }
 

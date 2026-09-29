@@ -13,15 +13,17 @@ const days = [
 
 const TeacherTimeTable = () => {
   const [rows, setRows] = useState([]);
+  const [loading, setLoading] = useState(true);
   useEffect(() => {
     fetch(`${import.meta.env.VITE_API_URL}/teacher/timetable`, {
       credentials: "include",
     })
       .then((response) => response.json())
-      .then((data) => setRows(data.timetable || []));
+      .then((data) => setRows(data.timetable || []))
+      .then(() => setLoading(false));
   }, []);
 
-  if (rows.length <= 0) {
+  if (rows.length <= 0 && loading) {
     return <MyTimetableSkeleton />;
   }
   return (

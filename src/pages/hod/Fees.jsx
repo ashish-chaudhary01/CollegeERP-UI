@@ -8,6 +8,7 @@ const Fees = () => {
     `${new Date().getFullYear()}-${String(new Date().getFullYear() + 1).slice(-2)}`,
   );
   const [fees, setFees] = useState([]);
+  const [loading, setLoading] = useState(true);
   const [message, setMessage] = useState("");
   const [search, setSearch] = useState("");
   const [year, setYear] = useState("all");
@@ -25,7 +26,8 @@ const Fees = () => {
       credentials: "include",
     })
       .then((response) => response.json())
-      .then((data) => setFees(data.fees || []));
+      .then((data) => setFees(data.fees || []))
+      .then(() => setLoading(false));
   }, [API_URL, session]);
   const submit = async (studentId) => {
     const response = await fetch(`${API_URL}/hod/fees/${studentId}`, {
@@ -67,7 +69,7 @@ const Fees = () => {
   const selectClass =
     "w-full rounded-lg border border-slate-200 bg-white px-3 py-2.5 text-sm outline-none focus:border-cyan-500";
 
-  if (fees.length <= 0) {
+  if (fees.length <= 0 && loading) {
     return <StudentFeesSkeleton />;
   }
   return (

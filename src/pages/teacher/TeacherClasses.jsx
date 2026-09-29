@@ -4,15 +4,17 @@ import { MyClassesSkeleton } from "../../components/ui/Skeletons";
 
 const TeacherClasses = () => {
   const [subjects, setSubjects] = useState([]);
+  const [loading, setLoading] = useState(true);
   useEffect(() => {
     fetch(`${import.meta.env.VITE_API_URL}/teacher/subjects`, {
       credentials: "include",
     })
       .then((response) => response.json())
-      .then((data) => setSubjects(data.teacherSubjects || []));
+      .then((data) => setSubjects(data.teacherSubjects || []))
+      .then(() => setLoading(false));
   }, []);
 
-  if (subjects.length <= 0) {
+  if (subjects.length <= 0 && loading) {
     return <MyClassesSkeleton />;
   }
   return (
