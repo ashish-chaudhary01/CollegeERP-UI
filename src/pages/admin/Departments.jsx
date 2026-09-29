@@ -1,4 +1,4 @@
-import { Building2 } from "lucide-react";
+import { Building2, Pencil } from "lucide-react";
 import { useEffect, useState } from "react";
 import AddDepartmentModal from "../../components/AddDepartmentModel";
 
@@ -127,75 +127,77 @@ const Departments = () => {
       </div>
 
       {/* department grid */}
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-3 sm:gap-4 items-stretch md:p-4 py-4">
-        {filteredDepartments?.map((department, idx) => (
-          <div
+      <div className="grid gap-5 grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 items-stretch md:p-4 py-4">
+        {filteredDepartments.map((department, idx) => (
+          <article
             key={idx}
-            className="flex h-full flex-col rounded-lg border border-black/20 shadow-md hover:-translate-y-1.5 duration-300 ease-out p-4"
+            className="group relative p-6 border border-slate-200 hover:border-indigo-500 w-full h-full rounded-lg hover:-translate-y-1 duration-200 bg-white shadow-sm hover:shadow-md"
           >
-            <div className="flex flex-1 flex-col">
-              <div className="flex-1 flex gap-4 items-center">
-                {/* icon */}
-                <div>
-                  <Building2
-                    size={60}
-                    className="bg-blue-100 text-blue-500 rounded-full p-2"
-                  />{" "}
-                </div>
-                {/* details */}
-                <div className="flex flex-col gap-1 p-2 items-start">
-                  <h2 className="text-2xl font-extrabold leading-tight">
-                    {department.departmentName}
-                    <span className="text-sm">
-                      {" "}
-                      ({department.departmentCode})
-                    </span>
-                  </h2>
-                  <p className="font-bold text-sm px-4 py-1 bg-green-100 text-green-500 rounded-full">
-                    Hod : {department.hod?.userId?.name ?? "not-assigned"}
-                  </p>
+            <div className="flex gap-4 items-center ">
+              {/* icon */}
+              <span className="p-2 rounded-xl bg-purple-50 text-purple-600 group-hover:bg-purple-600 group-hover:text-white shadow">
+                <Building2 size={30} />
+              </span>
+              {/* details */}
+              <div className="flex-1">
+                <h2 className="font-bold text-slate-900 leading-tight">
+                  {department.departmentName}
+                  <span className="ml-2 text-xs font-medium py-1 px-2.5 rounded-lg bg-blue-50 text-blue-600">
+                    {department.departmentCode}
+                  </span>
+                </h2>
+                <p className="text-xs font-medium text-slate-400 mt-2">
+                  HOD •{" "}
+                  <span>
+                    {department.hod
+                      ? department.hod?.userId?.name
+                      : "Not assigned"}
+                  </span>
+                </p>
+                {/* edit  */}
+                <div className="flex justify-between items-center w-full">
                   <button
                     onClick={() => {
                       setSelectedDepartmentId(department._id);
                       setAssignHodError("");
                       setAssignHodModal(true);
                     }}
-                    className="text-indigo-500 text-sm hover:underline text-left font-medium px-3"
+                    className="text-xs font-medium text-red-400 hover:underline"
                   >
                     {department.hod ? "Change HOD" : "Assign HOD"}
                   </button>
-                </div>
-              </div>
-              <div className="mt-4 grid grid-cols-3 gap-2 border-t border-slate-100 pt-4 text-center">
-                <div>
-                  <p className="text-xl font-bold text-slate-900">
-                    {department.studentCount ?? 0}
-                  </p>
-                  <p className="text-xs text-slate-500">Students</p>
-                </div>
-                <div>
-                  <p className="text-xl font-bold text-slate-900">
-                    {department.teacherCount ?? 0}
-                  </p>
-                  <p className="text-xs text-slate-500">Teachers</p>
-                </div>
-                <div>
-                  <p className="text-xl font-bold text-emerald-600">
-                    {department.activeTeacherCount ?? 0}
-                  </p>
-                  <p className="text-xs text-slate-500">Active</p>
-                </div>
-                {/* <div>
+                  {/* edit department */}
                   <button
-                    className="bg-rose-500 px-3 py-3 text-white transition hover:bg-rose-600"
+                    className="rounded-full bg-rose-500 px-3 py-3 text-white transition hover:bg-rose-600"
                     title="Delete Department"
                   >
-                    <Trash2 size={16} />
+                    <Pencil size={16} />
                   </button>
-                </div> */}
+                </div>
               </div>
             </div>
-          </div>
+            {/* other department details */}
+            <div className="mt-4 grid grid-cols-3 gap-2 border-t border-slate-100 pt-4 text-center">
+              <div>
+                <p className="text-xl font-bold text-slate-900">
+                  {department.studentCount ?? 0}
+                </p>
+                <p className="text-xs text-slate-500">Students</p>
+              </div>
+              <div>
+                <p className="text-xl font-bold text-slate-900">
+                  {department.teacherCount ?? 0}
+                </p>
+                <p className="text-xs text-slate-500">Teachers</p>
+              </div>
+              <div>
+                <p className="text-xl font-bold text-emerald-600">
+                  {department.activeTeacherCount ?? 0}
+                </p>
+                <p className="text-xs text-slate-500">Active</p>
+              </div>
+            </div>
+          </article>
         ))}
       </div>
 
@@ -211,7 +213,7 @@ const Departments = () => {
       {assignHodModal && (
         <div
           onClick={(e) => e.target === e.currentTarget && closeAssignHodModal()}
-          className="fixed z-70 inset-0 flex justify-center items-center bg-black/40 p-2 sm:p-0"
+          className="fixed z-70 inset-0 flex justify-center items-center bg-black/40 p-2.5 sm:p-0"
         >
           <div className="p-6 rounded-2xl shadow-xl bg-white max-w-md w-full">
             <h2 className="text-2xl font-bold text-slate-800">Assign Hod</h2>
