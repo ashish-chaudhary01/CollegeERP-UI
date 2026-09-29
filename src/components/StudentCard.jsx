@@ -38,7 +38,7 @@ function Studentcard({ student, onDeleted, profileBase = "/admin/student" }) {
             onError={(event) => {
               event.currentTarget.src = "/no-image.jpg";
             }}
-            className="h-full w-full object-cover"
+            className="size-full object-cover"
           />
         </div>
         {/* details */}

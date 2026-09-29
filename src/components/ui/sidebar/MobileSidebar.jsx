@@ -33,13 +33,13 @@ function MobileSidebar({ sidebarOpen, setSidebarOpen, role }) {
       }`}
     >
       {/* logo & close button */}
-      <Link
-        to="/"
-        className="flex items-center justify-between border-b border-slate-100 p-4"
-      >
-        <h2 className="text-2xl font-black tracking-tight text-slate-900">
+      <div className="flex items-center justify-between border-b border-slate-100 p-4">
+        <Link
+          to="/"
+          className="text-2xl font-black tracking-tight text-slate-900"
+        >
           CER<span className="text-cyan-600">P</span>
-        </h2>
+        </Link>
         <button
           onClick={() => setSidebarOpen(false)}
           className="flex h-9 w-9 items-center justify-center rounded-xl bg-slate-100 text-slate-500 hover:bg-slate-200 hover:text-slate-800 transition"
@@ -47,7 +47,7 @@ function MobileSidebar({ sidebarOpen, setSidebarOpen, role }) {
         >
           <X size={18} />
         </button>
-      </Link>
+      </div>
 
       {/* navlinks */}
       <nav className="flex-1 overflow-y-auto p-4 space-y-6">
