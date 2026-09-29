@@ -13,28 +13,27 @@ const StudentSubject = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
 
-  const fetchSubjects = async () => {
-    setLoading(true);
-    setError("");
-    try {
-      const response = await fetch(
-        `${import.meta.env.VITE_API_URL}/student/subjects`,
-        { credentials: "include" }
-      );
-      if (!response.ok) {
-        throw new Error(`Failed to load subjects (${response.status})`);
-      }
-      const data = await response.json();
-      setSubjects(data.studentSubjects || []);
-    } catch (err) {
-      console.error(err);
-      setError(err.message || "Failed to load subjects.");
-    } finally {
-      setLoading(false);
-    }
-  };
-
   useEffect(() => {
+    const fetchSubjects = async () => {
+      setLoading(true);
+      setError("");
+      try {
+        const response = await fetch(
+          `${import.meta.env.VITE_API_URL}/student/subjects`,
+          { credentials: "include" },
+        );
+        if (!response.ok) {
+          throw new Error(`Failed to load subjects (${response.status})`);
+        }
+        const data = await response.json();
+        setSubjects(data.studentSubjects || []);
+      } catch (err) {
+        console.error(err);
+        setError(err.message || "Failed to load subjects.");
+      } finally {
+        setLoading(false);
+      }
+    };
     fetchSubjects();
   }, []);
 
@@ -43,7 +42,7 @@ const StudentSubject = () => {
   return (
     <section className="space-y-6 max-w-7xl mx-auto pb-12">
       {/* Top Banner */}
-      <div className="relative overflow-hidden rounded-2xl bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600 p-6 sm:p-8 text-white shadow-lg">
+      <div className="relative overflow-hidden rounded-2xl bg-linear-to-r from-indigo-600 via-purple-600 to-pink-600 p-6 sm:p-8 text-white shadow-lg">
         <div className="relative z-10 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
           <div>
             <div className="inline-flex items-center gap-2 rounded-full bg-white/15 px-3 py-1 text-xs font-semibold backdrop-blur-md">
@@ -54,7 +53,8 @@ const StudentSubject = () => {
               My Academic Subjects
             </h1>
             <p className="mt-1 text-sm text-purple-100 max-w-xl">
-              Overview of all registered courses, theory subjects, labs, and faculty instructors for this academic term.
+              Overview of all registered courses, theory subjects, labs, and
+              faculty instructors for this academic term.
             </p>
           </div>
 
@@ -71,7 +71,7 @@ const StudentSubject = () => {
 
       {error && (
         <div className="flex items-center gap-3 rounded-xl border border-rose-200 bg-rose-50 p-4 text-sm font-medium text-rose-800">
-          <AlertCircle className="h-5 w-5 text-rose-600 flex-shrink-0" />
+          <AlertCircle className="h-5 w-5 text-rose-600 shrink-0" />
           <span>{error}</span>
         </div>
       )}
@@ -119,7 +119,7 @@ const StudentSubject = () => {
                   <div className="flex h-6 w-6 items-center justify-center rounded-full bg-indigo-100 text-indigo-700 font-bold text-[10px]">
                     {faculty.charAt(0)}
                   </div>
-                  <span className="truncate max-w-[150px] font-medium text-slate-700">
+                  <span className="truncate max-w-37.5 font-medium text-slate-700">
                     {faculty}
                   </span>
                 </div>

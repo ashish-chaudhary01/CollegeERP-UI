@@ -1,6 +1,7 @@
 import { Building2, Pencil } from "lucide-react";
 import { useEffect, useState } from "react";
 import AddDepartmentModal from "../../components/AddDepartmentModel";
+import EditDepartmentModel from "../../components/EditDepartmentModel";
 
 const Departments = () => {
   const [inputSearch, setInputSearch] = useState("");
@@ -13,7 +14,13 @@ const Departments = () => {
   const [isAssigningHod, setIsAssigningHod] = useState(false);
   const [assignHodError, setAssignHodError] = useState("");
   const [departmentsRefreshKey, setDepartmentsRefreshKey] = useState(0);
+  const [departmentEditModel, setDepartmentEditModel] = useState(false);
+  const [formData, setFormData] = useState({
+    departmentName: "",
+    departmentCode: "",
+  });
 
+  // fetch department
   useEffect(() => {
     async function fetchDepartment() {
       try {
@@ -31,6 +38,7 @@ const Departments = () => {
     fetchDepartment();
   }, [departmentsRefreshKey]);
 
+  // fetch teacher
   useEffect(() => {
     async function fetchTeacher() {
       try {
@@ -66,6 +74,7 @@ const Departments = () => {
     setAssignHodError("");
   };
 
+  // assign hod
   const assignHod = async () => {
     if (!selectedDepartmentId || !selectedTeacherId) {
       setAssignHodError("Please select a teacher");
@@ -113,21 +122,20 @@ const Departments = () => {
             value={inputSearch}
             onChange={(e) => setInputSearch(e.target.value)}
             placeholder="Search departments"
-            className="outline-0 border-black/15 px-4 py-2 rounded bg-gray-200 placeholder:text-sm flex-1 text-md text-slate-700"
+            className="py-2.5 px-4 outline-none border border-gray-200 bg-white rounded-lg focus:border-indigo-400 shadow flex-1 duration-200 focus:shadow-lg focus:shadow-indigo-50"
           />
         </div>
 
         <button
           onClick={() => setShowModal(true)}
-          className="flex justify-center items-center gap-2 bg-indigo-600 text-white px-4 py-2 rounded-lg font-semibold shadow hover:bg-indigo-700 duration-200 cursor-pointer"
+          className="flex justify-center items-center gap-2 bg-indigo-600 text-white px-4 py-2.5 rounded-lg font-semibold shadow hover:bg-indigo-700 duration-200 cursor-pointer"
         >
           <span>+</span>
-          <span className="hidden lg:block">Add Department</span>
         </button>
       </div>
 
       {/* department grid */}
-      <div className="grid gap-5 grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 items-stretch md:p-4 py-4">
+      <div className="grid gap-5 grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 items-stretch py-4">
         {filteredDepartments.map((department, idx) => (
           <article
             key={idx}
@@ -154,7 +162,7 @@ const Departments = () => {
                       : "Not assigned"}
                   </span>
                 </p>
-                {/* edit  */}
+                {/* edit hod */}
                 <div className="flex justify-between items-center w-full">
                   <button
                     onClick={() => {
@@ -168,8 +176,16 @@ const Departments = () => {
                   </button>
                   {/* edit department */}
                   <button
-                    className="rounded-full bg-rose-500 px-3 py-3 text-white transition hover:bg-rose-600"
-                    title="Delete Department"
+                    onClick={() => {
+                      setDepartmentEditModel(true);
+                      setSelectedDepartmentId(department._id);
+                      setFormData({
+                        departmentName: department.departmentName,
+                        departmentCode: department.departmentCode,
+                      });
+                    }}
+                    className="rounded-full bg-rose-500 p-2.5 text-white transition hover:bg-rose-600"
+                    title="Edit Department"
                   >
                     <Pencil size={16} />
                   </button>
@@ -262,6 +278,17 @@ const Departments = () => {
             </div>
           </div>
         </div>
+      )}
+
+      {/* edit department model */}
+      {departmentEditModel && (
+        <EditDepartmentModel
+          onClose={() => setDepartmentEditModel(false)}
+          selectedDepartmentId={selectedDepartmentId}
+          formData={formData}
+          setFormData={setFormData}
+          setDepartmentsRefreshKey={setDepartmentsRefreshKey}
+        />
       )}
     </div>
   );
