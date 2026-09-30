@@ -19,8 +19,9 @@
 
 html,
 body {
-  font-family: "Poppins", sans-serif;
+  font-family: "Space Grotesk", sans-serif;
   @apply bg-background text-primary;
+  scroll-behavior: smooth;
 }
 
 /* Custom Scrollbars */

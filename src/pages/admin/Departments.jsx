@@ -147,7 +147,7 @@ const Departments = () => {
           >
             <div className="flex gap-4 items-center ">
               {/* icon */}
-              <span className="p-2 rounded-xl bg-purple-50 text-purple-600 group-hover:bg-purple-600 group-hover:text-white shadow">
+              <span className="p-2 rounded-xl bg-purple-50 text-black group-hover:bg-blue-600 group-hover:text-white shadow">
                 <Building2 size={30} />
               </span>
               {/* details */}
@@ -174,7 +174,7 @@ const Departments = () => {
                       setAssignHodError("");
                       setAssignHodModal(true);
                     }}
-                    className="text-xs font-medium text-red-400 hover:underline"
+                    className="text-xs font-medium text-blue-400 hover:underline"
                   >
                     {department.hod ? "Change HOD" : "Assign HOD"}
                   </button>
