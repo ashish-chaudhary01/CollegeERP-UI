@@ -272,7 +272,7 @@ function Subject() {
       {/* Add Subject Modal */}
       {showAdd && (
         <div
-          className="fixed inset-0 z-50 flex items-center justify-center bg-slate-950/40 p-4"
+          className="modal-backdrop p-4"
           onMouseDown={(event) =>
             event.target === event.currentTarget && setShowAdd(false)
           }
@@ -376,7 +376,7 @@ function Subject() {
       {/* Edit Subject Modal */}
       {editSubject && (
         <div
-          className="fixed inset-0 z-50 flex items-center justify-center bg-slate-950/40 p-4"
+          className="modal-backdrop p-4"
           onMouseDown={(event) =>
             event.target === event.currentTarget && setEditSubject(null)
           }

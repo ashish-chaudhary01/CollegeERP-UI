@@ -233,7 +233,7 @@ const Departments = () => {
       {assignHodModal && (
         <div
           onClick={(e) => e.target === e.currentTarget && closeAssignHodModal()}
-          className="fixed z-70 inset-0 flex justify-center items-center bg-black/40 p-2.5 sm:p-0"
+          className="modal-backdrop p-2.5 sm:p-0"
         >
           <div className="p-6 rounded-2xl shadow-xl bg-white max-w-md w-full">
             <h2 className="text-2xl font-bold text-slate-800">Assign Hod</h2>

@@ -109,7 +109,7 @@ const EditSubjectModel = ({ subject, onClose, onSubjectUpdated }) => {
           onClose();
         }
       }}
-      className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 p-2 md:p-0"
+      className="modal-backdrop p-2 md:p-0"
     >
       <div className="max-h-[90vh] w-full max-w-xl overflow-auto rounded-2xl border border-slate-700/40 bg-white p-6 shadow-xl sm:max-w-2xl">
         <h1 className="text-xl font-semibold text-slate-900">Edit Subject</h1>

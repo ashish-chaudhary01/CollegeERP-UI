@@ -96,7 +96,7 @@ function TeacherCard({ teacher, onDeleted, profileBase = "/admin/teacher" }) {
       {/* Confirm Delete Modal */}
       {confirming && (
         <div
-          className="fixed inset-0 z-50 flex items-center justify-center bg-black/40"
+          className="modal-backdrop p-4"
           onClick={(e) => e.target === e.currentTarget && setConfirming(false)}
         >
           <div className="w-full max-w-sm rounded-2xl bg-white p-6 shadow-xl">

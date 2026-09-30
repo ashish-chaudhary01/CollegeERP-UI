@@ -248,7 +248,7 @@ const Subjects = () => {
           onClick={(e) =>
             e.target === e.currentTarget && closeAssignTeacherModal()
           }
-          className="fixed z-70 inset-0 flex justify-center items-center bg-black/40"
+          className="modal-backdrop p-4"
         >
           <div className="p-6 rounded-lg shadow-xl bg-white max-w-md w-full">
             <h2 className="text-xl font-bold">Assign Teacher</h2>

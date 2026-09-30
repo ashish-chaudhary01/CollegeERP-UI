@@ -87,7 +87,7 @@ const AddStudentModel = ({ onClose, onStudentAdded, role = "admin" }) => {
           onClose();
         }
       }}
-      className="fixed inset-0 bg-black/40 flex items-center justify-center z-50 p-2.5 sm:p-0"
+      className="modal-backdrop p-2.5 sm:p-0"
     >
       <div className="rounded-2xl w-full overflow-auto h-150 max-w-xl sm:max-w-2xl shadow-xl bg-white border border-slate-700/40 p-6">
         {/* heading */}
