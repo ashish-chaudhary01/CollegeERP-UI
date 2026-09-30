@@ -16,7 +16,7 @@ import { useAuth } from "../../context/AuthContext";
 
 function StatCard({ icon: Icon, label, value, color, bg, trend }) {
   return (
-    <div className="relative overflow-hidden rounded-2xl border border-slate-200 bg-white p-5 shadow-sm transition hover:shadow-md">
+    <div className="dashboard-card relative overflow-hidden rounded-xl border border-slate-200 bg-white p-5 shadow-sm">
       <div className="flex items-start justify-between">
         <div className={`rounded-xl p-3 ${bg}`}>
           <Icon size={22} className={color} />
@@ -76,12 +76,9 @@ function AdminDashboard() {
   });
 
   return (
-    <div className="min-h-screen space-y-6 overflow-hidden">
+    <div className="dashboard-page min-h-screen space-y-6 overflow-hidden">
       {/* ── Hero greeting ── */}
-      <div className="relative overflow-hidden rounded-2xl bg-linear-to-br from-slate-900 via-slate-800 to-cyan-900 p-6 text-white shadow-lg">
-        {/* decorative blobs */}
-        <div className="pointer-events-none absolute -right-10 -top-10 h-48 w-48 rounded-full bg-cyan-500/20 blur-3xl" />
-        <div className="pointer-events-none absolute -bottom-10 right-32 h-32 w-32 rounded-full bg-indigo-500/20 blur-2xl" />
+      <div className="role-hero-banner dashboard-reveal relative overflow-hidden rounded-xl border border-slate-800 bg-slate-900 p-6 text-white shadow-sm">
         <div className="relative flex flex-col gap-1 sm:flex-row sm:items-center sm:justify-between">
           <div>
             <p className="text-xs font-semibold uppercase tracking-widest text-cyan-400">
@@ -102,42 +99,42 @@ function AdminDashboard() {
       </div>
 
       {/* ── Stat cards ── */}
-      <div className="grid grid-cols-2 gap-4 xl:grid-cols-4">
+      <div className="dashboard-stagger grid grid-cols-2 gap-4 xl:grid-cols-4">
         <StatCard
           icon={UsersRound}
           label="Total Students"
           value={overviewData?.totalStudents ?? 0}
-          color="text-blue-600"
-          bg="bg-blue-50"
+          color="text-cyan-700"
+          bg="bg-cyan-50"
           trend
         />
         <StatCard
           icon={GraduationCap}
           label="Total Teachers"
           value={overviewData?.totalTeachers ?? 0}
-          color="text-violet-600"
-          bg="bg-violet-50"
+          color="text-cyan-700"
+          bg="bg-cyan-50"
         />
         <StatCard
           icon={Building2}
           label="Departments"
           value={overviewData?.totalDepartments ?? 0}
-          color="text-amber-600"
-          bg="bg-amber-50"
+          color="text-cyan-700"
+          bg="bg-cyan-50"
         />
         <StatCard
           icon={BookOpen}
           label="Total Subjects"
           value={overviewData?.totalSubjects ?? 0}
-          color="text-emerald-600"
-          bg="bg-emerald-50"
+          color="text-cyan-700"
+          bg="bg-cyan-50"
         />
       </div>
 
       {/* ── Secondary row ── */}
       <div className="grid gap-4 md:grid-cols-3">
         {/* Attendance card */}
-        <div className="col-span-2 rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
+        <div className="dashboard-reveal dashboard-panel col-span-2 rounded-xl border border-slate-200 bg-white p-5 shadow-sm">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-2">
               <Activity size={18} className="text-cyan-600" />
@@ -180,7 +177,7 @@ function AdminDashboard() {
 
         {/* Quick stats column */}
         <div className="flex flex-col gap-4">
-          <div className="flex flex-1 items-center gap-4 rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
+          <div className="dashboard-panel flex flex-1 items-center gap-4 rounded-xl border border-slate-200 bg-white p-5 shadow-sm">
             <div className="rounded-xl bg-cyan-50 p-3">
               <CalendarClock size={22} className="text-cyan-600" />
             </div>
@@ -193,7 +190,7 @@ function AdminDashboard() {
               </p>
             </div>
           </div>
-          <div className="flex flex-1 items-center gap-4 rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
+          <div className="dashboard-panel flex flex-1 items-center gap-4 rounded-xl border border-slate-200 bg-white p-5 shadow-sm">
             <div className="rounded-xl bg-amber-50 p-3">
               <IndianRupee size={22} className="text-amber-600" />
             </div>
@@ -210,7 +207,7 @@ function AdminDashboard() {
       </div>
 
       {/* ── Quick links ── */}
-      <div className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
+      <div className="dashboard-reveal dashboard-panel rounded-xl border border-slate-200 bg-white p-5 shadow-sm">
         <div className="flex items-center gap-2 mb-4">
           <AlertCircle size={16} className="text-cyan-600" />
           <h2 className="font-bold text-slate-800 text-sm uppercase tracking-wider">
@@ -223,29 +220,29 @@ function AdminDashboard() {
               label: "Manage Students",
               icon: Users,
               href: "/admin/students",
-              color: "text-blue-600",
-              bg: "bg-blue-50 hover:bg-blue-100",
+              color: "text-cyan-700",
+              bg: "bg-cyan-50 hover:bg-cyan-100",
             },
             {
               label: "Manage Teachers",
               icon: GraduationCap,
               href: "/admin/teachers",
-              color: "text-violet-600",
-              bg: "bg-violet-50 hover:bg-violet-100",
+              color: "text-cyan-700",
+              bg: "bg-cyan-50 hover:bg-cyan-100",
             },
             {
               label: "Departments",
               icon: Building2,
               href: "/admin/departments",
-              color: "text-amber-600",
-              bg: "bg-amber-50 hover:bg-amber-100",
+              color: "text-cyan-700",
+              bg: "bg-cyan-50 hover:bg-cyan-100",
             },
             {
               label: "Fee Records",
               icon: IndianRupee,
               href: "/admin/fees",
-              color: "text-emerald-600",
-              bg: "bg-emerald-50 hover:bg-emerald-100",
+              color: "text-cyan-700",
+              bg: "bg-cyan-50 hover:bg-cyan-100",
             },
           ].map(({ label, icon: Icon, href, color, bg }) => (
             <a

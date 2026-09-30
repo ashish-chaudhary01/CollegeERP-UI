@@ -1,7 +1,7 @@
 @import "tailwindcss";
 
 :root {
-  --background-color: #faf9fe;
+  --background-color: #ffffff;
   --primary-color: #15171a;
   --secondary-color: #8e44fd;
   --accent-color: #375ece;
@@ -22,6 +22,126 @@ body {
   font-family: "Space Grotesk", sans-serif;
   @apply bg-background text-primary;
   scroll-behavior: smooth;
+}
+
+.role-workspace {
+  background-color: #ffffff;
+}
+
+.role-content {
+  min-width: 0;
+}
+
+.role-content h1 {
+  margin-bottom: 0.375rem;
+  color: #0b1220;
+  font-size: 1.875rem;
+  font-weight: 750;
+  line-height: 1.15;
+  letter-spacing: 0;
+}
+
+.role-content .dashboard-page > .dashboard-reveal h1 {
+  color: #ffffff;
+}
+
+.role-content .about-page .about-hero h1 {
+  color: #ffffff;
+  font-size: 2.5rem;
+  line-height: 1.1;
+}
+
+.about-hero,
+.role-hero-banner {
+  background-image: linear-gradient(115deg, #101820 0%, #14232d 72%, #153642 100%);
+}
+
+.about-page > section {
+  animation: about-section-in 480ms cubic-bezier(0.2, 0.7, 0.2, 1) both;
+}
+
+.about-page > section:nth-of-type(2) { animation-delay: 70ms; }
+.about-page > section:nth-of-type(3) { animation-delay: 140ms; }
+.about-page > section:nth-of-type(4) { animation-delay: 210ms; }
+
+.about-role-card {
+  transition: border-color 180ms ease, background-color 180ms ease;
+}
+
+.about-role-card:focus-within {
+  border-color: #0891b2;
+}
+
+.about-role-icon,
+.about-module-icon {
+  transition: transform 200ms ease, background-color 200ms ease;
+}
+
+.about-role-card:hover .about-role-icon,
+.about-role-card:focus-within .about-role-icon {
+  transform: rotate(-5deg) scale(1.06);
+  background-color: #cffafe;
+}
+
+.about-module:hover .about-module-icon {
+  transform: translateY(-2px);
+}
+
+.about-role-details {
+  animation: about-details-in 180ms ease-out both;
+}
+
+.role-content h2 {
+  letter-spacing: 0;
+}
+
+.role-content [class~="bg-white"][class~="shadow-sm"] {
+  border-color: #e2e8f0;
+  box-shadow: 0 1px 2px rgb(15 23 42 / 5%), 0 8px 24px -20px rgb(15 23 42 / 28%);
+  transition: transform 180ms ease, border-color 180ms ease, box-shadow 180ms ease;
+}
+
+.role-content [class~="bg-white"][class~="shadow-sm"]:hover {
+  transform: translateY(-2px);
+  border-color: #cbd5e1;
+  box-shadow: 0 12px 24px -18px rgb(15 23 42 / 35%);
+}
+
+.role-page-transition {
+  animation: role-page-arrive 320ms cubic-bezier(0.2, 0.7, 0.2, 1) both;
+}
+
+@keyframes role-page-arrive {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes about-section-in {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes about-details-in {
+  from {
+    opacity: 0;
+    transform: translateY(-4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 /* Custom Scrollbars */
@@ -45,6 +165,76 @@ body {
 
 .animate-in {
   animation: slideIn 200ms ease-out;
+}
+
+.dashboard-page > .dashboard-reveal {
+  animation: dashboard-rise 420ms cubic-bezier(0.2, 0.7, 0.2, 1) both;
+}
+
+.dashboard-stagger > * {
+  animation: dashboard-rise 420ms cubic-bezier(0.2, 0.7, 0.2, 1) both;
+}
+
+.dashboard-stagger > :nth-child(2) { animation-delay: 60ms; }
+.dashboard-stagger > :nth-child(3) { animation-delay: 120ms; }
+.dashboard-stagger > :nth-child(4) { animation-delay: 180ms; }
+
+.dashboard-card {
+  transition: transform 180ms ease, border-color 180ms ease, box-shadow 180ms ease;
+}
+
+.dashboard-card:hover {
+  transform: translateY(-3px);
+  border-color: #cbd5e1;
+  box-shadow: 0 12px 24px -16px rgb(15 23 42 / 35%);
+}
+
+.dashboard-panel {
+  transition: border-color 180ms ease, box-shadow 180ms ease;
+}
+
+@keyframes dashboard-rise {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .about-page > section,
+  .about-role-details,
+  .about-role-icon,
+  .about-module-icon {
+    animation: none;
+    transition: none;
+    transform: none;
+  }
+
+  .role-page-transition {
+    animation: none;
+  }
+
+  .role-content [class~="bg-white"][class~="shadow-sm"] {
+    transition: none;
+  }
+
+  .role-content [class~="bg-white"][class~="shadow-sm"]:hover {
+    transform: none;
+  }
+
+  .dashboard-page > .dashboard-reveal,
+  .dashboard-stagger > * {
+    animation: none;
+  }
+
+  .dashboard-card,
+  .dashboard-panel {
+    transition: none;
+  }
 }
 
 @keyframes slideIn {

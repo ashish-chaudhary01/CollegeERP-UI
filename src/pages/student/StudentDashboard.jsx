@@ -9,10 +9,8 @@ import {
   User,
   AlertTriangle,
   CheckCircle2,
-  XCircle,
   ArrowRight,
   Sparkles,
-  RefreshCw,
   AlertCircle,
 } from "lucide-react";
 import { useEffect, useState, useMemo } from "react";
@@ -143,12 +141,9 @@ const StudentDashboard = () => {
   const isAttendanceLow = attendanceRate < 75 && (attendance.total || 0) > 0;
 
   return (
-    <section className="space-y-6 max-w-7xl mx-auto pb-12">
+    <section className="dashboard-page space-y-6 max-w-7xl mx-auto pb-12">
       {/* 1. Hero / Welcome Banner */}
-      <div className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-slate-900 via-indigo-950 to-slate-900 p-6 sm:p-8 text-white shadow-xl">
-        {/* Glow and background circles */}
-        <div className="absolute top-0 right-0 -mt-10 -mr-10 h-64 w-64 rounded-full bg-cyan-500/20 blur-3xl pointer-events-none" />
-        <div className="absolute bottom-0 left-1/3 -mb-10 h-48 w-48 rounded-full bg-violet-600/20 blur-2xl pointer-events-none" />
+      <div className="role-hero-banner dashboard-reveal relative overflow-hidden rounded-xl border border-slate-800 bg-slate-900 p-6 text-white shadow-sm sm:p-8">
 
         <div className="relative z-10 flex flex-col lg:flex-row lg:items-center lg:justify-between gap-6">
           <div className="flex items-start sm:items-center gap-4">
@@ -246,9 +241,9 @@ const StudentDashboard = () => {
       )}
 
       {/* 3. Key Stat Cards */}
-      <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
+      <div className="dashboard-stagger grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
         {/* Attendance Card */}
-        <div className="group relative overflow-hidden rounded-2xl border border-slate-200 bg-white p-5 shadow-sm transition-all hover:shadow-md hover:border-cyan-300">
+        <div className="dashboard-card group relative overflow-hidden rounded-xl border border-slate-200 bg-white p-5 shadow-sm">
           <div className="flex items-center justify-between">
             <span className="text-xs font-bold uppercase tracking-wider text-slate-400">
               Overall Attendance
@@ -302,12 +297,12 @@ const StudentDashboard = () => {
         </div>
 
         {/* Subjects Enrolled Card */}
-        <div className="group relative overflow-hidden rounded-2xl border border-slate-200 bg-white p-5 shadow-sm transition-all hover:shadow-md hover:border-indigo-300">
+        <div className="dashboard-card group relative overflow-hidden rounded-xl border border-slate-200 bg-white p-5 shadow-sm">
           <div className="flex items-center justify-between">
             <span className="text-xs font-bold uppercase tracking-wider text-slate-400">
               Enrolled Subjects
             </span>
-            <div className="rounded-xl bg-indigo-50 p-2.5 text-indigo-600">
+            <div className="rounded-xl bg-cyan-50 p-2.5 text-cyan-700">
               <BookOpen size={20} />
             </div>
           </div>
@@ -332,12 +327,12 @@ const StudentDashboard = () => {
         </div>
 
         {/* Today's Lectures Card */}
-        <div className="group relative overflow-hidden rounded-2xl border border-slate-200 bg-white p-5 shadow-sm transition-all hover:shadow-md hover:border-amber-300">
+        <div className="dashboard-card group relative overflow-hidden rounded-xl border border-slate-200 bg-white p-5 shadow-sm">
           <div className="flex items-center justify-between">
             <span className="text-xs font-bold uppercase tracking-wider text-slate-400">
               Today&apos;s Lectures
             </span>
-            <div className="rounded-xl bg-amber-50 p-2.5 text-amber-600">
+            <div className="rounded-xl bg-cyan-50 p-2.5 text-cyan-700">
               <Clock size={20} />
             </div>
           </div>
@@ -366,7 +361,7 @@ const StudentDashboard = () => {
         </div>
 
         {/* Fees Status Card */}
-        <div className="group relative overflow-hidden rounded-2xl border border-slate-200 bg-white p-5 shadow-sm transition-all hover:shadow-md hover:border-emerald-300">
+        <div className="dashboard-card group relative overflow-hidden rounded-xl border border-slate-200 bg-white p-5 shadow-sm">
           <div className="flex items-center justify-between">
             <span className="text-xs font-bold uppercase tracking-wider text-slate-400">
               Fee Clearance
@@ -438,7 +433,7 @@ const StudentDashboard = () => {
             </Link>
           </div>
 
-          <div className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm space-y-3">
+          <div className="dashboard-reveal dashboard-panel rounded-xl border border-slate-200 bg-white p-5 shadow-sm space-y-3">
             {todayClasses.length > 0 ? (
               todayClasses.map((lecture, idx) => {
                 const instructor =
@@ -524,7 +519,7 @@ const StudentDashboard = () => {
             </Link>
           </div>
 
-          <div className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm space-y-4">
+          <div className="dashboard-reveal dashboard-panel rounded-xl border border-slate-200 bg-white p-5 shadow-sm space-y-4">
             {attendance.bySubject && attendance.bySubject.length > 0 ? (
               attendance.bySubject.map((item) => {
                 const pct = item.percentage || 0;

@@ -1,4 +1,4 @@
-import { Outlet } from "react-router";
+import { Outlet, useLocation } from "react-router";
 import Header from "../components/ui/Header";
 import { useState } from "react";
 import Sidebar from "../components/ui/sidebar/Sidebar";
@@ -7,6 +7,7 @@ import { useAuth } from "../context/AuthContext";
 
 const DashboardLayout = () => {
   const { user } = useAuth();
+  const location = useLocation();
   // sidebar open or close state
   const [sidebarOpen, setSidebarOpen] = useState(false);
 
@@ -15,7 +16,7 @@ const DashboardLayout = () => {
   }
 
   return (
-    <div className="min-h-screen bg-slate-50/50">
+    <div className="role-workspace min-h-screen">
       {/* desktop sidebar */}
       <Sidebar role={user.role} />
 
@@ -38,8 +39,10 @@ const DashboardLayout = () => {
       {/* content wrapper */}
       <div className="md:pl-67 min-h-screen flex flex-col">
         <Header setSidebarOpen={setSidebarOpen} />
-        <main className="flex-1 p-4 sm:p-6 lg:p-8 max-w-7xl w-full mx-auto mt-15">
-          <Outlet />
+        <main className="role-content mx-auto mt-15 w-full max-w-7xl flex-1 p-5 sm:p-7 lg:p-8">
+          <div key={location.pathname} className="role-page-transition">
+            <Outlet />
+          </div>
         </main>
       </div>
     </div>

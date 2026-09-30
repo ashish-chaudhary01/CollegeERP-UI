@@ -2,7 +2,6 @@ import {
   Activity,
   BookOpen,
   Building2,
-  CalendarClock,
   GraduationCap,
   IndianRupee,
   TrendingUp,
@@ -16,7 +15,7 @@ import { useAuth } from "../../context/AuthContext";
 
 function StatCard({ icon: Icon, label, value, color, bg }) {
   return (
-    <div className="relative overflow-hidden rounded-2xl border border-slate-200 bg-white p-5 shadow-sm transition hover:shadow-md">
+    <div className="dashboard-card relative overflow-hidden rounded-xl border border-slate-200 bg-white p-5 shadow-sm">
       <div className={`inline-flex rounded-xl p-3 ${bg}`}>
         <Icon size={22} className={color} />
       </div>
@@ -66,11 +65,9 @@ function HodDashboard() {
   });
 
   return (
-    <div className="min-h-screen space-y-6 overflow-hidden">
+    <div className="dashboard-page min-h-screen space-y-6 overflow-hidden">
       {/* ── Hero banner ── */}
-      <div className="relative overflow-hidden rounded-2xl bg-gradient-to-br from-slate-900 via-slate-800 to-cyan-900 p-6 text-white shadow-lg">
-        <div className="pointer-events-none absolute -right-10 -top-10 h-48 w-48 rounded-full bg-cyan-500/20 blur-3xl" />
-        <div className="pointer-events-none absolute -bottom-10 right-32 h-32 w-32 rounded-full bg-violet-500/20 blur-2xl" />
+      <div className="role-hero-banner dashboard-reveal relative overflow-hidden rounded-xl border border-slate-800 bg-slate-900 p-6 text-white shadow-sm">
         <div className="relative flex flex-col gap-1 sm:flex-row sm:items-center sm:justify-between">
           <div>
             <p className="text-xs font-semibold uppercase tracking-widest text-cyan-400">
@@ -91,41 +88,41 @@ function HodDashboard() {
       </div>
 
       {/* ── Stat cards ── */}
-      <div className="grid grid-cols-2 gap-4 xl:grid-cols-4">
+      <div className="dashboard-stagger grid grid-cols-2 gap-4 xl:grid-cols-4">
         <StatCard
           icon={UsersRound}
           label="Dept. Students"
           value={overview.totalStudents ?? 0}
-          color="text-blue-600"
-          bg="bg-blue-50"
+          color="text-cyan-700"
+          bg="bg-cyan-50"
         />
         <StatCard
           icon={GraduationCap}
           label="Faculty Members"
           value={overview.totalTeachers ?? 0}
-          color="text-violet-600"
-          bg="bg-violet-50"
+          color="text-cyan-700"
+          bg="bg-cyan-50"
         />
         <StatCard
           icon={BookOpen}
           label="Subjects Offered"
           value={overview.totalSubjects ?? 0}
-          color="text-emerald-600"
-          bg="bg-emerald-50"
+          color="text-cyan-700"
+          bg="bg-cyan-50"
         />
         <StatCard
           icon={Building2}
           label="Department"
           value={overview.totalDepartments ?? 1}
-          color="text-amber-600"
-          bg="bg-amber-50"
+          color="text-cyan-700"
+          bg="bg-cyan-50"
         />
       </div>
 
       {/* ── Attendance + Quick stats ── */}
       <div className="grid gap-4 md:grid-cols-3">
         {/* Attendance detail */}
-        <div className="col-span-2 rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
+        <div className="dashboard-reveal dashboard-panel col-span-2 rounded-xl border border-slate-200 bg-white p-5 shadow-sm">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-2">
               <Activity size={18} className="text-cyan-600" />
@@ -167,7 +164,7 @@ function HodDashboard() {
 
         {/* Dept health */}
         <div className="flex flex-col gap-4">
-          <div className="flex flex-1 items-center gap-4 rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
+          <div className="dashboard-panel flex flex-1 items-center gap-4 rounded-xl border border-slate-200 bg-white p-5 shadow-sm">
             <div className="rounded-xl bg-cyan-50 p-3">
               <UserCheck size={22} className="text-cyan-600" />
             </div>
@@ -184,7 +181,7 @@ function HodDashboard() {
               </p>
             </div>
           </div>
-          <div className="flex flex-1 items-center gap-4 rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
+          <div className="dashboard-panel flex flex-1 items-center gap-4 rounded-xl border border-slate-200 bg-white p-5 shadow-sm">
             <div className="rounded-xl bg-rose-50 p-3">
               <TrendingUp size={22} className="text-rose-500" />
             </div>
@@ -199,16 +196,16 @@ function HodDashboard() {
       </div>
 
       {/* ── Quick links ── */}
-      <div className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
+      <div className="dashboard-reveal dashboard-panel rounded-xl border border-slate-200 bg-white p-5 shadow-sm">
         <h2 className="mb-4 text-xs font-bold uppercase tracking-widest text-slate-400">
           Quick Navigation
         </h2>
         <div className="grid grid-cols-2 gap-3 sm:grid-cols-4">
           {[
-            { label: "Students", icon: Users, href: "/hod/students", color: "text-blue-600", bg: "bg-blue-50 hover:bg-blue-100" },
-            { label: "Teachers", icon: GraduationCap, href: "/hod/teachers", color: "text-violet-600", bg: "bg-violet-50 hover:bg-violet-100" },
-            { label: "Subjects", icon: BookOpen, href: "/hod/subjects", color: "text-emerald-600", bg: "bg-emerald-50 hover:bg-emerald-100" },
-            { label: "Fee Records", icon: IndianRupee, href: "/hod/fees", color: "text-amber-600", bg: "bg-amber-50 hover:bg-amber-100" },
+            { label: "Students", icon: Users, href: "/hod/students", color: "text-cyan-700", bg: "bg-cyan-50 hover:bg-cyan-100" },
+            { label: "Teachers", icon: GraduationCap, href: "/hod/teachers", color: "text-cyan-700", bg: "bg-cyan-50 hover:bg-cyan-100" },
+            { label: "Subjects", icon: BookOpen, href: "/hod/subjects", color: "text-cyan-700", bg: "bg-cyan-50 hover:bg-cyan-100" },
+            { label: "Fee Records", icon: IndianRupee, href: "/hod/fees", color: "text-cyan-700", bg: "bg-cyan-50 hover:bg-cyan-100" },
           ].map(({ label, icon: Icon, href, color, bg }) => (
             <a
               key={label}

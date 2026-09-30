@@ -78,38 +78,36 @@ const TeacherDashboard = () => {
       label: "Assigned Subjects",
       value: data?.subjects?.length || 0,
       icon: BookOpen,
-      color: "text-cyan-600",
+      color: "text-cyan-700",
       bg: "bg-cyan-50",
     },
     {
       label: "Dept. Students",
       value: data?.students || 0,
       icon: Users,
-      color: "text-indigo-600",
-      bg: "bg-indigo-50",
+      color: "text-cyan-700",
+      bg: "bg-cyan-50",
     },
     {
       label: "Today's Classes",
       value: data?.todayClasses?.length || 0,
       icon: CalendarClock,
-      color: "text-amber-600",
-      bg: "bg-amber-50",
+      color: "text-cyan-700",
+      bg: "bg-cyan-50",
     },
     {
       label: "Class Attendance",
       value: `${attendancePct}%`,
       icon: TrendingUp,
-      color: "text-emerald-600",
-      bg: "bg-emerald-50",
+      color: "text-cyan-700",
+      bg: "bg-cyan-50",
     },
   ];
 
   return (
-    <section className="min-h-screen space-y-6">
+    <section className="dashboard-page min-h-screen space-y-6">
       {/* ── Hero banner ── */}
-      <div className="relative overflow-hidden rounded-2xl bg-gradient-to-br from-slate-900 via-slate-800 to-cyan-900 p-6 text-white shadow-lg">
-        <div className="pointer-events-none absolute -right-10 -top-10 h-48 w-48 rounded-full bg-cyan-500/20 blur-3xl" />
-        <div className="pointer-events-none absolute -bottom-10 right-32 h-32 w-32 rounded-full bg-indigo-500/20 blur-2xl" />
+      <div className="role-hero-banner dashboard-reveal relative overflow-hidden rounded-xl border border-slate-800 bg-slate-900 p-6 text-white shadow-sm">
         <div className="relative flex flex-col gap-1 sm:flex-row sm:items-center sm:justify-between">
           <div>
             <p className="text-xs font-semibold uppercase tracking-widest text-cyan-400">
@@ -131,11 +129,11 @@ const TeacherDashboard = () => {
       </div>
 
       {/* ── Stat cards ── */}
-      <div className="grid grid-cols-2 gap-4 xl:grid-cols-4">
+      <div className="dashboard-stagger grid grid-cols-2 gap-4 xl:grid-cols-4">
         {statCards.map(({ label, value, icon: Icon, color, bg }) => (
           <div
             key={label}
-            className="overflow-hidden rounded-2xl border border-slate-200 bg-white p-5 shadow-sm transition hover:shadow-md"
+            className="dashboard-card overflow-hidden rounded-xl border border-slate-200 bg-white p-5 shadow-sm"
           >
             <div className={`inline-flex rounded-xl p-3 ${bg}`}>
               <Icon size={22} className={color} />
@@ -149,7 +147,7 @@ const TeacherDashboard = () => {
       {/* ── Content grid ── */}
       <div className="grid gap-5 lg:grid-cols-2">
         {/* Today's timetable */}
-        <div className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
+        <div className="dashboard-reveal dashboard-panel rounded-xl border border-slate-200 bg-white p-5 shadow-sm">
           <div className="flex items-center gap-2">
             <CalendarClock size={18} className="text-amber-500" />
             <h2 className="font-bold text-slate-800">Today&apos;s Classes</h2>
@@ -188,7 +186,7 @@ const TeacherDashboard = () => {
         </div>
 
         {/* Assigned subjects */}
-        <div className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
+        <div className="dashboard-reveal dashboard-panel rounded-xl border border-slate-200 bg-white p-5 shadow-sm">
           <div className="flex items-center gap-2">
             <BookOpen size={18} className="text-cyan-600" />
             <h2 className="font-bold text-slate-800">Assigned Subjects</h2>
@@ -227,7 +225,7 @@ const TeacherDashboard = () => {
       </div>
 
       {/* ── Attendance stats ── */}
-      <div className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
+      <div className="dashboard-reveal dashboard-panel rounded-xl border border-slate-200 bg-white p-5 shadow-sm">
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-2">
             <Activity size={18} className="text-emerald-600" />

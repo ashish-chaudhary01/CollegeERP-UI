@@ -188,7 +188,7 @@ const Departments = () => {
                         departmentCode: department.departmentCode,
                       });
                     }}
-                    className="rounded-full bg-rose-500 p-2.5 text-white transition hover:bg-rose-600"
+                    className="rounded-full p-2.5 text-red-400 transition hover:text-red-500 hover:bg-black/10"
                     title="Edit Department"
                   >
                     <Pencil size={16} />
